@@ -1,0 +1,11 @@
+name: MoonCube
+version: ${project.version}
+api-version: 1.13
+main: me.xiaozhangup.mooncube.Main
+commands:
+  mooncube:
+    description: MoonCube Main Command
+    aliases:
+      - moonc
+authors:
+  - xiaozhangup
