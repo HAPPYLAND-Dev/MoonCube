@@ -5,7 +5,6 @@ import me.happylandmc.core.math.Number;
 import me.happylandmc.core.message.Message;
 import me.xiaozhangup.mooncube.Config;
 import me.xiaozhangup.mooncube.Main;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -58,9 +57,7 @@ public class Spawner implements Listener {
             e.setCancelled(true);
             String coin = itemStack.getItemMeta().getDisplayName().replace("Coin|", "");
             //e.getPlayer().sendActionBar(itemStack.getItemMeta().getDisplayName().replace("Coin|" , ""));
-            e.getPlayer().sendActionBar(
-                    Component.text(Message.Color(Config.COIN_ACTION.replace("{coin}" , coin)))
-            );
+            e.getPlayer().sendActionBar(Message.Color(Config.COIN_ACTION.replace("{coin}" , coin)));
             e.getItem().remove();
             Main.getEconomy().depositPlayer(e.getPlayer() , Double.parseDouble(coin));
         }
