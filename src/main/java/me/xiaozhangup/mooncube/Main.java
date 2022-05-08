@@ -16,6 +16,9 @@ public class Main extends JavaPlugin {
         plugin = this;
         //log print
 
+        Config.loadConfig();
+        //config
+
         Bukkit.getPluginManager().registerEvents(new Spawner(), this);
         //event load
     }

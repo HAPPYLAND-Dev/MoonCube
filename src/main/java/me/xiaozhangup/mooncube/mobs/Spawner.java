@@ -3,6 +3,7 @@ package me.xiaozhangup.mooncube.mobs;
 import me.happylandmc.core.Skull;
 import me.happylandmc.core.math.Number;
 import me.happylandmc.core.message.Message;
+import me.xiaozhangup.mooncube.Config;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -42,7 +43,7 @@ public class Spawner implements Listener {
             item.setPickupDelay(8);
             item.setThrower(entity.getUniqueId());
             item.setOwner(entity.getKiller().getUniqueId());
-            item.setCustomName(Message.Color("&x&F&D&F&5&E&6" + coin + "&x&D&A&A&5&2&0$"));
+            item.setCustomName(Message.Color(Config.COIN_HOLOGRAM.replace("{coin}" , coin)));
 
         }
     }
@@ -55,7 +56,7 @@ public class Spawner implements Listener {
         e.setCancelled(true);
         //e.getPlayer().sendActionBar(itemStack.getItemMeta().getDisplayName().replace("Coin|" , ""));
         e.getPlayer().sendActionBar(
-                Component.text(itemStack.getItemMeta().getDisplayName().replace("Coin|", ""))
+                Component.text(Config.COIN_ACTION.replace("{coin}" , itemStack.getItemMeta().getDisplayName().replace("Coin|", "")))
         );
         e.getItem().remove();
     }
