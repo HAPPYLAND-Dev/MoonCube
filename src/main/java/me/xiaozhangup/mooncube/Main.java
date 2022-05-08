@@ -1,6 +1,7 @@
 package me.xiaozhangup.mooncube;
 
 import me.xiaozhangup.mooncube.mobs.Spawner;
+import me.xiaozhangup.mooncube.player.Hey;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -34,6 +35,7 @@ public class Main extends JavaPlugin {
         //config
 
         Bukkit.getPluginManager().registerEvents(new Spawner(), this);
+        Bukkit.getPluginManager().registerEvents(new Hey() , this);
         //event load
     }
 
