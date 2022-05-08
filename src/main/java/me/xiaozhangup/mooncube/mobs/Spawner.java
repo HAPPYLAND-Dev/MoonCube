@@ -4,6 +4,7 @@ import me.happylandmc.core.Skull;
 import me.happylandmc.core.math.Number;
 import me.happylandmc.core.message.Message;
 import me.xiaozhangup.mooncube.Config;
+import me.xiaozhangup.mooncube.Main;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -51,22 +52,29 @@ public class Spawner implements Listener {
     @EventHandler
     public void onPlayerPickup(PlayerAttemptPickupItemEvent e) {
         ItemStack itemStack = e.getItem().getItemStack();
-        String itemName = itemStack.getItemMeta().getDisplayName();
-        if (itemStack.getType() != Material.PLAYER_HEAD && !itemName.startsWith("Coin|")) return;
-        e.setCancelled(true);
-        //e.getPlayer().sendActionBar(itemStack.getItemMeta().getDisplayName().replace("Coin|" , ""));
-        e.getPlayer().sendActionBar(
-                Component.text(Config.COIN_ACTION.replace("{coin}" , itemStack.getItemMeta().getDisplayName().replace("Coin|", "")))
-        );
-        e.getItem().remove();
+        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName()) {
+            String itemName = itemStack.getItemMeta().getDisplayName();
+            if (itemStack.getType() != Material.PLAYER_HEAD && !itemName.startsWith("Coin|")) return;
+            e.setCancelled(true);
+            String coin = itemStack.getItemMeta().getDisplayName().replace("Coin|", "");
+            //e.getPlayer().sendActionBar(itemStack.getItemMeta().getDisplayName().replace("Coin|" , ""));
+            e.getPlayer().sendActionBar(
+                    Component.text(Message.Color(Config.COIN_ACTION.replace("{coin}" , coin)))
+            );
+            e.getItem().remove();
+            Main.getEconomy().depositPlayer(e.getPlayer() , Double.parseDouble(coin));
+        }
     }
 
     @EventHandler
     public void onHopperWork(InventoryPickupItemEvent e) {
         ItemStack itemStack = e.getItem().getItemStack();
-        String itemName = itemStack.getItemMeta().getDisplayName();
-        if (itemStack.getType() != Material.PLAYER_HEAD && !itemName.startsWith("Coin|")) return;
-        e.setCancelled(true);
+        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName()) {
+            String itemName = itemStack.getItemMeta().getDisplayName();
+            if (itemStack.getType() != Material.PLAYER_HEAD) return;
+            if (!itemName.startsWith("Coin|")) return;
+            e.setCancelled(true);
+        }
     }
 
 
