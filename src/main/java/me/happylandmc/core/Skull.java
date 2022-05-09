@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import me.happylandmc.core.message.Message;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -67,6 +68,39 @@ public class Skull {
         } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
             e.printStackTrace();
         }
+
+        skull.setItemMeta(skullMeta);
+        return skull;
+    }
+
+    public static ItemStack getSkull(Player player, String name, List<String> stringList) {
+        ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
+        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+
+        skullMeta.setOwningPlayer(player);
+
+        skullMeta.setDisplayName(Message.Color(name));
+        skullMeta.setLore(stringList);
+        skull.setItemMeta(skullMeta);
+        return skull;
+    }
+
+
+    public static ItemStack getSkull(Player player, String name) {
+        ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
+        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+        skullMeta.setOwningPlayer(player);
+
+        skullMeta.setDisplayName(Message.Color(name));
+        skull.setItemMeta(skullMeta);
+        return skull;
+    }
+
+    public static ItemStack getSkull(Player player) {
+        ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
+        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+
+        skullMeta.setOwningPlayer(player);
 
         skull.setItemMeta(skullMeta);
         return skull;
