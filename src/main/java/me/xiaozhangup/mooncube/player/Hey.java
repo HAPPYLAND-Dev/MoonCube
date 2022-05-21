@@ -2,6 +2,7 @@ package me.xiaozhangup.mooncube.player;
 
 import me.happylandmc.core.Skull;
 import me.happylandmc.core.message.Message;
+import me.xiaozhangup.mooncube.Config;
 import me.xiaozhangup.mooncube.Main;
 import me.xiaozhangup.mooncube.gui.HeyProfile;
 import me.xiaozhangup.mooncube.gui.IsControl;
@@ -17,8 +18,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
-
 
 public class Hey implements Listener {
 
@@ -28,21 +27,28 @@ public class Hey implements Listener {
         Player ed = (Player) e.getRightClicked();
         Player p = e.getPlayer();
         Material material = p.getInventory().getItemInMainHand().getType();
-        if (material.toString().endsWith("_POTION") || material == Material.BOW || material == Material.CROSSBOW || material == Material.TRIDENT
-                || material == Material.SNOWBALL || material == Material.ENDER_PEARL || material == Material.FISHING_ROD)
-            return;
+        if (Config.BLACK_ITEMS.contains(material.toString()) || material.toString().endsWith("POTION")) return;
         if (p.isSneaking()) {
             Inventory iscontrol = Bukkit.createInventory(new IsControl(), 27, Message.Color("对于玩家 " + ed.getName() + " 的岛屿选项"));
             Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
                 ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
                 ItemMeta boardMeta = board.getItemMeta();
-                boardMeta.setDisplayName("");
+                //PlaceholderAPI.setPlaceholders(ed , "%%");
+                boardMeta.setDisplayName(" ");
                 board.setItemMeta(boardMeta);
                 for (int i = 0; i < 27; i++) {
                     iscontrol.setItem(i, board);
                 }
 
                 iscontrol.setItem(8, Skull.getSkull(ed, "&7" + ed.getName()));
+
+                iscontrol.setItem(10, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
+                iscontrol.setItem(11, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
+                iscontrol.setItem(12, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
+                iscontrol.setItem(13, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
+                iscontrol.setItem(14, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
+                iscontrol.setItem(15, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
+
 
                 Bukkit.getScheduler().runTask(Main.plugin, () -> {
                     p.openInventory(iscontrol);
@@ -53,13 +59,39 @@ public class Hey implements Listener {
             Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
                 ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
                 ItemMeta boardMeta = board.getItemMeta();
-                boardMeta.setDisplayName("");
+                boardMeta.setDisplayName(" ");
                 board.setItemMeta(boardMeta);
                 for (int i = 0; i < 54; i++) {
                     profile.setItem(i, board);
                 }
 
-                profile.setItem(16, Skull.getSkull(ed, ed.getName() + "'s Profile", Arrays.asList("Line 1", "Line 2")));
+                profile.setItem(8, Skull.getSkull(ed, "&7" + ed.getName()));
+
+                ItemStack gray = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+                ItemMeta grayItemMeta = gray.getItemMeta();
+                grayItemMeta.setDisplayName(" ");
+                board.setItemMeta(grayItemMeta);
+                profile.setItem(10, gray);
+                profile.setItem(12, gray);
+                profile.setItem(28, gray);
+                profile.setItem(30, gray);
+                profile.setItem(37, gray);
+                profile.setItem(39, gray);
+
+                profile.setItem(11, ed.getInventory().getHelmet());
+                profile.setItem(20, ed.getInventory().getChestplate());
+                profile.setItem(29, ed.getInventory().getLeggings());
+                profile.setItem(38, ed.getInventory().getBoots());
+
+                profile.setItem(19, ed.getInventory().getItemInOffHand());
+                profile.setItem(21, ed.getInventory().getItemInMainHand());
+
+                profile.setItem(14, new ItemStack(Material.OAK_SIGN));
+                profile.setItem(15, new ItemStack(Material.CROSSBOW));
+                profile.setItem(23, new ItemStack(Material.COD));
+                profile.setItem(24, new ItemStack(Material.DIAMOND_HOE));
+                profile.setItem(33, new ItemStack(Material.WATER_BUCKET));
+                profile.setItem(42, new ItemStack(Material.IRON_INGOT));
 
                 Bukkit.getScheduler().runTask(Main.plugin, () -> {
                     p.openInventory(profile);

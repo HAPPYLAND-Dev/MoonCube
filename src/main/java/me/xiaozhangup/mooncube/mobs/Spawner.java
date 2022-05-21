@@ -34,7 +34,7 @@ public class Spawner implements Listener {
                 coin = decimalFormat.format(Number.getRandom(point, entity.getMaxHealth() / 10));
             }
             ItemStack ball = Skull.getSkull(
-                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2MxNDE0NGY2MWM0ZTY2YjNjNDQzNjYwZGViYzczY2IyMTI1ZDAxNDBjNTFiNTUyMmM4YTY4Yjc4OTQxNCJ9fX0=",
+                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmQxOTY1YTUzMjBiZmZmMTRkOTlkNjgwNDQ0MmNiMzMyODdhZjZhYzhkNGI0ZWZkZTA3YWQ0MjYzZDNiZTg3NSJ9fX0=",
                     "Coin|" + coin);
             Item item = (Item) entity.getWorld().spawnEntity(entity.getLocation(), EntityType.DROPPED_ITEM);
             item.setItemStack(ball);
@@ -43,7 +43,7 @@ public class Spawner implements Listener {
             item.setPickupDelay(8);
             item.setThrower(entity.getUniqueId());
             item.setOwner(entity.getKiller().getUniqueId());
-            item.setCustomName(Message.Color(Config.COIN_HOLOGRAM.replace("{coin}" , coin)));
+            item.setCustomName(Message.Color(Config.COIN_HOLOGRAM.replace("{coin}", coin)));
 
         }
     }
@@ -57,9 +57,9 @@ public class Spawner implements Listener {
             e.setCancelled(true);
             String coin = itemStack.getItemMeta().getDisplayName().replace("Coin|", "");
             //e.getPlayer().sendActionBar(itemStack.getItemMeta().getDisplayName().replace("Coin|" , ""));
-            e.getPlayer().sendActionBar(Message.Color(Config.COIN_ACTION.replace("{coin}" , coin)));
+            e.getPlayer().sendActionBar(Message.Color(Config.COIN_ACTION.replace("{coin}", coin)));
             e.getItem().remove();
-            Main.getEconomy().depositPlayer(e.getPlayer() , Double.parseDouble(coin));
+            Main.getEconomy().depositPlayer(e.getPlayer(), Double.parseDouble(coin));
         }
     }
 

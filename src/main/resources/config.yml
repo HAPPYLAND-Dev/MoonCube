@@ -1,2 +1,10 @@
 CoinHologram: "&x&F&D&F&5&E&6{coin}&x&D&A&A&5&2&0$"
 CoinActionBar: "&x&D&C&D&C&D&C生物击杀!   &x&F&D&F&5&E&6+ {coin}&x&D&A&A&5&2&0⛁"
+
+BlackItems:
+  - BOW
+  - CROSSBOW
+  - TRIDENT
+  - SNOWBALL
+  - ENDER_PEARL
+  - FISHING_ROD
