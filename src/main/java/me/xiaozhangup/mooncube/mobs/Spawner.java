@@ -34,7 +34,7 @@ public class Spawner implements Listener {
                 coin = decimalFormat.format(Number.getRandom(point, entity.getMaxHealth() / 10));
             }
             ItemStack ball = Skull.getSkull(
-                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmQxOTY1YTUzMjBiZmZmMTRkOTlkNjgwNDQ0MmNiMzMyODdhZjZhYzhkNGI0ZWZkZTA3YWQ0MjYzZDNiZTg3NSJ9fX0=",
+                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTA5ODcwNTk0OWZjNGM0YjI4ZWI4MzQ3NDVjNTc2YTFjMzVkOGQ3MDIyMGM5YTBiNTQyZGVmOGY0NzA5Nzc4YyJ9fX0=",
                     "Coin|" + coin);
             Item item = (Item) entity.getWorld().spawnEntity(entity.getLocation(), EntityType.DROPPED_ITEM);
             item.setItemStack(ball);
