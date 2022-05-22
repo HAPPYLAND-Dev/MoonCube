@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -104,61 +103,60 @@ public class ProfileEditer implements Listener {
         if (e.getWhoClicked() instanceof Player && e.getInventory().getHolder() instanceof Emo) {
             e.setCancelled(true);
             Player p = (Player) e.getWhoClicked();
-            if (e.getInventory().getType() == InventoryType.CHEST) {
-                if (e.getSlot() == 16) {
-                    e.getWhoClicked().closeInventory();
-                    Message.PerMessage((Player) e.getWhoClicked(), "&x&8&F&B&C&8&F签名", "&f在聊天栏输入你的新签名,或者输入 c 取消设置");
-                    input.put((Player) e.getWhoClicked(), true);
-                } else {
-                    Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
-                        if (e.getSlot() == 10) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzVhNDZmODMzNGU0OWQyNzMzODRlYjcyYjJhYzE1ZTI0YTY0MGQ3NjQ4ZTRiMjhjMzQ4ZWZjZTkzZGM5N2FiIn19fQ==");
-                        }
-                        if (e.getSlot() == 11) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWM0OWJkNDEzODYwM2E5MDRmYWFmZTEzNjZmNmJmYjczZWJkMTY3NDA1OGE4OTg1NjYyOGViMmM5NWMyMCJ9fX0=");
-                        }
-                        if (e.getSlot() == 12) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWMyNjcyYWFhZTU4ZjNkMTg1MmQxOWI4NDIyY2FmNzBiMzI1ODJmOGRlM2ZjYjVjN2MyNGRhY2I3ZWJjMyJ9fX0=");
-                        }
-                        if (e.getSlot() == 13) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzMyZmUxMjFhNjNlYWFiZDk5Y2VkNmQxYWNjOTE3OTg2NTJkMWVlODA4NGQyZjkxMjdkOGEzMTVjYWQ1Y2U0In19fQ==");
-                        }
-                        if (e.getSlot() == 14) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGIwNDQ3NDY0OWY5MDdhY2Y2YmEwNGY4Y2VhNjViMjZhOTEwY2UyNGJhYjJjNmEzZmE2NzU5ZWFjZmZhZiJ9fX0=");
-                        }
-                        if (e.getSlot() == 19) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDU4Njg1MjlmYmY0YmU2MjkzNzEyNzViMTEzOGRhYjkyOTU3NjAyMTcxNmVlNzM3ZGIxMjYzNGFhMTI1YWYzIn19fQ==");
-                        }
-                        if (e.getSlot() == 20) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDE2ZjNkY2U5NzdkOGI3OTdlMWU0NzZmNWFiOTM2MTllZDJmMmIyMWE0OWFjOTM3NDMxNDBjZjY3YTA4OCJ9fX0=");
-                        }
-                        if (e.getSlot() == 21) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWZmNDlhODY0NWRkNjhiNjhmMGJhZmEyMjY1YmFkOTMyZjc1MWM1ODRlNGY3MzFmZDcxNzNhNWU1YjI2ZDMifX19");
-                        }
-                        if (e.getSlot() == 22) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2VmNTc1NjI5YTI2ODlkNjNhM2EzZTkxYmQzNDJlYzNmNzhiNGYzOTc2ODdjMDgzM2JmNmQ2NGJmMjZkMTJlOCJ9fX0=");
-                        }
-                        if (e.getSlot() == 23) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGQ4ZjVmYjM4N2NhNjZmYzJmNjViOTFmY2IyMzE2MDQ1NDhlODU2NTg5NWJiOTZjNjc2OTg0MjA1ZTZmMTkifX19");
-                        }
-                        if (e.getSlot() == 28) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDM5YzNkZjdhNjI4YWY4ZDc1MWVjY2ExOTc2NDJjZGMxYTA3YzMwZTMyODliMmQzMjYxZjdhNjVjZjM5NWIifX19");
-                        }
-                        if (e.getSlot() == 29) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjFkNGJlYTM2NmFjYTU4ZGQ1YjIyZTk0MGJjZGQ0YmE0NWJmODg0MjFmNmQ4MzExNThiODc5ZjJjOGFiY2UxOCJ9fX0=");
-                        }
-                        if (e.getSlot() == 30) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNjZDU0NzJhNDZmNDZlNGNkZmRhOWFkZWEyMzIwY2NjZmJhZTExMTk4YjZhYWUxNjNkMTdjNGI1YjQ2NjZkIn19fQ==");
-                        }
-                        if (e.getSlot() == 31) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZlYTk5YWQ5NWI1NzAxNzVmZGEyNWMzYTY5Nzg4ZDZhOWI4NTRhYTEzZjhhNWZmNjNmNmVmZWRmNTgxZGZiNiJ9fX0=");
-                        }
-                        if (e.getSlot() == 32) {
-                            setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFiZmFiZjBhZGIyYTYxNWU5MDFmZTAwNDBlMzIyYzUxZmI3ZDExYzgyY2ZhZmEyMWU1MjIxYTVmNmEyZTAzMCJ9fX0=");
-                        }
-                    });
-                }
+            if (e.getRawSlot() == 16) {
+                e.getWhoClicked().closeInventory();
+                Message.PerMessage((Player) e.getWhoClicked(), "&x&8&F&B&C&8&F签名", "&f在聊天栏输入你的新签名,或者输入 c 取消设置");
+                input.put((Player) e.getWhoClicked(), true);
+            } else {
+                Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
+                    if (e.getRawSlot() == 10) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzVhNDZmODMzNGU0OWQyNzMzODRlYjcyYjJhYzE1ZTI0YTY0MGQ3NjQ4ZTRiMjhjMzQ4ZWZjZTkzZGM5N2FiIn19fQ==");
+                    }
+                    if (e.getRawSlot() == 11) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWM0OWJkNDEzODYwM2E5MDRmYWFmZTEzNjZmNmJmYjczZWJkMTY3NDA1OGE4OTg1NjYyOGViMmM5NWMyMCJ9fX0=");
+                    }
+                    if (e.getRawSlot() == 12) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWMyNjcyYWFhZTU4ZjNkMTg1MmQxOWI4NDIyY2FmNzBiMzI1ODJmOGRlM2ZjYjVjN2MyNGRhY2I3ZWJjMyJ9fX0=");
+                    }
+                    if (e.getRawSlot() == 13) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzMyZmUxMjFhNjNlYWFiZDk5Y2VkNmQxYWNjOTE3OTg2NTJkMWVlODA4NGQyZjkxMjdkOGEzMTVjYWQ1Y2U0In19fQ==");
+                    }
+                    if (e.getRawSlot() == 14) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGIwNDQ3NDY0OWY5MDdhY2Y2YmEwNGY4Y2VhNjViMjZhOTEwY2UyNGJhYjJjNmEzZmE2NzU5ZWFjZmZhZiJ9fX0=");
+                    }
+                    if (e.getRawSlot() == 19) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDU4Njg1MjlmYmY0YmU2MjkzNzEyNzViMTEzOGRhYjkyOTU3NjAyMTcxNmVlNzM3ZGIxMjYzNGFhMTI1YWYzIn19fQ==");
+                    }
+                    if (e.getRawSlot() == 20) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDE2ZjNkY2U5NzdkOGI3OTdlMWU0NzZmNWFiOTM2MTllZDJmMmIyMWE0OWFjOTM3NDMxNDBjZjY3YTA4OCJ9fX0=");
+                    }
+                    if (e.getRawSlot() == 21) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWZmNDlhODY0NWRkNjhiNjhmMGJhZmEyMjY1YmFkOTMyZjc1MWM1ODRlNGY3MzFmZDcxNzNhNWU1YjI2ZDMifX19");
+                    }
+                    if (e.getRawSlot() == 22) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2VmNTc1NjI5YTI2ODlkNjNhM2EzZTkxYmQzNDJlYzNmNzhiNGYzOTc2ODdjMDgzM2JmNmQ2NGJmMjZkMTJlOCJ9fX0=");
+                    }
+                    if (e.getRawSlot() == 23) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGQ4ZjVmYjM4N2NhNjZmYzJmNjViOTFmY2IyMzE2MDQ1NDhlODU2NTg5NWJiOTZjNjc2OTg0MjA1ZTZmMTkifX19");
+                    }
+                    if (e.getRawSlot() == 28) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDM5YzNkZjdhNjI4YWY4ZDc1MWVjY2ExOTc2NDJjZGMxYTA3YzMwZTMyODliMmQzMjYxZjdhNjVjZjM5NWIifX19");
+                    }
+                    if (e.getRawSlot() == 29) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjFkNGJlYTM2NmFjYTU4ZGQ1YjIyZTk0MGJjZGQ0YmE0NWJmODg0MjFmNmQ4MzExNThiODc5ZjJjOGFiY2UxOCJ9fX0=");
+                    }
+                    if (e.getRawSlot() == 30) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNjZDU0NzJhNDZmNDZlNGNkZmRhOWFkZWEyMzIwY2NjZmJhZTExMTk4YjZhYWUxNjNkMTdjNGI1YjQ2NjZkIn19fQ==");
+                    }
+                    if (e.getRawSlot() == 31) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZlYTk5YWQ5NWI1NzAxNzVmZGEyNWMzYTY5Nzg4ZDZhOWI4NTRhYTEzZjhhNWZmNjNmNmVmZWRmNTgxZGZiNiJ9fX0=");
+                    }
+                    if (e.getRawSlot() == 32) {
+                        setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFiZmFiZjBhZGIyYTYxNWU5MDFmZTAwNDBlMzIyYzUxZmI3ZDExYzgyY2ZhZmEyMWU1MjIxYTVmNmEyZTAzMCJ9fX0=");
+                    }
+                });
             }
+
         }
     }
 
