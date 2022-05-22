@@ -9,5 +9,9 @@ commands:
     description: MoonCube Main Command
     aliases:
       - moonc
+  profile:
+    description: Edit your profile
+    aliases:
+      - pfe
 authors:
   - xiaozhangup

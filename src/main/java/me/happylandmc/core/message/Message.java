@@ -37,11 +37,11 @@ public class Message {
     }
 
     public static void PerMessage(Player p, String per, String mes) {
-        p.sendMessage("§f[" + per.replace("&", "§") + "§f] " + mes.replace("&", "§"));
+        p.sendMessage("§8[" + per.replace("&", "§") + "§8] " + mes.replace("&", "§"));
     }
 
     public static String PerText(String per, String mes) {
-        String text = "§f[" + per.replace("&", "§") + "§f] " + mes.replace("&", "§");
+        String text = "§8[" + per.replace("&", "§") + "§8] " + mes.replace("&", "§");
         return text;
     }
 

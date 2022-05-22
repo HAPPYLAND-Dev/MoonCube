@@ -18,6 +18,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Hey implements Listener {
 
@@ -92,6 +95,22 @@ public class Hey implements Listener {
                 profile.setItem(24, new ItemStack(Material.DIAMOND_HOE));
                 profile.setItem(33, new ItemStack(Material.WATER_BUCKET));
                 profile.setItem(42, new ItemStack(Material.IRON_INGOT));
+
+                ItemStack dailyemo = Skull.getSkull(Config.getConfig("emodata.yml").getString(ed.getName() + ".emobase"));
+                ItemMeta emoMeta = dailyemo.getItemMeta();
+                emoMeta.setDisplayName(Message.Color("&f个性签名"));
+                if (Config.getConfig("emodata.yml").getString(ed.getName() + ".text") == null) {
+                    List<String> lore = new ArrayList<>();
+                    lore.add(Message.Color("&7&o他没有设置签名"));
+                    emoMeta.setLore(lore);
+                    dailyemo.setItemMeta(emoMeta);
+                } else {
+                    List<String> lore = new ArrayList<>();
+                    lore.add(Message.Color("&7" + Config.getConfig("emodata.yml").getString(ed.getName() + ".text")));
+                    emoMeta.setLore(lore);
+                    dailyemo.setItemMeta(emoMeta);
+                }
+                profile.setItem(40, dailyemo);
 
                 Bukkit.getScheduler().runTask(Main.plugin, () -> {
                     p.openInventory(profile);
