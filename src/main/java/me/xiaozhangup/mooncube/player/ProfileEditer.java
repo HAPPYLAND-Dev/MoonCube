@@ -7,6 +7,7 @@ import me.xiaozhangup.mooncube.Main;
 import me.xiaozhangup.mooncube.gui.Emo;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -81,9 +82,7 @@ public class ProfileEditer implements Listener {
 
             profile.setItem(16, sign);
 
-            Bukkit.getScheduler().runTask(Main.plugin, () -> {
-                p.openInventory(profile);
-            });
+            Bukkit.getScheduler().runTask(Main.plugin, () -> p.openInventory(profile));
         });
     }
 
@@ -95,18 +94,19 @@ public class ProfileEditer implements Listener {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+        p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
         openProfile(p);
     }
 
     @EventHandler
     public void onPlayerClick(InventoryClickEvent e) {
-        if (e.getWhoClicked() instanceof Player && e.getInventory().getHolder() instanceof Emo) {
+        if (e.getWhoClicked() instanceof Player p && e.getInventory().getHolder() instanceof Emo) {
             e.setCancelled(true);
-            Player p = (Player) e.getWhoClicked();
             if (e.getRawSlot() == 16) {
                 e.getWhoClicked().closeInventory();
                 Message.PerMessage((Player) e.getWhoClicked(), "&x&8&F&B&C&8&F签名", "&f在聊天栏输入你的新签名,或者输入 c 取消设置");
                 input.put((Player) e.getWhoClicked(), true);
+                p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             } else {
                 Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
                     if (e.getRawSlot() == 10) {
@@ -165,7 +165,7 @@ public class ProfileEditer implements Listener {
         if (input.get(e.getPlayer())) {
             e.setCancelled(true);
             input.put(e.getPlayer(), false);
-            if (e.getMessage().equals("c")) {
+            if ("c".equals(e.getMessage())) {
                 Message.PerMessage(e.getPlayer(), "&x&8&F&B&C&8&F签名", "&c签名设置已取消");
                 openProfile(e.getPlayer());
             } else {

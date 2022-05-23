@@ -40,8 +40,9 @@ public class TXTWeb {
         byte[] buffer = new byte[1024];
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         int len;
-        while ((len = inputStream.read(buffer)) != -1)
+        while ((len = inputStream.read(buffer)) != -1) {
             bos.write(buffer, 0, len);
+        }
         bos.close();
         return bos.toString("utf-8");
     }

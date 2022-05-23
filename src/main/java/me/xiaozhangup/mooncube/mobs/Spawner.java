@@ -53,10 +53,11 @@ public class Spawner implements Listener {
         ItemStack itemStack = e.getItem().getItemStack();
         if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName()) {
             String itemName = itemStack.getItemMeta().getDisplayName();
-            if (itemStack.getType() != Material.PLAYER_HEAD && !itemName.startsWith("Coin|")) return;
+            if (itemStack.getType() != Material.PLAYER_HEAD && !itemName.startsWith("Coin|")) {
+                return;
+            }
             e.setCancelled(true);
             String coin = itemStack.getItemMeta().getDisplayName().replace("Coin|", "");
-            //e.getPlayer().sendActionBar(itemStack.getItemMeta().getDisplayName().replace("Coin|" , ""));
             e.getPlayer().sendActionBar(Message.Color(Config.COIN_ACTION.replace("{coin}", coin)));
             e.getItem().remove();
             Main.getEconomy().depositPlayer(e.getPlayer(), Double.parseDouble(coin));
@@ -68,8 +69,12 @@ public class Spawner implements Listener {
         ItemStack itemStack = e.getItem().getItemStack();
         if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName()) {
             String itemName = itemStack.getItemMeta().getDisplayName();
-            if (itemStack.getType() != Material.PLAYER_HEAD) return;
-            if (!itemName.startsWith("Coin|")) return;
+            if (itemStack.getType() != Material.PLAYER_HEAD) {
+                return;
+            }
+            if (!itemName.startsWith("Coin|")) {
+                return;
+            }
             e.setCancelled(true);
         }
     }

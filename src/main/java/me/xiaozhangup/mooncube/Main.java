@@ -25,8 +25,9 @@ public class Main extends JavaPlugin {
 
     private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
-        if (economyProvider != null)
+        if (economyProvider != null) {
             econ = (Economy) economyProvider.getProvider();
+        }
         return (econ != null);
     }
 

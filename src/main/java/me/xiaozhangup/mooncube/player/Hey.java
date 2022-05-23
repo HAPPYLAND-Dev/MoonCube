@@ -8,6 +8,7 @@ import me.xiaozhangup.mooncube.gui.HeyProfile;
 import me.xiaozhangup.mooncube.gui.IsControl;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,12 +27,17 @@ public class Hey implements Listener {
 
     @EventHandler
     public void onPlayerClick(PlayerInteractEntityEvent e) {
-        if (e.getRightClicked().getType() != EntityType.PLAYER) return;
+        if (e.getRightClicked().getType() != EntityType.PLAYER) {
+            return;
+        }
         Player ed = (Player) e.getRightClicked();
         Player p = e.getPlayer();
         Material material = p.getInventory().getItemInMainHand().getType();
-        if (Config.BLACK_ITEMS.contains(material.toString()) || material.toString().endsWith("POTION")) return;
+        if (Config.BLACK_ITEMS.contains(material.toString()) || material.toString().endsWith("POTION")) {
+            return;
+        }
         if (p.isSneaking()) {
+            p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             Inventory iscontrol = Bukkit.createInventory(new IsControl(), 27, Message.Color("对于玩家 " + ed.getName() + " 的岛屿选项"));
             Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
                 ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
@@ -58,6 +64,7 @@ public class Hey implements Listener {
                 });
             });
         } else {
+            p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             Inventory profile = Bukkit.createInventory(new HeyProfile(), 54, Message.Color("玩家 " + ed.getName() + " 的个人资料"));
             Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
                 ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
