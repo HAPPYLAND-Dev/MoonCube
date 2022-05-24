@@ -1,5 +1,6 @@
 package me.xiaozhangup.mooncube.player;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.happylandmc.core.Skull;
 import me.happylandmc.core.message.Message;
 import me.xiaozhangup.mooncube.Config;
@@ -95,9 +96,33 @@ public class Hey implements Listener {
 
                 profile.setItem(19, ed.getInventory().getItemInOffHand());
                 profile.setItem(21, ed.getInventory().getItemInMainHand());
+                
+                ItemStack sign = new ItemStack(Material.OAK_SIGN);
+                ItemMeta signMeta = sign.getItemMeta();
+                signMeta.setDisplayName(Message.Color("&f&l参观他的岛屿&7(如果可以)"));
+                List<String> olore = new ArrayList<>();
+                olore.add(Message.Color("&9岛屿水晶 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_bank_crystals%")));
+                olore.add(Message.Color("&b岛屿大小 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_upgrade_size_dimensions%")));
+                olore.add(Message.Color("&3岛屿价值 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_value%")));
+                olore.add(Message.Color("&x&2&0&B&2&A&A岛屿等级 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_level%")));
+                signMeta.setLore(olore);
+                sign.setItemMeta(signMeta);
+                profile.setItem(14, sign);
 
-                profile.setItem(14, new ItemStack(Material.OAK_SIGN));
-                profile.setItem(15, new ItemStack(Material.CROSSBOW));
+                ItemStack skills = new ItemStack(Material.CROSSBOW);
+                ItemMeta skillsMeta = skills.getItemMeta();
+                skillsMeta.setDisplayName(Message.Color("&6&l个人技能数据"));
+                List<String> slore = new ArrayList<>();
+                slore.add(Message.Color("&4力量 ➽ &7: " + PlaceholderAPI.setPlaceholders(p, "%aureliumskills_strength%")));
+                slore.add(Message.Color("&c生命值 ❤ &7: " + PlaceholderAPI.setPlaceholders(p, "%aureliumskills_health%")));
+                slore.add(Message.Color("&6再生 ❥ &7: " + PlaceholderAPI.setPlaceholders(p, "%aureliumskills_regeneration%")));
+                slore.add(Message.Color("&2幸运 ☘ &7: " + PlaceholderAPI.setPlaceholders(p, "%aureliumskills_luck%")));
+                slore.add(Message.Color("&9智慧 ✿ &7: " + PlaceholderAPI.setPlaceholders(p, "%aureliumskills_wisdom%")));
+                slore.add(Message.Color("&5韧性 ✦ &7: " + PlaceholderAPI.setPlaceholders(p, "%aureliumskills_toughness%")));
+                skillsMeta.setLore(slore);
+                skills.setItemMeta(skillsMeta);
+                profile.setItem(15, skills);
+
                 profile.setItem(23, new ItemStack(Material.COD));
                 profile.setItem(24, new ItemStack(Material.DIAMOND_HOE));
                 profile.setItem(33, new ItemStack(Material.WATER_BUCKET));
