@@ -97,22 +97,24 @@ public class Hey implements Listener {
                 profile.setItem(19, ed.getInventory().getItemInOffHand());
                 profile.setItem(21, ed.getInventory().getItemInMainHand());
 
-                ItemStack sign = new ItemStack(Material.OAK_SIGN);
+                ItemStack sign = new ItemStack(Material.HEART_OF_THE_SEA);
                 ItemMeta signMeta = sign.getItemMeta();
-                signMeta.setDisplayName(Message.Color("&f&l岛屿数据统计"));
+                signMeta.setDisplayName(Message.Color("&x&7&F&F&F&D&4岛屿数据统计"));
                 List<String> olore = new ArrayList<>();
-                olore.add(Message.Color("&9岛屿水晶 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_bank_crystals%")));
-                olore.add(Message.Color("&b岛屿大小 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_upgrade_size_dimensions%")));
-                olore.add(Message.Color("&3岛屿价值 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_value%")));
-                olore.add(Message.Color("&x&2&0&B&2&A&A岛屿等级 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_level%")));
+                olore.add(" ");
+                olore.add(Message.Color("&x&3&C&B&3&7&1岛屿水晶 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_bank_crystals%")));
+                olore.add(Message.Color("&x&6&B&8&E&2&3岛屿大小 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_upgrade_size_dimensions%")));
+                olore.add(Message.Color("&x&8&0&8&0&0&0岛屿价值 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_value%")));
+                olore.add(Message.Color("&x&0&0&8&0&8&0岛屿等级 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_level%")));
                 signMeta.setLore(olore);
                 sign.setItemMeta(signMeta);
                 profile.setItem(14, sign);
 
                 ItemStack skills = new ItemStack(Material.CROSSBOW);
                 ItemMeta skillsMeta = skills.getItemMeta();
-                skillsMeta.setDisplayName(Message.Color("&6&l个人技能数据"));
+                skillsMeta.setDisplayName(Message.Color("&x&C&D&8&5&3&F个人技能数据"));
                 List<String> slore = new ArrayList<>();
+                slore.add(" ");
                 slore.add(Message.Color("&4力量 ➽ &7: " + PlaceholderAPI.setPlaceholders(p, "%aureliumskills_strength%")));
                 slore.add(Message.Color("&c生命值 ❤ &7: " + PlaceholderAPI.setPlaceholders(p, "%aureliumskills_health%")));
                 slore.add(Message.Color("&6再生 ❥ &7: " + PlaceholderAPI.setPlaceholders(p, "%aureliumskills_regeneration%")));
