@@ -96,7 +96,7 @@ public class Hey implements Listener {
 
                 profile.setItem(19, ed.getInventory().getItemInOffHand());
                 profile.setItem(21, ed.getInventory().getItemInMainHand());
-                
+
                 ItemStack sign = new ItemStack(Material.OAK_SIGN);
                 ItemMeta signMeta = sign.getItemMeta();
                 signMeta.setDisplayName(Message.Color("&f&l参观他的岛屿&7(如果可以)"));
@@ -123,6 +123,7 @@ public class Hey implements Listener {
                 skills.setItemMeta(skillsMeta);
                 profile.setItem(15, skills);
 
+                //TODO
                 profile.setItem(23, new ItemStack(Material.COD));
                 profile.setItem(24, new ItemStack(Material.DIAMOND_HOE));
                 profile.setItem(33, new ItemStack(Material.WATER_BUCKET));

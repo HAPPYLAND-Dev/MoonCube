@@ -162,6 +162,7 @@ public class ProfileEditer implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
+        if (input.get(e.getPlayer()) == null) return;
         if (input.get(e.getPlayer())) {
             e.setCancelled(true);
             input.put(e.getPlayer(), false);
