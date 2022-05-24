@@ -99,7 +99,7 @@ public class Hey implements Listener {
 
                 ItemStack sign = new ItemStack(Material.OAK_SIGN);
                 ItemMeta signMeta = sign.getItemMeta();
-                signMeta.setDisplayName(Message.Color("&f&l参观他的岛屿&7(如果可以)"));
+                signMeta.setDisplayName(Message.Color("&f&l岛屿数据统计"));
                 List<String> olore = new ArrayList<>();
                 olore.add(Message.Color("&9岛屿水晶 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_bank_crystals%")));
                 olore.add(Message.Color("&b岛屿大小 &7: " + PlaceholderAPI.setPlaceholders(p, "%iridiumskyblock_island_upgrade_size_dimensions%")));
