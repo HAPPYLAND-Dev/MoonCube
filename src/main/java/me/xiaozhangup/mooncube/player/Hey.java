@@ -15,6 +15,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.Inventory;
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class Hey implements Listener {
 
-    private HashMap<Player, Player> target = new HashMap<>();
+    private final HashMap<Player, Player> target = new HashMap<>();
 
     @EventHandler
     public void onPlayerClick(PlayerInteractEntityEvent e) {
@@ -62,9 +63,24 @@ public class Hey implements Listener {
                 iscontrol.setItem(11, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzMyYzFmMjUyNjNhZWJkNTdiODBiM2I3YjJiZTkxOGUxNGEyNzc3NmYxZTk5NTE3NDk1MjczZTU4M2NjNmY2ZCJ9fX0=" , "&x&F&5&F&5&F&5取消邀请他成为岛员"));
                 iscontrol.setItem(12, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzlmZmRkOWYwN2M3ZWFjMTdhMGIwNWJjNzk2YmE0ZmNlMTk0MWM3MDVmMWE3ZmM4YjQ2YzI4ODI3MTIzZGU1MiJ9fX0=" , "&x&F&5&F&5&F&5邀请他成为岛员"));
                 iscontrol.setItem(13, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWNiNTQ4MDFmNmJmOWYwYWZmOWI5ZWRhOGJjOTE2NDJmODhhZWVhYzNjM2RlNWJiODA3NWRjYTI5NGU1MGU2MiJ9fX0=" , "&x&3&C&B&3&7&1将自己的岛屿转让给他"));
-                iscontrol.setItem(14, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjViMzZjNmYwMTMzYmVhMzgwY2NmYWE0MGJkMDlkM2IwNGFiN2Q3NWRhZmViNzFiMzNmM2ZhMThkNmU0OWJiMCJ9fX0=" , "&c将他从自己岛屿拉黑"));
-                iscontrol.setItem(15, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjI3ODY2ZDI2NjkzYWE5N2M4NDRiNjJmYzlkMDJkNmY5ZjJjMjE3MGJkZWRkZmJlOGI3NjUzMDU0YTdhNGE0YiJ9fX0=" , "&e将他标记为信任者"));
 
+                ItemStack ban = Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjViMzZjNmYwMTMzYmVhMzgwY2NmYWE0MGJkMDlkM2IwNGFiN2Q3NWRhZmViNzFiMzNmM2ZhMThkNmU0OWJiMCJ9fX0=" , "&c将他从自己岛屿拉黑");
+                ItemMeta banMeta = ban.getItemMeta();
+                List<String> blore = new ArrayList<>();
+                blore.add(Message.Color("&7左键 - 拉黑玩家"));
+                blore.add(Message.Color("&7右键 - 取消拉黑玩家"));
+                banMeta.setLore(blore);
+                ban.setItemMeta(banMeta);
+                iscontrol.setItem(14, ban);
+
+                ItemStack trust = Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjI3ODY2ZDI2NjkzYWE5N2M4NDRiNjJmYzlkMDJkNmY5ZjJjMjE3MGJkZWRkZmJlOGI3NjUzMDU0YTdhNGE0YiJ9fX0=" , "&e将他标记为信任者");
+                ItemMeta trustMeta = trust.getItemMeta();
+                List<String> tlore = new ArrayList<>();
+                tlore.add(Message.Color("&7左键 - 信任玩家"));
+                tlore.add(Message.Color("&7右键 - 取消信任玩家"));
+                banMeta.setLore(tlore);
+                trust.setItemMeta(trustMeta);
+                iscontrol.setItem(15, trust);
 
                 Bukkit.getScheduler().runTask(Main.plugin, () -> {
                     p.openInventory(iscontrol);
@@ -184,35 +200,52 @@ public class Hey implements Listener {
         if (e.getWhoClicked() instanceof Player && e.getInventory().getHolder() instanceof HeyProfile) {
             e.setCancelled(true);
             if (e.getRawSlot() == 42) {
-                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is visit " + target.get((Player) e.getWhoClicked()).getName());
+                Bukkit.dispatchCommand(e.getWhoClicked(), "is visit " + target.get((Player) e.getWhoClicked()).getName());
                 e.getWhoClicked().closeInventory();
+                ((Player) e.getWhoClicked()).playSound(e.getWhoClicked() , Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             }
         }
         if (e.getWhoClicked() instanceof Player && e.getInventory().getHolder() instanceof IsControl) {
             e.setCancelled(true);
             if (e.getRawSlot() == 10) {
-                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is visit " + target.get((Player) e.getWhoClicked()).getName());
+                Bukkit.dispatchCommand(e.getWhoClicked(), "is visit " + target.get((Player) e.getWhoClicked()).getName());
                 e.getWhoClicked().closeInventory();
+                ((Player) e.getWhoClicked()).playSound(e.getWhoClicked() , Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             }
             if (e.getRawSlot() == 11) {
-                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is uninvite " + target.get((Player) e.getWhoClicked()).getName());
+                Bukkit.dispatchCommand(e.getWhoClicked(), "is uninvite " + target.get((Player) e.getWhoClicked()).getName());
                 e.getWhoClicked().closeInventory();
+                ((Player) e.getWhoClicked()).playSound(e.getWhoClicked() , Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             }
             if (e.getRawSlot() == 12) {
-                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is invite " + target.get((Player) e.getWhoClicked()).getName());
+                Bukkit.dispatchCommand(e.getWhoClicked(), "is invite " + target.get((Player) e.getWhoClicked()).getName());
                 e.getWhoClicked().closeInventory();
+                ((Player) e.getWhoClicked()).playSound(e.getWhoClicked() , Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             }
             if (e.getRawSlot() == 13) {
-                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is transfer " + target.get((Player) e.getWhoClicked()).getName());
+                Bukkit.dispatchCommand(e.getWhoClicked(), "is transfer " + target.get((Player) e.getWhoClicked()).getName());
                 e.getWhoClicked().closeInventory();
+                ((Player) e.getWhoClicked()).playSound(e.getWhoClicked() , Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             }
-            if (e.getRawSlot() == 14) {
-                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is ban " + target.get((Player) e.getWhoClicked()).getName());
+            if (e.getRawSlot() == 14 && e.getClick() == ClickType.RIGHT) {
+                Bukkit.dispatchCommand(e.getWhoClicked(), "is unban " + target.get((Player) e.getWhoClicked()).getName());
                 e.getWhoClicked().closeInventory();
+                ((Player) e.getWhoClicked()).playSound(e.getWhoClicked() , Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             }
-            if (e.getRawSlot() == 15) {
-                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is trust " + target.get((Player) e.getWhoClicked()).getName());
+            if (e.getRawSlot() == 14 && e.getClick() == ClickType.LEFT) {
+                Bukkit.dispatchCommand(e.getWhoClicked(), "is ban " + target.get((Player) e.getWhoClicked()).getName());
                 e.getWhoClicked().closeInventory();
+                ((Player) e.getWhoClicked()).playSound(e.getWhoClicked() , Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+            }
+            if (e.getRawSlot() == 15 && e.getClick() == ClickType.RIGHT) {
+                Bukkit.dispatchCommand(e.getWhoClicked(), "is untrust " + target.get((Player) e.getWhoClicked()).getName());
+                e.getWhoClicked().closeInventory();
+                ((Player) e.getWhoClicked()).playSound(e.getWhoClicked() , Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+            }
+            if (e.getRawSlot() == 15 && e.getClick() == ClickType.LEFT) {
+                Bukkit.dispatchCommand(e.getWhoClicked(), "is trust " + target.get((Player) e.getWhoClicked()).getName());
+                e.getWhoClicked().closeInventory();
+                ((Player) e.getWhoClicked()).playSound(e.getWhoClicked() , Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             }
 
         }

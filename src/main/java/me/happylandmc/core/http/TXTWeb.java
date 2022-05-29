@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class TXTWeb {
     public static String getSentence() {
@@ -44,6 +45,6 @@ public class TXTWeb {
             bos.write(buffer, 0, len);
         }
         bos.close();
-        return bos.toString("utf-8");
+        return bos.toString(StandardCharsets.UTF_8);
     }
 }
