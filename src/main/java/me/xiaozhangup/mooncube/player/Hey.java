@@ -78,7 +78,7 @@ public class Hey implements Listener {
                 List<String> tlore = new ArrayList<>();
                 tlore.add(Message.Color("&7左键 - 信任玩家"));
                 tlore.add(Message.Color("&7右键 - 取消信任玩家"));
-                banMeta.setLore(tlore);
+                trustMeta.setLore(tlore);
                 trust.setItemMeta(trustMeta);
                 iscontrol.setItem(15, trust);
 
