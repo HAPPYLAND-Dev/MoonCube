@@ -10,6 +10,7 @@ import me.xiaozhangup.mooncube.gui.IsControl;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,10 +22,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
 public class Hey implements Listener {
+
+    private HashMap<Player, Player> target = new HashMap<>();
 
     @EventHandler
     public void onPlayerClick(PlayerInteractEntityEvent e) {
@@ -37,6 +41,7 @@ public class Hey implements Listener {
         if (Config.BLACK_ITEMS.contains(material.toString()) || material.toString().endsWith("POTION")) {
             return;
         }
+        target.put(p, ed);
         if (p.isSneaking()) {
             p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             Inventory iscontrol = Bukkit.createInventory(new IsControl(), 27, Message.Color("对于玩家 " + ed.getName() + " 的岛屿选项"));
@@ -52,12 +57,13 @@ public class Hey implements Listener {
 
                 iscontrol.setItem(8, Skull.getSkull(ed, "&7" + ed.getName()));
 
-                iscontrol.setItem(10, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
-                iscontrol.setItem(11, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
-                iscontrol.setItem(12, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
-                iscontrol.setItem(13, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
-                iscontrol.setItem(14, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
-                iscontrol.setItem(15, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NjNGNjMmVhYTVmNzRlMjZjYjA0ZWM0YTQxZWRlYWU0ZDA0YWY5ZTJmM2U5OWJhNjRkNmM5YzBjNWUzYTdiZiJ9fX0="));
+
+                iscontrol.setItem(10, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjJiYjM3ZjAzMjlmNmJiNWMzY2Y1NjFmZWNhMGJlMTAzNGM5OWE0OGY1ZTFjNzExZGM5YjgzNWRjMzk5NTdhZSJ9fX0=" , "&x&F&5&F&5&F&5参观他的岛屿"));
+                iscontrol.setItem(11, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzMyYzFmMjUyNjNhZWJkNTdiODBiM2I3YjJiZTkxOGUxNGEyNzc3NmYxZTk5NTE3NDk1MjczZTU4M2NjNmY2ZCJ9fX0=" , "&x&F&5&F&5&F&5取消邀请他成为岛员"));
+                iscontrol.setItem(12, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzlmZmRkOWYwN2M3ZWFjMTdhMGIwNWJjNzk2YmE0ZmNlMTk0MWM3MDVmMWE3ZmM4YjQ2YzI4ODI3MTIzZGU1MiJ9fX0=" , "&x&F&5&F&5&F&5邀请他成为岛员"));
+                iscontrol.setItem(13, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWNiNTQ4MDFmNmJmOWYwYWZmOWI5ZWRhOGJjOTE2NDJmODhhZWVhYzNjM2RlNWJiODA3NWRjYTI5NGU1MGU2MiJ9fX0=" , "&x&3&C&B&3&7&1将自己的岛屿转让给他"));
+                iscontrol.setItem(14, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjViMzZjNmYwMTMzYmVhMzgwY2NmYWE0MGJkMDlkM2IwNGFiN2Q3NWRhZmViNzFiMzNmM2ZhMThkNmU0OWJiMCJ9fX0=" , "&c将他从自己岛屿拉黑"));
+                iscontrol.setItem(15, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjI3ODY2ZDI2NjkzYWE5N2M4NDRiNjJmYzlkMDJkNmY5ZjJjMjE3MGJkZWRkZmJlOGI3NjUzMDU0YTdhNGE0YiJ9fX0=" , "&e将他标记为信任者"));
 
 
                 Bukkit.getScheduler().runTask(Main.plugin, () -> {
@@ -125,11 +131,30 @@ public class Hey implements Listener {
                 skills.setItemMeta(skillsMeta);
                 profile.setItem(15, skills);
 
-                //TODO
-                profile.setItem(23, new ItemStack(Material.COD));
-                profile.setItem(24, new ItemStack(Material.DIAMOND_HOE));
-                profile.setItem(33, new ItemStack(Material.WATER_BUCKET));
-                profile.setItem(42, new ItemStack(Material.IRON_INGOT));
+                ItemStack maper = new ItemStack(Material.COD);
+                ItemMeta maperMeta = maper.getItemMeta();
+                maperMeta.setDisplayName(Message.Color("&x&F&F&E&B&C&D其他个人数据"));
+                List<String> mlore = new ArrayList<>();
+                mlore.add(" ");
+                mlore.add(Message.Color("&x&F&F&D&E&A&D金钱 &7: ") + PlaceholderAPI.setPlaceholders(p, "%vault_eco_balance_fixed%"));
+                mlore.add(Message.Color("&x&F&5&D&E&B&3经验 &7: ") + PlaceholderAPI.setPlaceholders(p, "%player_exp%"));
+                mlore.add(Message.Color("&x&D&E&B&8&8&7生命 &7: ") + PlaceholderAPI.setPlaceholders(p, "%player_health%"));
+                mlore.add(Message.Color("&x&D&2&B&4&8&C当前正在 &7: ") + PlaceholderAPI.setPlaceholders(p, "%multiverse_world_alias%"));
+                maperMeta.setLore(mlore);
+                maper.setItemMeta(maperMeta);
+                profile.setItem(24, maper);
+
+                ItemStack visit = new ItemStack(Material.ENDER_EYE);
+                ItemMeta visitMeta = visit.getItemMeta();
+                visitMeta.setDisplayName(Message.Color("&x&9&A&C&D&3&2参观它的岛屿"));
+                List<String> alore = new ArrayList<>();
+                alore.add(" ");
+                alore.add(Message.Color("&7不是所有人的岛屿都能参观!"));
+                alore.add(Message.Color("&7例如岛主禁止访客参观后,"));
+                alore.add(Message.Color("&7你就无法参观它的岛屿."));
+                visitMeta.setLore(alore);
+                visit.setItemMeta(visitMeta);
+                profile.setItem(42, visit);
 
                 ItemStack dailyemo = Skull.getSkull(Config.getConfig("emodata.yml").getString(ed.getName() + ".emobase"));
                 ItemMeta emoMeta = dailyemo.getItemMeta();
@@ -158,9 +183,38 @@ public class Hey implements Listener {
     public void onInvClick(InventoryClickEvent e) {
         if (e.getWhoClicked() instanceof Player && e.getInventory().getHolder() instanceof HeyProfile) {
             e.setCancelled(true);
+            if (e.getRawSlot() == 42) {
+                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is visit " + target.get((Player) e.getWhoClicked()).getName());
+                e.getWhoClicked().closeInventory();
+            }
         }
         if (e.getWhoClicked() instanceof Player && e.getInventory().getHolder() instanceof IsControl) {
             e.setCancelled(true);
+            if (e.getRawSlot() == 10) {
+                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is visit " + target.get((Player) e.getWhoClicked()).getName());
+                e.getWhoClicked().closeInventory();
+            }
+            if (e.getRawSlot() == 11) {
+                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is uninvite " + target.get((Player) e.getWhoClicked()).getName());
+                e.getWhoClicked().closeInventory();
+            }
+            if (e.getRawSlot() == 12) {
+                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is invite " + target.get((Player) e.getWhoClicked()).getName());
+                e.getWhoClicked().closeInventory();
+            }
+            if (e.getRawSlot() == 13) {
+                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is transfer " + target.get((Player) e.getWhoClicked()).getName());
+                e.getWhoClicked().closeInventory();
+            }
+            if (e.getRawSlot() == 14) {
+                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is ban " + target.get((Player) e.getWhoClicked()).getName());
+                e.getWhoClicked().closeInventory();
+            }
+            if (e.getRawSlot() == 15) {
+                Bukkit.dispatchCommand((CommandSender) e.getWhoClicked(), "is trust " + target.get((Player) e.getWhoClicked()).getName());
+                e.getWhoClicked().closeInventory();
+            }
+
         }
     }
 }
