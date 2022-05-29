@@ -1,5 +1,9 @@
 package me.xiaozhangup.mooncube.player;
 
+import com.iridium.iridiumskyblock.IridiumSkyblock;
+import com.iridium.iridiumskyblock.database.Island;
+import com.iridium.iridiumskyblock.database.User;
+import com.iridium.iridiumskyblock.managers.IslandManager;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.happylandmc.core.Skull;
 import me.happylandmc.core.message.Message;
@@ -25,11 +29,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 
 public class Hey implements Listener {
 
     private final HashMap<Player, Player> target = new HashMap<>();
+    IslandManager islandManager = new IslandManager();
 
     @EventHandler
     public void onPlayerClick(PlayerInteractEntityEvent e) {
@@ -46,6 +52,8 @@ public class Hey implements Listener {
         if (p.isSneaking()) {
             p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             Inventory iscontrol = Bukkit.createInventory(new IsControl(), 27, Message.Color("对于玩家 " + ed.getName() + " 的岛屿选项"));
+            User user = IridiumSkyblock.getInstance().getUserManager().getUser(p);
+            Optional<Island> island = user.getIsland();
             Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
                 ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
                 ItemMeta boardMeta = board.getItemMeta();
@@ -68,7 +76,18 @@ public class Hey implements Listener {
                 ItemMeta banMeta = ban.getItemMeta();
                 List<String> blore = new ArrayList<>();
                 blore.add(Message.Color("&7左键 - 拉黑玩家"));
-                blore.add(Message.Color("&7右键 - 取消拉黑玩家"));
+                blore.add(Message.Color("&7右键 - 取消拉黑玩家"));User targetUser = IridiumSkyblock.getInstance().getUserManager().getUser(target.get(p));
+                if (island.get().equals(targetUser.getIsland().orElse(null)) || IridiumSkyblock.getInstance().getIslandManager().getIslandTrusted(island.get(), targetUser).isPresent()) {
+                    blore.add(" ");
+                    blore.add(Message.Color("&c✘ 他目前为你的岛屿信任者"));
+                    blore.add(Message.Color("&c因此你无法拉黑他"));
+                }
+                blore.add(" ");
+                if (IridiumSkyblock.getInstance().getIslandManager().isBannedOnIsland(island.get(), targetUser)) {
+                    blore.add(Message.Color("&a✔ 本玩家已被你拉黑"));
+                } else {
+                    blore.add(Message.Color("&c✘ 本玩家没有被拉黑"));
+                }
                 banMeta.setLore(blore);
                 ban.setItemMeta(banMeta);
                 iscontrol.setItem(14, ban);
@@ -78,6 +97,12 @@ public class Hey implements Listener {
                 List<String> tlore = new ArrayList<>();
                 tlore.add(Message.Color("&7左键 - 信任玩家"));
                 tlore.add(Message.Color("&7右键 - 取消信任玩家"));
+                blore.add(" ");
+                if (island.get().equals(targetUser.getIsland().orElse(null)) || IridiumSkyblock.getInstance().getIslandManager().getIslandTrusted(island.get(), targetUser).isPresent()) {
+                    blore.add(Message.Color("&a✔ 本玩家已是信任玩家"));
+                } else {
+                    blore.add(Message.Color("&c✘ 本玩家还不是信任玩家"));
+                }
                 trustMeta.setLore(tlore);
                 trust.setItemMeta(trustMeta);
                 iscontrol.setItem(15, trust);

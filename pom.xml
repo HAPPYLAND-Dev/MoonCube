@@ -62,6 +62,13 @@
             <version>2.11.1</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.iridium.iridiumskyblock</groupId>
+            <artifactId>iridiumskybloc</artifactId>
+            <version>3.2.7</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/IridiumSkyblock-3.2.8.jar</systemPath>
+        </dependency>
     </dependencies>
 
 </project>

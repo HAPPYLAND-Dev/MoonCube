@@ -5,6 +5,7 @@ main: me.xiaozhangup.mooncube.Main
 depend:
   - Vault
   - PlaceholderAPI
+  - IridiumSkyblock
 commands:
   mooncube:
     description: MoonCube Main Command
