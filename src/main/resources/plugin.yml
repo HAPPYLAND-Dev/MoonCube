@@ -4,6 +4,7 @@ api-version: 1.13
 main: me.xiaozhangup.mooncube.Main
 depend:
   - Vault
+  - PlaceholderAPI
 commands:
   mooncube:
     description: MoonCube Main Command
