@@ -23,8 +23,8 @@ import java.util.List;
 
 public class TABConfig implements Listener {
 
-    private final int[] bossbarSlot = {1, 2, 3, 4, 5, 6, 7};
-    private final int[] boardSlot = {25, 26, 34, 35, 43, 44};
+    public static List<Integer> bossbarSlot;
+    public static List<Integer> boardSlot;
 
     public static void openTAB(Player p) {
         Inventory tab = Bukkit.createInventory(new TabC(), 45, Message.Color("游戏页面控件置"));
@@ -100,6 +100,17 @@ public class TABConfig implements Listener {
         }
     }
 
+    public static void setUp() {
+        int[] ibossbarSlot = {1, 2, 3, 4, 5, 6, 7};
+        int[] iboardSlot = {25, 26, 34, 35, 43, 44};
+        for (Integer bossbar : ibossbarSlot) {
+            bossbarSlot.add(bossbar);
+        }
+        for (Integer board : iboardSlot) {
+            boardSlot.add(board);
+        }
+    }
+
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
 
@@ -109,7 +120,7 @@ public class TABConfig implements Listener {
         if (e.getWhoClicked() instanceof Player p && e.getInventory().getHolder() instanceof TabC) {
             e.setCancelled(true);
             TabPlayer tabPlayer = TabAPI.getInstance().getPlayer(p.getUniqueId());
-            if (Arrays.asList(boardSlot).contains(e.getRawSlot())) {
+            if (boardSlot.contains(e.getRawSlot())) {
                 p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
                 if (scoreboardManager.hasScoreboardVisible(tabPlayer)) {
                     scoreboardManager.setScoreboardVisible(tabPlayer, false, false);
@@ -119,7 +130,7 @@ public class TABConfig implements Listener {
                     openTAB(p);
                 }
             }
-            if (Arrays.asList(bossbarSlot).contains(e.getRawSlot())) {
+            if (bossbarSlot.contains(e.getRawSlot())) {
                 p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
                 if (bossBarManager.hasBossBarVisible(tabPlayer)) {
                     bossBarManager.setBossBarVisible(tabPlayer, false, false);

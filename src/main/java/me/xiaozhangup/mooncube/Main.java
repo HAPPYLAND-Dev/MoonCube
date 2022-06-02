@@ -69,6 +69,9 @@ public class Main extends JavaPlugin {
             return true;
         });
         //command
+
+        TABConfig.setUp();
+        //misc
     }
 
 }
