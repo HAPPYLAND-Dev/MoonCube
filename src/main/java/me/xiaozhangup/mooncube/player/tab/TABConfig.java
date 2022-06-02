@@ -46,7 +46,7 @@ public class TABConfig implements Listener {
         if (bossBarManager.hasBossBarVisible(tabPlayer)) {
             ItemStack bosson = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
             ItemMeta bossonMeta = bosson.getItemMeta();
-            bossonMeta.setDisplayName(Message.Color("&fBossBar控件: &2开启"));
+            bossonMeta.setDisplayName(Message.Color("&fBossBar控件: &a开启"));
             List<String> onlore = new ArrayList<>();
             onlore.add(" ");
             onlore.add(Message.Color("&7单击来关闭这个控件"));

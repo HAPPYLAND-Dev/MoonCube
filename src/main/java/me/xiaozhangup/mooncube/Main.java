@@ -47,6 +47,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Hey(), this);
         Bukkit.getPluginManager().registerEvents(new Join(), this);
         Bukkit.getPluginManager().registerEvents(new ProfileEditer(), this);
+        Bukkit.getPluginManager().registerEvents(new TABConfig(), this);
         //event load
 
         File emodata = new File(plugin.getDataFolder(), "emodata.yml");
