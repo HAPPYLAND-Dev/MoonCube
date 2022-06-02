@@ -32,6 +32,8 @@ public class TABConfig implements Listener {
         ScoreboardManager scoreboardManager = TabAPI.getInstance().getScoreboardManager();
         BossBarManager bossBarManager = TabAPI.getInstance().getBossBarManager();
 
+        TabPlayer tabPlayer = TabAPI.getInstance().getPlayer(p.getUniqueId());
+
         ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta boardMeta = board.getItemMeta();
         boardMeta.setDisplayName(" ");
@@ -41,7 +43,7 @@ public class TABConfig implements Listener {
             tab.setItem(i, board);
         }
 
-        if (bossBarManager.hasBossBarVisible((TabPlayer) p)) {
+        if (bossBarManager.hasBossBarVisible(tabPlayer)) {
             ItemStack bosson = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
             ItemMeta bossonMeta = bosson.getItemMeta();
             bossonMeta.setDisplayName(Message.Color("&fBossBar控件: &2开启"));
@@ -67,7 +69,7 @@ public class TABConfig implements Listener {
             }
         }
 
-        if (scoreboardManager.hasScoreboardVisible((TabPlayer) p)) {
+        if (scoreboardManager.hasScoreboardVisible(tabPlayer)) {
             ItemStack boardon = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
             ItemMeta boardonMeta = boardon.getItemMeta();
             boardonMeta.setDisplayName(Message.Color("&f计分板控件: &a开启"));
@@ -105,7 +107,7 @@ public class TABConfig implements Listener {
         BossBarManager bossBarManager = TabAPI.getInstance().getBossBarManager();
 
         if (e.getWhoClicked() instanceof Player p && e.getInventory().getHolder() instanceof TabC) {
-            TabPlayer tabPlayer = (TabPlayer) p;
+            TabPlayer tabPlayer = TabAPI.getInstance().getPlayer(p.getUniqueId());
             if (Arrays.asList(boardSlot).contains(e.getRawSlot())) {
                 p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
                 if (scoreboardManager.hasScoreboardVisible(tabPlayer)) {
