@@ -4,6 +4,7 @@ import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
 import me.xiaozhangup.mooncube.player.ProfileEditer;
+import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -59,6 +60,11 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginCommand("profile").setExecutor((commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
             ProfileEditer.openProfile(p);
+            return true;
+        });
+        Bukkit.getPluginCommand("tabc").setExecutor((commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            TABConfig.openTAB(p);
             return true;
         });
         //command

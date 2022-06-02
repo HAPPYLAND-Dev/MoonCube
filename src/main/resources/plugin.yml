@@ -15,5 +15,7 @@ commands:
     description: Edit your profile
     aliases:
       - pfe
+  tabc:
+    description: Tab Settings
 authors:
   - xiaozhangup
