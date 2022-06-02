@@ -23,8 +23,8 @@ import java.util.List;
 
 public class TABConfig implements Listener {
 
-    public static List<Integer> bossbarSlot;
-    public static List<Integer> boardSlot;
+    public static List<Integer> bossbarSlot = new ArrayList<>();
+    public static List<Integer> boardSlot = new ArrayList<>();
 
     public static void openTAB(Player p) {
         Inventory tab = Bukkit.createInventory(new TabC(), 45, Message.Color("游戏页面控件置"));
@@ -64,7 +64,7 @@ public class TABConfig implements Listener {
             offlore.add(Message.Color("&7单击来打开这个控件"));
             bossoffMeta.setLore(offlore);
             bossoff.setItemMeta(bossoffMeta);
-            for (int i = 0; i < 8; i++) {
+            for (int i = 1; i < 8; i++) {
                 tab.setItem(i, bossoff);
             }
         }
