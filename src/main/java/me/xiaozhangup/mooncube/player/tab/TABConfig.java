@@ -107,24 +107,25 @@ public class TABConfig implements Listener {
         BossBarManager bossBarManager = TabAPI.getInstance().getBossBarManager();
 
         if (e.getWhoClicked() instanceof Player p && e.getInventory().getHolder() instanceof TabC) {
+            e.setCancelled(true);
             TabPlayer tabPlayer = TabAPI.getInstance().getPlayer(p.getUniqueId());
             if (Arrays.asList(boardSlot).contains(e.getRawSlot())) {
                 p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
                 if (scoreboardManager.hasScoreboardVisible(tabPlayer)) {
-                    scoreboardManager.setScoreboardVisible(tabPlayer, true, false);
+                    scoreboardManager.setScoreboardVisible(tabPlayer, false, false);
                     openTAB(p);
                 } else {
-                    scoreboardManager.setScoreboardVisible(tabPlayer, false, false);
+                    scoreboardManager.setScoreboardVisible(tabPlayer, true, false);
                     openTAB(p);
                 }
             }
             if (Arrays.asList(bossbarSlot).contains(e.getRawSlot())) {
                 p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
                 if (bossBarManager.hasBossBarVisible(tabPlayer)) {
-                    bossBarManager.setBossBarVisible(tabPlayer, true, false);
+                    bossBarManager.setBossBarVisible(tabPlayer, false, false);
                     openTAB(p);
                 } else {
-                    bossBarManager.setBossBarVisible(tabPlayer, false, false);
+                    bossBarManager.setBossBarVisible(tabPlayer, true, false);
                     openTAB(p);
                 }
             }
