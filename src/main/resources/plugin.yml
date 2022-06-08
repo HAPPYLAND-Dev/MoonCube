@@ -6,6 +6,7 @@ depend:
   - Vault
   - PlaceholderAPI
   - IridiumSkyblock
+  - TAB
 commands:
   mooncube:
     description: MoonCube Main Command

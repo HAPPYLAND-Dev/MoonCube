@@ -65,6 +65,11 @@ public class Hey implements Listener {
                     player.closeInventory();
                     player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
                 }
+                if (e.getRawSlot() == 43) {
+                    Bukkit.dispatchCommand(player, "trade request " + target.get(player).getName());
+                    player.closeInventory();
+                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                }
             }
             if (e.getInventory().getHolder() instanceof IsControl) {
                 e.setCancelled(true);
@@ -261,6 +266,17 @@ public class Hey implements Listener {
             visitMeta.setLore(alore);
             visit.setItemMeta(visitMeta);
             profile.setItem(42, visit);
+
+            ItemStack trade = new ItemStack(Material.MINECART);
+            ItemMeta tradeMeta = trade.getItemMeta();
+            tradeMeta.setDisplayName(Message.Color("&x&D&C&D&C&D&C向他发起交易"));
+            List<String> tlore = new ArrayList<>();
+            tlore.add(" ");
+            tlore.add(Message.Color("&7耐心等待对方同意即可."));
+            tlore.add(Message.Color("&7随便放点什么,万一别人看中了呢?"));
+            tradeMeta.setLore(tlore);
+            trade.setItemMeta(tradeMeta);
+            profile.setItem(43, trade);
 
             ItemStack dailyemo = Skull.getSkull(Config.getConfig("emodata.yml").getString(ed.getName() + ".emobase"));
             ItemMeta emoMeta = dailyemo.getItemMeta();
