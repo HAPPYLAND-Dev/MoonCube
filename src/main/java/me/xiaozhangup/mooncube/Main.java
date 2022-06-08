@@ -72,6 +72,10 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginCommand("mooncube").setExecutor((commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
             if (!p.isOp()) return false;
+            if (inside[0] == null) {
+                p.sendMessage(Message.Color("&8[DeBug] &7profile;control"));
+                return false;
+            }
             if (inside[0].equals("profile")) {
                 Hey.openProfile(p , p);
                 return true;
@@ -80,7 +84,7 @@ public class Main extends JavaPlugin {
                 Hey.openIsControl(p , p);
                 return true;
             }
-            p.sendMessage(Message.Color("&8[DeBug] profile;control"));
+            p.sendMessage(Message.Color("&8[DeBug] &7profile;control"));
             return false;
         });
         //command
