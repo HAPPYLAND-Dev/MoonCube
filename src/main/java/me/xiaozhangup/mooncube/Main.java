@@ -1,5 +1,6 @@
 package me.xiaozhangup.mooncube;
 
+import me.happylandmc.core.message.Message;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
@@ -67,6 +68,20 @@ public class Main extends JavaPlugin {
             Player p = (Player) commandSender;
             TABConfig.openTAB(p);
             return true;
+        });
+        Bukkit.getPluginCommand("mooncube").setExecutor((commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            if (!p.isOp()) return false;
+            if (inside[0].equals("profile")) {
+                Hey.openProfile(p , p);
+                return true;
+            }
+            if (inside[0].equals("control")) {
+                Hey.openIsControl(p , p);
+                return true;
+            }
+            p.sendMessage(Message.Color("&8[DeBug] profile;control"));
+            return false;
         });
         //command
 

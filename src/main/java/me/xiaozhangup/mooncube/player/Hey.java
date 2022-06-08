@@ -117,7 +117,7 @@ public class Hey implements Listener {
         }
     }
 
-    public void openIsControl(Player p, Player ed) {
+    public static void openIsControl(Player p, Player ed) {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
         Inventory iscontrol = Bukkit.createInventory(new IsControl(), 27, Message.Color("对于玩家 " + ed.getName() + " 的岛屿选项"));
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(p);
@@ -181,7 +181,7 @@ public class Hey implements Listener {
         });
     }
 
-    public void openProfile(Player p, Player ed) {
+    public static void openProfile(Player p, Player ed) {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
         Inventory profile = Bukkit.createInventory(new HeyProfile(), 54, Message.Color("玩家 " + ed.getName() + " 的个人资料"));
         Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
