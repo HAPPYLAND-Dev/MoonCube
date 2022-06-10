@@ -66,7 +66,7 @@ public class Hey implements Listener {
                     player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
                 }
                 if (e.getRawSlot() == 43) {
-                    Bukkit.dispatchCommand(player, "trade request " + target.get(player).getName());
+                    Bukkit.dispatchCommand(player, "trade " + target.get(player).getName());
                     player.closeInventory();
                     player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
                 }
