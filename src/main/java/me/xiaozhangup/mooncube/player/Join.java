@@ -2,6 +2,7 @@ package me.xiaozhangup.mooncube.player;
 
 import me.xiaozhangup.mooncube.Config;
 import me.xiaozhangup.mooncube.Main;
+import me.xiaozhangup.mooncube.mobs.Spawner;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
@@ -16,8 +17,7 @@ public class Join implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         if (e.getPlayer().hasPlayedBefore()) {
-            //TODO
-            Main.plugin.getLogger().info("Yep");
+            Spawner.dailyCoin.putIfAbsent(e.getPlayer(), 0.0);
         } else {
             Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
                 FileConfiguration configuration = Config.getConfig("emodata.yml");

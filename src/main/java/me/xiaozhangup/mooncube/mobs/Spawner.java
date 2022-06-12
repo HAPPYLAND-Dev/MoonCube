@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -17,8 +18,12 @@ import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Spawner implements Listener {
+
+    public static Map<Player, Double> dailyCoin = new HashMap<>();
 
     @EventHandler
     public void onMonDeath(EntityDeathEvent e) {
@@ -57,10 +62,15 @@ public class Spawner implements Listener {
                 return;
             }
             e.setCancelled(true);
-            String coin = itemStack.getItemMeta().getDisplayName().replace("Coin|", "");
-            e.getPlayer().sendActionBar(Message.Color(Config.COIN_ACTION.replace("{coin}", coin)));
-            e.getItem().remove();
-            Main.getEconomy().depositPlayer(e.getPlayer(), Double.parseDouble(coin));
+            if (dailyCoin.get(e.getPlayer()) <= Config.DAILYMAX) {
+                String coin = itemStack.getItemMeta().getDisplayName().replace("Coin|", "");
+                e.getPlayer().sendActionBar(Message.Color(Config.COIN_ACTION.replace("{coin}", coin)));
+                e.getItem().remove();
+                Main.getEconomy().depositPlayer(e.getPlayer(), Double.parseDouble(coin));
+                dailyCoin.put(e.getPlayer() , dailyCoin.get(e.getPlayer()) + Double.parseDouble(coin));
+            } else {
+                e.getPlayer().sendActionBar(Message.Color(Config.COIN_FULL));
+            }
         }
     }
 

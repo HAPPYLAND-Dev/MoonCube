@@ -84,7 +84,12 @@ public class Main extends JavaPlugin {
                 Hey.openIsControl(p , p);
                 return true;
             }
-            p.sendMessage(Message.Color("&8[DeBug] &7profile;control"));
+            if (inside[0].equals("reload")) {
+                Config.loadConfig();
+                p.sendMessage(Message.Color("&8[DeBug] &freload!"));
+                return true;
+            }
+            p.sendMessage(Message.Color("&8[DeBug] &7profile;control;reload"));
             return false;
         });
         //command

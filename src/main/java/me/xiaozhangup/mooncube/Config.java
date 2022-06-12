@@ -12,6 +12,8 @@ public class Config {
 
     public static String COIN_ACTION;
     public static String COIN_HOLOGRAM;
+    public static String COIN_FULL;
+    public static Double DAILYMAX;
 
     public static List<String> BLACK_ITEMS;
 
@@ -21,7 +23,9 @@ public class Config {
 
         COIN_ACTION = plugin.getConfig().getString("CoinActionBar");
         COIN_HOLOGRAM = plugin.getConfig().getString("CoinHologram");
+        COIN_FULL = plugin.getConfig().getString("CoinFull");
         BLACK_ITEMS = plugin.getConfig().getStringList("BlackItems");
+        DAILYMAX = plugin.getConfig().getDouble("DailyMax");
     }
 
     public static FileConfiguration getConfig(String yamlFileName) {
