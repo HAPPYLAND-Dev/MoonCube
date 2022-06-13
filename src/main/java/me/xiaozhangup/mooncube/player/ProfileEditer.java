@@ -4,6 +4,7 @@ import me.happylandmc.core.Skull;
 import me.happylandmc.core.message.Message;
 import me.xiaozhangup.mooncube.Config;
 import me.xiaozhangup.mooncube.Main;
+import me.xiaozhangup.mooncube.config.ConfigManager;
 import me.xiaozhangup.mooncube.gui.Emo;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -42,14 +43,14 @@ public class ProfileEditer implements Listener {
             ItemStack sign = new ItemStack(Material.NAME_TAG);
             ItemMeta signMeta = sign.getItemMeta();
             signMeta.setDisplayName(Message.Color("&f单击设置你的个性签名"));
-            if (Config.getConfig("emodata.yml").getString(p.getName() + ".text") == null) {
+            if (ConfigManager.getConfig("emodata").getString(p.getName() + ".text") == null) {
                 List<String> lore = new ArrayList<>();
                 lore.add(Message.Color("&7&o你没有设置签名"));
                 signMeta.setLore(lore);
                 sign.setItemMeta(signMeta);
             } else {
                 List<String> lore = new ArrayList<>();
-                lore.add(Message.Color("&7" + Config.getConfig("emodata.yml").getString(p.getName() + ".text")));
+                lore.add(Message.Color("&7" + ConfigManager.getConfig("emodata").getString(p.getName() + ".text")));
                 signMeta.setLore(lore);
                 sign.setItemMeta(signMeta);
             }
@@ -71,7 +72,7 @@ public class ProfileEditer implements Listener {
             profile.setItem(31, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZlYTk5YWQ5NWI1NzAxNzVmZGEyNWMzYTY5Nzg4ZDZhOWI4NTRhYTEzZjhhNWZmNjNmNmVmZWRmNTgxZGZiNiJ9fX0=", "&f思索"));
             profile.setItem(32, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFiZmFiZjBhZGIyYTYxNWU5MDFmZTAwNDBlMzIyYzUxZmI3ZDExYzgyY2ZhZmEyMWU1MjIxYTVmNmEyZTAzMCJ9fX0=", "&f吐了"));
 
-            ItemStack dailyemo = Skull.getSkull(Config.getConfig("emodata.yml").getString(p.getName() + ".emobase"));
+            ItemStack dailyemo = Skull.getSkull(ConfigManager.getConfig("emodata").getString(p.getName() + ".emobase"));
             ItemMeta emoMeta = dailyemo.getItemMeta();
             emoMeta.setDisplayName(Message.Color("&f当前个性表情"));
             List<String> lore = new ArrayList<>();
@@ -87,7 +88,7 @@ public class ProfileEditer implements Listener {
     }
 
     public static void setEmo(Player p, String s) {
-        FileConfiguration configuration = Config.getConfig("emodata.yml");
+        FileConfiguration configuration = ConfigManager.getConfig("emodata");
         configuration.set(p.getName() + ".emobase", s);
         try {
             configuration.save(new File(Main.plugin.getDataFolder(), "emodata.yml"));
@@ -171,13 +172,7 @@ public class ProfileEditer implements Listener {
                 openProfile(e.getPlayer());
             } else {
                 Message.PerMessage(e.getPlayer(), "&x&8&F&B&C&8&F签名", "&f签名设置成功!");
-                FileConfiguration configuration = Config.getConfig("emodata.yml");
-                configuration.set(e.getPlayer().getName() + ".text", e.getMessage());
-                try {
-                    configuration.save(new File(Main.plugin.getDataFolder(), "emodata.yml"));
-                } catch (IOException exception) {
-                    exception.printStackTrace();
-                }
+                ConfigManager.writeConfig("emodata" , e.getPlayer().getName() + ".text", e.getMessage());
                 openProfile(e.getPlayer());
             }
         }

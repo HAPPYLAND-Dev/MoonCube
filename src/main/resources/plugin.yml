@@ -1,6 +1,6 @@
 name: MoonCube
 version: ${project.version}
-api-version: 1.13
+api-version: 1.18
 main: me.xiaozhangup.mooncube.Main
 depend:
   - Vault

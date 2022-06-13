@@ -9,6 +9,7 @@ import me.happylandmc.core.Skull;
 import me.happylandmc.core.message.Message;
 import me.xiaozhangup.mooncube.Config;
 import me.xiaozhangup.mooncube.Main;
+import me.xiaozhangup.mooncube.config.ConfigManager;
 import me.xiaozhangup.mooncube.gui.HeyProfile;
 import me.xiaozhangup.mooncube.gui.IsControl;
 import org.bukkit.Bukkit;
@@ -278,17 +279,17 @@ public class Hey implements Listener {
             trade.setItemMeta(tradeMeta);
             profile.setItem(43, trade);
 
-            ItemStack dailyemo = Skull.getSkull(Config.getConfig("emodata.yml").getString(ed.getName() + ".emobase"));
+            ItemStack dailyemo = Skull.getSkull(ConfigManager.getConfig("emodata").getString(ed.getName() + ".emobase"));
             ItemMeta emoMeta = dailyemo.getItemMeta();
             emoMeta.setDisplayName(Message.Color("&f个性签名"));
-            if (Config.getConfig("emodata.yml").getString(ed.getName() + ".text") == null) {
+            if (ConfigManager.getConfig("emodata").getString(ed.getName() + ".text") == null) {
                 List<String> lore = new ArrayList<>();
                 lore.add(Message.Color("&7&o他没有设置签名"));
                 emoMeta.setLore(lore);
                 dailyemo.setItemMeta(emoMeta);
             } else {
                 List<String> lore = new ArrayList<>();
-                lore.add(Message.Color("&7" + Config.getConfig("emodata.yml").getString(ed.getName() + ".text")));
+                lore.add(Message.Color("&7" + ConfigManager.getConfig("emodata").getString(ed.getName() + ".text")));
                 emoMeta.setLore(lore);
                 dailyemo.setItemMeta(emoMeta);
             }

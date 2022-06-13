@@ -28,13 +28,4 @@ public class Config {
         DAILYMAX = plugin.getConfig().getDouble("DailyMax");
     }
 
-    public static FileConfiguration getConfig(String yamlFileName) {
-        File file = new File(plugin.getDataFolder(), yamlFileName);
-        if (!file.exists()) {
-            plugin.saveResource(yamlFileName, false);
-        }
-        return YamlConfiguration.loadConfiguration(file);
-    }
-
-
 }

@@ -1,11 +1,13 @@
 package me.xiaozhangup.mooncube;
 
 import me.happylandmc.core.message.Message;
+import me.xiaozhangup.mooncube.config.ConfigManager;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
 import me.xiaozhangup.mooncube.player.ProfileEditer;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
+import me.xiaozhangup.mooncube.world.RuleManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -35,13 +37,15 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("MoonCube Version " + Bukkit.getPluginManager().getPlugin("MoonCube").getDescription().getVersion());
-        getLogger().info("");
         plugin = this;
+
+        getLogger().info("MoonCube Version " + plugin.getDescription().getVersion());
+        getLogger().info("");
         //log print
 
         Config.loadConfig();
         setupEconomy();
+        RuleManager.setAll();
         //config
 
         Bukkit.getPluginManager().registerEvents(new Spawner(), this);
@@ -49,14 +53,10 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Join(), this);
         Bukkit.getPluginManager().registerEvents(new ProfileEditer(), this);
         Bukkit.getPluginManager().registerEvents(new TABConfig(), this);
+        Bukkit.getPluginManager().registerEvents(new RuleManager() , this);
         //event load
 
-        File emodata = new File(plugin.getDataFolder(), "emodata.yml");
-        try {
-            emodata.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ConfigManager.createFile("emodata");
         //file
 
         Bukkit.getPluginCommand("profile").setExecutor((commandSender, command, s, inside) -> {
