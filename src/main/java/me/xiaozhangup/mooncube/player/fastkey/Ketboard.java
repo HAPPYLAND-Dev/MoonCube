@@ -16,24 +16,25 @@ public class Ketboard implements Listener {
     private final Map<Player, Long> timeSnap = new HashMap<>();
     public static Map<Integer, String> shortSnap = new HashMap<>();
 
+    //TODO
+    //高级快捷键优待实现，例如Shift+F
+
     @EventHandler
     public void onPlayerSneak(PlayerToggleSneakEvent e) {
-        if (e.getPlayer().isSneaking()) {
             timeSnap.put(e.getPlayer() , System.currentTimeMillis());
-        }
     }
 
     @EventHandler
     public void onPlayerKeyinput(PlayerItemHeldEvent e) {
         Player p = e.getPlayer();
-        if (shortSnap.get(e.getNewSlot()) != null && timeSnap.get(p) != null && System.currentTimeMillis() - timeSnap.get(p) <= 200) {
+        if (shortSnap.get(e.getNewSlot()) != null && timeSnap.get(p) != null && System.currentTimeMillis() - timeSnap.get(p) <= 220) {
             e.setCancelled(true);
             Bukkit.dispatchCommand(p , shortSnap.get(e.getNewSlot()));
         }
     }
 
     public static void loadKey() {
-        for (int i = 1 ; i < 10 ; i ++) {
+        for (int i = 0 ; i < 9 ; i ++) {
             if (ConfigManager.getConfig("keymap").getString(String.valueOf(i)) != null) {
                 shortSnap.put(i , ConfigManager.getConfig("keymap").getString(String.valueOf(i)));
             }
