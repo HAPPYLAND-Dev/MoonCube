@@ -6,6 +6,7 @@ import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
 import me.xiaozhangup.mooncube.player.ProfileEditer;
+import me.xiaozhangup.mooncube.player.fastkey.Ketboard;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import me.xiaozhangup.mooncube.world.RuleManager;
 import net.milkbowl.vault.economy.Economy;
@@ -54,8 +55,10 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ProfileEditer(), this);
         Bukkit.getPluginManager().registerEvents(new TABConfig(), this);
         Bukkit.getPluginManager().registerEvents(new RuleManager() , this);
+        Bukkit.getPluginManager().registerEvents(new Ketboard(), this);
         //event load
 
+        ConfigManager.createFile("keymap");
         ConfigManager.createFile("emodata");
         //file
 
@@ -86,6 +89,7 @@ public class Main extends JavaPlugin {
             }
             if (inside[0].equals("reload")) {
                 Config.loadConfig();
+                Ketboard.loadKey();
                 p.sendMessage(Message.Color("&8[DeBug] &freload!"));
                 return true;
             }
@@ -95,6 +99,7 @@ public class Main extends JavaPlugin {
         //command
 
         TABConfig.setUp();
+        Ketboard.loadKey();
         //misc
     }
 
