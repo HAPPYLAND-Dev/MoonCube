@@ -1,7 +1,7 @@
 package me.xiaozhangup.mooncube;
 
-import me.happylandmc.core.message.Message;
 import me.xiaozhangup.mooncube.config.ConfigManager;
+import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
@@ -15,9 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
-import java.io.IOException;
 
 public class Main extends JavaPlugin {
 
@@ -76,7 +73,7 @@ public class Main extends JavaPlugin {
             Player p = (Player) commandSender;
             if (!p.isOp()) return false;
             if (inside[0] == null) {
-                p.sendMessage(Message.Color("&8[DeBug] &7profile;control"));
+                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control"));
                 return false;
             }
             if (inside[0].equals("profile")) {
@@ -90,10 +87,10 @@ public class Main extends JavaPlugin {
             if (inside[0].equals("reload")) {
                 Config.loadConfig();
                 Ketboard.loadKey();
-                p.sendMessage(Message.Color("&8[DeBug] &freload!"));
+                p.sendMessage(IString.addColor("&8[DeBug] &freload!"));
                 return true;
             }
-            p.sendMessage(Message.Color("&8[DeBug] &7profile;control;reload"));
+            p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;reload"));
             return false;
         });
         //command

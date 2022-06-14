@@ -1,10 +1,10 @@
 package me.xiaozhangup.mooncube.mobs;
 
-import me.happylandmc.core.Skull;
-import me.happylandmc.core.math.Number;
-import me.happylandmc.core.message.Message;
 import me.xiaozhangup.mooncube.Config;
 import me.xiaozhangup.mooncube.Main;
+import me.xiaozhangup.mooncube.gui.tools.INumber;
+import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.gui.tools.Skull;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -34,9 +34,9 @@ public class Spawner implements Listener {
             double point = entity.getMaxHealth() / 10 - 1;
             String coin = null;
             if (point < 0.00) {
-                coin = decimalFormat.format(Number.getRandom(0, entity.getMaxHealth() / 10));
+                coin = decimalFormat.format(INumber.getRandom(0, entity.getMaxHealth() / 10));
             } else {
-                coin = decimalFormat.format(Number.getRandom(point, entity.getMaxHealth() / 10));
+                coin = decimalFormat.format(INumber.getRandom(point, entity.getMaxHealth() / 10));
             }
             ItemStack ball = Skull.getSkull(
                     "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTA5ODcwNTk0OWZjNGM0YjI4ZWI4MzQ3NDVjNTc2YTFjMzVkOGQ3MDIyMGM5YTBiNTQyZGVmOGY0NzA5Nzc4YyJ9fX0=",
@@ -48,7 +48,7 @@ public class Spawner implements Listener {
             item.setPickupDelay(8);
             item.setThrower(entity.getUniqueId());
             item.setOwner(entity.getKiller().getUniqueId());
-            item.setCustomName(Message.Color(Config.COIN_HOLOGRAM.replace("{coin}", coin)));
+            item.setCustomName(IString.addColor(Config.COIN_HOLOGRAM.replace("{coin}", coin)));
 
         }
     }
@@ -64,12 +64,12 @@ public class Spawner implements Listener {
             e.setCancelled(true);
             if (dailyCoin.get(e.getPlayer()) <= Config.DAILYMAX) {
                 String coin = itemStack.getItemMeta().getDisplayName().replace("Coin|", "");
-                e.getPlayer().sendActionBar(Message.Color(Config.COIN_ACTION.replace("{coin}", coin)));
+                e.getPlayer().sendActionBar(IString.addColor(Config.COIN_ACTION.replace("{coin}", coin)));
                 e.getItem().remove();
                 Main.getEconomy().depositPlayer(e.getPlayer(), Double.parseDouble(coin));
                 dailyCoin.put(e.getPlayer() , dailyCoin.get(e.getPlayer()) + Double.parseDouble(coin));
             } else {
-                e.getPlayer().sendActionBar(Message.Color(Config.COIN_FULL));
+                e.getPlayer().sendActionBar(IString.addColor(Config.COIN_FULL));
             }
         }
     }

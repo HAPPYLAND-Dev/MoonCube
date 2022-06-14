@@ -1,11 +1,10 @@
 package me.xiaozhangup.mooncube.player;
 
-import me.happylandmc.core.Skull;
-import me.happylandmc.core.message.Message;
-import me.xiaozhangup.mooncube.Config;
 import me.xiaozhangup.mooncube.Main;
 import me.xiaozhangup.mooncube.config.ConfigManager;
 import me.xiaozhangup.mooncube.gui.Emo;
+import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.gui.tools.Skull;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -30,7 +29,7 @@ public class ProfileEditer implements Listener {
     HashMap<Player, Boolean> input = new HashMap<>();
 
     public static void openProfile(Player p) {
-        Inventory profile = Bukkit.createInventory(new Emo(), 45, Message.Color("编辑你的个人资料"));
+        Inventory profile = Bukkit.createInventory(new Emo(), 45, IString.addColor("编辑你的个人资料"));
         Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
             ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
             ItemMeta boardMeta = board.getItemMeta();
@@ -42,15 +41,15 @@ public class ProfileEditer implements Listener {
 
             ItemStack sign = new ItemStack(Material.NAME_TAG);
             ItemMeta signMeta = sign.getItemMeta();
-            signMeta.setDisplayName(Message.Color("&f单击设置你的个性签名"));
+            signMeta.setDisplayName(IString.addColor("&f单击设置你的个性签名"));
             if (ConfigManager.getConfig("emodata").getString(p.getName() + ".text") == null) {
                 List<String> lore = new ArrayList<>();
-                lore.add(Message.Color("&7&o你没有设置签名"));
+                lore.add(IString.addColor("&7&o你没有设置签名"));
                 signMeta.setLore(lore);
                 sign.setItemMeta(signMeta);
             } else {
                 List<String> lore = new ArrayList<>();
-                lore.add(Message.Color("&7" + ConfigManager.getConfig("emodata").getString(p.getName() + ".text")));
+                lore.add(IString.addColor("&7" + ConfigManager.getConfig("emodata").getString(p.getName() + ".text")));
                 signMeta.setLore(lore);
                 sign.setItemMeta(signMeta);
             }
@@ -74,9 +73,9 @@ public class ProfileEditer implements Listener {
 
             ItemStack dailyemo = Skull.getSkull(ConfigManager.getConfig("emodata").getString(p.getName() + ".emobase"));
             ItemMeta emoMeta = dailyemo.getItemMeta();
-            emoMeta.setDisplayName(Message.Color("&f当前个性表情"));
+            emoMeta.setDisplayName(IString.addColor("&f当前个性表情"));
             List<String> lore = new ArrayList<>();
-            lore.add(Message.Color("&7从左侧表情点选来更换"));
+            lore.add(IString.addColor("&7从左侧表情点选来更换"));
             emoMeta.setLore(lore);
             dailyemo.setItemMeta(emoMeta);
             profile.setItem(34, dailyemo);
@@ -105,7 +104,7 @@ public class ProfileEditer implements Listener {
             e.setCancelled(true);
             if (e.getRawSlot() == 16) {
                 e.getWhoClicked().closeInventory();
-                Message.PerMessage((Player) e.getWhoClicked(), "&x&8&F&B&C&8&F签名", "&f在聊天栏输入你的新签名,或者输入 c 取消设置");
+                e.getWhoClicked().sendMessage(IString.addColor("&8[&x&8&F&B&C&8&F签名&8] &f在聊天栏输入你的新签名,或者输入 c 取消设置"));
                 input.put((Player) e.getWhoClicked(), true);
                 p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             } else {
@@ -168,10 +167,10 @@ public class ProfileEditer implements Listener {
             e.setCancelled(true);
             input.put(e.getPlayer(), false);
             if ("c".equals(e.getMessage())) {
-                Message.PerMessage(e.getPlayer(), "&x&8&F&B&C&8&F签名", "&c签名设置已取消");
+                e.getPlayer().sendMessage(IString.addColor("&8[&x&8&F&B&C&8&F签名&8] &c签名设置已取消"));
                 openProfile(e.getPlayer());
             } else {
-                Message.PerMessage(e.getPlayer(), "&x&8&F&B&C&8&F签名", "&f签名设置成功!");
+                e.getPlayer().sendMessage(IString.addColor("&8[&x&8&F&B&C&8&F签名&8] &f签名设置成功!"));
                 ConfigManager.writeConfig("emodata" , e.getPlayer().getName() + ".text", e.getMessage());
                 openProfile(e.getPlayer());
             }

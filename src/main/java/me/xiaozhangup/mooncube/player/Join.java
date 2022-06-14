@@ -1,6 +1,5 @@
 package me.xiaozhangup.mooncube.player;
 
-import me.xiaozhangup.mooncube.Config;
 import me.xiaozhangup.mooncube.Main;
 import me.xiaozhangup.mooncube.config.ConfigManager;
 import me.xiaozhangup.mooncube.mobs.Spawner;

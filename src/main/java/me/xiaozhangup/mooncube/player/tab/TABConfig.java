@@ -1,11 +1,11 @@
 package me.xiaozhangup.mooncube.player.tab;
 
-import me.happylandmc.core.message.Message;
 import me.neznamy.tab.api.TabAPI;
 import me.neznamy.tab.api.TabPlayer;
 import me.neznamy.tab.api.bossbar.BossBarManager;
 import me.neznamy.tab.api.scoreboard.ScoreboardManager;
 import me.xiaozhangup.mooncube.gui.TabC;
+import me.xiaozhangup.mooncube.gui.tools.IString;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -18,7 +18,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TABConfig implements Listener {
@@ -27,7 +26,7 @@ public class TABConfig implements Listener {
     public static List<Integer> boardSlot = new ArrayList<>();
 
     public static void openTAB(Player p) {
-        Inventory tab = Bukkit.createInventory(new TabC(), 45, Message.Color("游戏页面控件置"));
+        Inventory tab = Bukkit.createInventory(new TabC(), 45, IString.addColor("游戏页面控件置"));
 
         ScoreboardManager scoreboardManager = TabAPI.getInstance().getScoreboardManager();
         BossBarManager bossBarManager = TabAPI.getInstance().getBossBarManager();
@@ -46,10 +45,10 @@ public class TABConfig implements Listener {
         if (bossBarManager.hasBossBarVisible(tabPlayer)) {
             ItemStack bosson = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
             ItemMeta bossonMeta = bosson.getItemMeta();
-            bossonMeta.setDisplayName(Message.Color("&fBossBar控件: &a开启"));
+            bossonMeta.setDisplayName(IString.addColor("&fBossBar控件: &a开启"));
             List<String> onlore = new ArrayList<>();
             onlore.add(" ");
-            onlore.add(Message.Color("&7单击来关闭这个控件"));
+            onlore.add(IString.addColor("&7单击来关闭这个控件"));
             bossonMeta.setLore(onlore);
             bosson.setItemMeta(bossonMeta);
             for (int i = 1; i < 8; i++) {
@@ -58,10 +57,10 @@ public class TABConfig implements Listener {
         } else {
             ItemStack bossoff = new ItemStack(Material.RED_STAINED_GLASS_PANE);
             ItemMeta bossoffMeta = bossoff.getItemMeta();
-            bossoffMeta.setDisplayName(Message.Color("&fBossBar控件: &c关闭"));
+            bossoffMeta.setDisplayName(IString.addColor("&fBossBar控件: &c关闭"));
             List<String> offlore = new ArrayList<>();
             offlore.add(" ");
-            offlore.add(Message.Color("&7单击来打开这个控件"));
+            offlore.add(IString.addColor("&7单击来打开这个控件"));
             bossoffMeta.setLore(offlore);
             bossoff.setItemMeta(bossoffMeta);
             for (int i = 1; i < 8; i++) {
@@ -72,20 +71,20 @@ public class TABConfig implements Listener {
         if (scoreboardManager.hasScoreboardVisible(tabPlayer)) {
             ItemStack boardon = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
             ItemMeta boardonMeta = boardon.getItemMeta();
-            boardonMeta.setDisplayName(Message.Color("&f计分板控件: &a开启"));
+            boardonMeta.setDisplayName(IString.addColor("&f计分板控件: &a开启"));
             List<String> bloreon = new ArrayList<>();
             bloreon.add(" ");
-            bloreon.add(Message.Color("&7单击来关闭这个控件"));
+            bloreon.add(IString.addColor("&7单击来关闭这个控件"));
             boardonMeta.setLore(bloreon);
             boardon.setItemMeta(boardonMeta);
             fastSet(boardon, tab, 25, 26, 34, 35, 43, 44);
         } else {
             ItemStack boardoff = new ItemStack(Material.RED_STAINED_GLASS_PANE);
             ItemMeta boardoffMeta = boardoff.getItemMeta();
-            boardoffMeta.setDisplayName(Message.Color("&f计分板控件: &c关闭"));
+            boardoffMeta.setDisplayName(IString.addColor("&f计分板控件: &c关闭"));
             List<String> bloreoff = new ArrayList<>();
             bloreoff.add(" ");
-            bloreoff.add(Message.Color("&7单击来打开这个控件"));
+            bloreoff.add(IString.addColor("&7单击来打开这个控件"));
             boardoffMeta.setLore(bloreoff);
             boardoff.setItemMeta(boardoffMeta);
             fastSet(boardoff, tab, 25, 26, 34, 35, 43, 44);

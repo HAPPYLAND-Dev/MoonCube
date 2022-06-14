@@ -1,8 +1,7 @@
-package me.happylandmc.core;
+package me.xiaozhangup.mooncube.gui.tools;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import me.happylandmc.core.message.Message;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -28,7 +27,7 @@ public class Skull {
             e.printStackTrace();
         }
 
-        skullMeta.setDisplayName(Message.Color(name));
+        skullMeta.setDisplayName(IString.addColor(name));
         skullMeta.setLore(stringList);
         skull.setItemMeta(skullMeta);
         return skull;
@@ -49,7 +48,7 @@ public class Skull {
             e.printStackTrace();
         }
 
-        skullMeta.setDisplayName(Message.Color(name));
+        skullMeta.setDisplayName(IString.addColor(name));
         skull.setItemMeta(skullMeta);
         return skull;
     }
@@ -79,7 +78,7 @@ public class Skull {
 
         skullMeta.setOwningPlayer(player);
 
-        skullMeta.setDisplayName(Message.Color(name));
+        skullMeta.setDisplayName(IString.addColor(name));
         skullMeta.setLore(stringList);
         skull.setItemMeta(skullMeta);
         return skull;
@@ -91,7 +90,7 @@ public class Skull {
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
         skullMeta.setOwningPlayer(player);
 
-        skullMeta.setDisplayName(Message.Color(name));
+        skullMeta.setDisplayName(IString.addColor(name));
         skull.setItemMeta(skullMeta);
         return skull;
     }
