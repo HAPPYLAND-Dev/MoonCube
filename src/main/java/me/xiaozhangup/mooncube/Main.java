@@ -2,6 +2,7 @@ package me.xiaozhangup.mooncube;
 
 import me.xiaozhangup.mooncube.config.ConfigManager;
 import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.menu.MainMenu;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
@@ -53,6 +54,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new TABConfig(), this);
         Bukkit.getPluginManager().registerEvents(new RuleManager() , this);
         Bukkit.getPluginManager().registerEvents(new Ketboard(), this);
+        Bukkit.getPluginManager().registerEvents(new MainMenu(), this);
         //event load
 
         ConfigManager.createFile("keymap");
@@ -72,26 +74,31 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginCommand("mooncube").setExecutor((commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
             if (!p.isOp()) return false;
-            if (inside[0] == null) {
-                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control"));
+            try {
+                if (inside[0].equals("profile")) {
+                    Hey.openProfile(p , p);
+                    return true;
+                }
+                if (inside[0].equals("control")) {
+                    Hey.openIsControl(p , p);
+                    return true;
+                }
+                if (inside[0].equals("main")) {
+                    MainMenu.open(p);
+                    return true;
+                }
+                if (inside[0].equals("reload")) {
+                    Config.loadConfig();
+                    Ketboard.loadKey();
+                    p.sendMessage(IString.addColor("&8[DeBug] &freload!"));
+                    return true;
+                }
+                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload"));
+                return false;
+            } catch (Exception e) {
+                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload"));
                 return false;
             }
-            if (inside[0].equals("profile")) {
-                Hey.openProfile(p , p);
-                return true;
-            }
-            if (inside[0].equals("control")) {
-                Hey.openIsControl(p , p);
-                return true;
-            }
-            if (inside[0].equals("reload")) {
-                Config.loadConfig();
-                Ketboard.loadKey();
-                p.sendMessage(IString.addColor("&8[DeBug] &freload!"));
-                return true;
-            }
-            p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;reload"));
-            return false;
         });
         //command
 
