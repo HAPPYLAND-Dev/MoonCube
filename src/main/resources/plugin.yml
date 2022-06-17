@@ -18,5 +18,6 @@ commands:
       - pfe
   tabc:
     description: Tab Settings
+  menu:
 authors:
   - xiaozhangup

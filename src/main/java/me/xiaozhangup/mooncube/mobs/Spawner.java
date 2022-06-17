@@ -58,7 +58,7 @@ public class Spawner implements Listener {
         ItemStack itemStack = e.getItem().getItemStack();
         if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName()) {
             String itemName = itemStack.getItemMeta().getDisplayName();
-            if (itemStack.getType() != Material.PLAYER_HEAD && !itemName.startsWith("Coin|")) {
+            if (itemStack.getType() != Material.PLAYER_HEAD || !itemName.startsWith("Coin|")) {
                 return;
             }
             e.setCancelled(true);

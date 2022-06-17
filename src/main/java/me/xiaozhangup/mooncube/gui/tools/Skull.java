@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -101,6 +102,31 @@ public class Skull {
 
         skullMeta.setOwningPlayer(player);
 
+        skull.setItemMeta(skullMeta);
+        return skull;
+    }
+
+    public static ItemStack getSkull(String base64, String name, String... lores) {
+        ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
+        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+        GameProfile profile = new GameProfile(UUID.randomUUID(), "");
+        profile.getProperties().put("textures", new Property("textures",
+                base64));
+        Field profileField = null;
+        try {
+            profileField = skullMeta.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(skullMeta, profile);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+            e.printStackTrace();
+        }
+
+        skullMeta.setDisplayName(IString.addColor(name));
+        List<String> lore = new ArrayList<>();
+        for (String s : lores) {
+            lore.add(IString.addColor(s));
+        }
+        skullMeta.setLore(lore);
         skull.setItemMeta(skullMeta);
         return skull;
     }

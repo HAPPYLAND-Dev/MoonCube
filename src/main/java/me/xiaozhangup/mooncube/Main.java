@@ -100,6 +100,12 @@ public class Main extends JavaPlugin {
                 return false;
             }
         });
+
+        Bukkit.getPluginCommand("menu").setExecutor((commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            MainMenu.open(p);
+            return true;
+        });
         //command
 
         TABConfig.setUp();
