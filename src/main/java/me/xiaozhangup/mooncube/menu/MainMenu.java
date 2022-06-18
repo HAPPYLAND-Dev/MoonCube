@@ -33,7 +33,7 @@ public class MainMenu implements Listener {
             }
 
             //TODO
-            menu.setItem(8 , Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTVkYjg0OWExNWVmMDFhMDMyMTNkMzZjN2M2MmUwN2I4OGMyNzdkYmE4NjkzMTdiN2UyNzU3MWZkZGIyOTNkNCJ9fX0=" , "&x&C&D&8&5&3&F主页面" , "&7" , "&7使用Shift + F打开本菜单" , "&7或者使用 /menu"));
+            menu.setItem(8 , Skull.getSkull(p , "&7" + p.getName()));
 
             Bukkit.getScheduler().runTask(Main.plugin, () -> p.openInventory(menu));
         });
