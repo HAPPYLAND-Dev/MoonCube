@@ -7,11 +7,11 @@ import com.iridium.iridiumskyblock.managers.IslandManager;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.xiaozhangup.mooncube.Config;
 import me.xiaozhangup.mooncube.MoonCube;
-import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.gui.HeyProfile;
 import me.xiaozhangup.mooncube.gui.IsControl;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
+import me.xiaozhangup.mooncube.manager.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -24,6 +24,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -62,60 +63,52 @@ public class Hey implements Listener {
             if (e.getInventory().getHolder() instanceof HeyProfile) {
                 e.setCancelled(true);
                 if (e.getRawSlot() == 42) {
-                    Bukkit.dispatchCommand(player, "is visit " + target.get(player).getName());
-                    player.closeInventory();
-                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                    executeCommandAndClose(player, "is visit");
                 }
-                if (e.getRawSlot() == 43) {
-                    Bukkit.dispatchCommand(player, "trade " + target.get(player).getName());
-                    player.closeInventory();
-                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                else if (e.getRawSlot() == 43) {
+                    executeCommandAndClose(player, "trade");
                 }
             }
             if (e.getInventory().getHolder() instanceof IsControl) {
                 e.setCancelled(true);
                 if (e.getRawSlot() == 10) {
-                    Bukkit.dispatchCommand(player, "is visit " + target.get(player).getName());
-                    player.closeInventory();
-                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                    executeCommandAndClose(player, "is visit");
                 }
-                if (e.getRawSlot() == 11) {
-                    Bukkit.dispatchCommand(player, "is uninvite " + target.get(player).getName());
-                    player.closeInventory();
-                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                else if (e.getRawSlot() == 11) {
+                    executeCommandAndClose(player, "is uninvite");
                 }
-                if (e.getRawSlot() == 12) {
-                    Bukkit.dispatchCommand(player, "is invite " + target.get(player).getName());
-                    player.closeInventory();
-                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                else if (e.getRawSlot() == 12) {
+                    executeCommandAndClose(player, "is invite");
                 }
-                if (e.getRawSlot() == 13) {
-                    Bukkit.dispatchCommand(player, "is transfer " + target.get(player).getName());
-                    player.closeInventory();
-                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                else if (e.getRawSlot() == 13) {
+                    executeCommandAndClose(player, "is transfer");
                 }
-                if (e.getRawSlot() == 14 && e.getClick() == ClickType.RIGHT) {
-                    Bukkit.dispatchCommand(player, "is unban " + target.get(player).getName());
-                    openIsControl(player, target.get(player));
-                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                else if (e.getRawSlot() == 14 && e.getClick() == ClickType.RIGHT) {
+                    executeCommandAndOpen(player, "is unban");
                 }
-                if (e.getRawSlot() == 14 && e.getClick() == ClickType.LEFT) {
-                    Bukkit.dispatchCommand(player, "is ban " + target.get(player).getName());
-                    openIsControl(player, target.get(player));
-                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                else if (e.getRawSlot() == 14 && e.getClick() == ClickType.LEFT) {
+                    executeCommandAndOpen(player, "is ban");
                 }
-                if (e.getRawSlot() == 15 && e.getClick() == ClickType.RIGHT) {
-                    Bukkit.dispatchCommand(player, "is untrust " + target.get(player).getName());
-                    openIsControl(player, target.get(player));
-                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                else if (e.getRawSlot() == 15 && e.getClick() == ClickType.RIGHT) {
+                    executeCommandAndOpen(player, "is untrust");
                 }
-                if (e.getRawSlot() == 15 && e.getClick() == ClickType.LEFT) {
-                    Bukkit.dispatchCommand(player, "is trust " + target.get(player).getName());
-                    openIsControl(player, target.get(player));
-                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                else if (e.getRawSlot() == 15 && e.getClick() == ClickType.LEFT) {
+                    executeCommandAndOpen(player, "is trust");
                 }
             }
         }
+    }
+
+    private void executeCommandAndOpen(Player player, String command) {
+        Bukkit.dispatchCommand(player, command + " " + target.get(player).getName());
+        openIsControl(player, target.get(player));
+        player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+    }
+
+    private void executeCommandAndClose(Player player, String command) {
+        Bukkit.dispatchCommand(player, command + " " + target.get(player).getName());
+        player.closeInventory();
+        player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
     }
 
     public static void openIsControl(Player p, Player ed) {
@@ -207,13 +200,14 @@ public class Hey implements Listener {
             profile.setItem(37, gray);
             profile.setItem(39, gray);
 
-            profile.setItem(11, ed.getInventory().getHelmet());
-            profile.setItem(20, ed.getInventory().getChestplate());
-            profile.setItem(29, ed.getInventory().getLeggings());
-            profile.setItem(38, ed.getInventory().getBoots());
+            PlayerInventory inventory = ed.getInventory();
+            profile.setItem(11, inventory.getHelmet());
+            profile.setItem(20, inventory.getChestplate());
+            profile.setItem(29, inventory.getLeggings());
+            profile.setItem(38, inventory.getBoots());
 
-            profile.setItem(19, ed.getInventory().getItemInOffHand());
-            profile.setItem(21, ed.getInventory().getItemInMainHand());
+            profile.setItem(19, inventory.getItemInOffHand());
+            profile.setItem(21, inventory.getItemInMainHand());
 
             ItemStack sign = new ItemStack(Material.HEART_OF_THE_SEA);
             ItemMeta signMeta = sign.getItemMeta();

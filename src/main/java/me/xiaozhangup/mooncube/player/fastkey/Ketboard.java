@@ -15,10 +15,12 @@ import java.util.Map;
 public class Ketboard implements Listener {
 
     private final Map<Player, Long> timeSnap = new HashMap<>();
+    
+    
     public static Map<Integer, String> shortSnap = new HashMap<>();
-
     public static String fCommand = null;
 
+    
     //TODO
     //高级快捷键优待实现，例如Shift+F
 
@@ -28,7 +30,7 @@ public class Ketboard implements Listener {
     }
 
     @EventHandler
-    public void onPlayerKeyinput(PlayerItemHeldEvent e) {
+    public void onPlayerKeyInput(PlayerItemHeldEvent e) {
         Player p = e.getPlayer();
         if (p.isSneaking() && shortSnap.get(e.getNewSlot()) != null && timeSnap.get(p) != null && System.currentTimeMillis() - timeSnap.get(p) <= 220) {
             e.setCancelled(true);

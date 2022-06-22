@@ -1,8 +1,8 @@
 package me.xiaozhangup.mooncube;
 
 import me.xiaozhangup.mooncube.command.Command;
-import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.manager.ListenerManager;
 import me.xiaozhangup.mooncube.menu.MainMenu;
 import me.xiaozhangup.mooncube.mobs.Spawner;
@@ -13,7 +13,6 @@ import me.xiaozhangup.mooncube.player.fastkey.Ketboard;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import me.xiaozhangup.mooncube.world.RuleManager;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;

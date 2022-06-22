@@ -37,7 +37,7 @@ public class IString {
             bos.write(buffer, 0, len);
         }
         bos.close();
-        return bos.toString(StandardCharsets.UTF_8);
+        return bos.toString(StandardCharsets.UTF_8.toString());
     }
 
 }
