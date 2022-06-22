@@ -23,7 +23,6 @@ public class MoonCube extends JavaPlugin {
     public static Plugin plugin;
     
     private static Economy econ = null;
-   
     
 
     @Override
@@ -53,6 +52,7 @@ public class MoonCube extends JavaPlugin {
         
         ConfigManager.createFile("keymap");
         ConfigManager.createFile("emodata");
+        ConfigManager.createFile("book");
         //file
 
         
