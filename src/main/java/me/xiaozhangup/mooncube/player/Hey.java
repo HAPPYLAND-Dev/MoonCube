@@ -6,8 +6,8 @@ import com.iridium.iridiumskyblock.database.User;
 import com.iridium.iridiumskyblock.managers.IslandManager;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.xiaozhangup.mooncube.Config;
-import me.xiaozhangup.mooncube.Main;
-import me.xiaozhangup.mooncube.config.ConfigManager;
+import me.xiaozhangup.mooncube.MoonCube;
+import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.gui.HeyProfile;
 import me.xiaozhangup.mooncube.gui.IsControl;
 import me.xiaozhangup.mooncube.gui.tools.IString;
@@ -123,7 +123,7 @@ public class Hey implements Listener {
         Inventory iscontrol = Bukkit.createInventory(new IsControl(), 27, IString.addColor("对于玩家 " + ed.getName() + " 的岛屿选项"));
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(p);
         Optional<Island> island = user.getIsland();
-        Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
             ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
             ItemMeta boardMeta = board.getItemMeta();
             boardMeta.setDisplayName(" ");
@@ -176,7 +176,7 @@ public class Hey implements Listener {
             trust.setItemMeta(trustMeta);
             iscontrol.setItem(15, trust);
 
-            Bukkit.getScheduler().runTask(Main.plugin, () -> {
+            Bukkit.getScheduler().runTask(MoonCube.plugin, () -> {
                 p.openInventory(iscontrol);
             });
         });
@@ -185,7 +185,7 @@ public class Hey implements Listener {
     public static void openProfile(Player p, Player ed) {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
         Inventory profile = Bukkit.createInventory(new HeyProfile(), 54, IString.addColor("玩家 " + ed.getName() + " 的个人资料"));
-        Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
             ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
             ItemMeta boardMeta = board.getItemMeta();
             boardMeta.setDisplayName(" ");
@@ -295,7 +295,7 @@ public class Hey implements Listener {
             }
             profile.setItem(40, dailyemo);
 
-            Bukkit.getScheduler().runTask(Main.plugin, () -> {
+            Bukkit.getScheduler().runTask(MoonCube.plugin, () -> {
                 p.openInventory(profile);
             });
         });

@@ -1,7 +1,7 @@
 name: MoonCube
 version: ${project.version}
 api-version: 1.18
-main: me.xiaozhangup.mooncube.Main
+main: me.xiaozhangup.mooncube.MoonCube
 depend:
   - Vault
   - PlaceholderAPI
@@ -19,5 +19,6 @@ commands:
   tabc:
     description: Tab Settings
   menu:
+    description: Menu
 authors:
   - xiaozhangup

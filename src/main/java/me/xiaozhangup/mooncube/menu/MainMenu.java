@@ -1,7 +1,6 @@
 package me.xiaozhangup.mooncube.menu;
 
-import me.xiaozhangup.mooncube.Main;
-import me.xiaozhangup.mooncube.gui.Emo;
+import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.HomeMenu;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
@@ -21,7 +20,7 @@ public class MainMenu implements Listener {
     public static void open(Player p) {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
         Inventory menu = Bukkit.createInventory(new HomeMenu(),  45, IString.addColor("主菜单 | 你好! " + p.getName() + " !"));
-        Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
 
             ItemStack board = IBuilder.getBorder(Material.BLACK_STAINED_GLASS_PANE);
             for (int i = 0; i < 9; i++) {
@@ -35,7 +34,7 @@ public class MainMenu implements Listener {
             //TODO
             menu.setItem(8 , Skull.getSkull(p , "&7" + p.getName()));
 
-            Bukkit.getScheduler().runTask(Main.plugin, () -> p.openInventory(menu));
+            Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
     }
 

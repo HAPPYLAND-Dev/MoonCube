@@ -1,6 +1,6 @@
 package me.xiaozhangup.mooncube.world;
 
-import me.xiaozhangup.mooncube.Main;
+import me.xiaozhangup.mooncube.MoonCube;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.World;
@@ -13,13 +13,13 @@ public class RuleManager implements Listener {
     @EventHandler
     public void onWorldload(WorldLoadEvent e) {
         e.getWorld().setGameRule(GameRule.KEEP_INVENTORY , true);
-        Main.plugin.getLogger().info("World: " + e.getWorld().getName() + " Done!");
+        MoonCube.plugin.getLogger().info("World: " + e.getWorld().getName() + " Done!");
     }
 
     public static void setAll() {
         for (World world : Bukkit.getWorlds()) {
             world.setGameRule(GameRule.KEEP_INVENTORY , true);
-            Main.plugin.getLogger().info("World: " + world.getName() + " Done!");
+            MoonCube.plugin.getLogger().info("World: " + world.getName() + " Done!");
         }
     }
 }

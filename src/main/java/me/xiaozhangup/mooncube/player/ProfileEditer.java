@@ -1,7 +1,7 @@
 package me.xiaozhangup.mooncube.player;
 
-import me.xiaozhangup.mooncube.Main;
-import me.xiaozhangup.mooncube.config.ConfigManager;
+import me.xiaozhangup.mooncube.MoonCube;
+import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.gui.Emo;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
@@ -30,7 +30,7 @@ public class ProfileEditer implements Listener {
 
     public static void openProfile(Player p) {
         Inventory profile = Bukkit.createInventory(new Emo(), 45, IString.addColor("编辑你的个人资料"));
-        Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
             ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
             ItemMeta boardMeta = board.getItemMeta();
             boardMeta.setDisplayName(" ");
@@ -82,7 +82,7 @@ public class ProfileEditer implements Listener {
 
             profile.setItem(16, sign);
 
-            Bukkit.getScheduler().runTask(Main.plugin, () -> p.openInventory(profile));
+            Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(profile));
         });
     }
 
@@ -90,7 +90,7 @@ public class ProfileEditer implements Listener {
         FileConfiguration configuration = ConfigManager.getConfig("emodata");
         configuration.set(p.getName() + ".emobase", s);
         try {
-            configuration.save(new File(Main.plugin.getDataFolder(), "emodata.yml"));
+            configuration.save(new File(MoonCube.plugin.getDataFolder(), "emodata.yml"));
         } catch (IOException exception) {
             exception.printStackTrace();
         }
@@ -108,7 +108,7 @@ public class ProfileEditer implements Listener {
                 input.put((Player) e.getWhoClicked(), true);
                 p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
             } else {
-                Bukkit.getScheduler().runTaskAsynchronously(Main.plugin, () -> {
+                Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
                     if (e.getRawSlot() == 10) {
                         setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzVhNDZmODMzNGU0OWQyNzMzODRlYjcyYjJhYzE1ZTI0YTY0MGQ3NjQ4ZTRiMjhjMzQ4ZWZjZTkzZGM5N2FiIn19fQ==");
                     }

@@ -1,13 +1,13 @@
-package me.xiaozhangup.mooncube.config;
+package me.xiaozhangup.mooncube.manager;
 
-import me.xiaozhangup.mooncube.Main;
+import me.xiaozhangup.mooncube.MoonCube;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
 
-import static me.xiaozhangup.mooncube.Main.plugin;
+import static me.xiaozhangup.mooncube.MoonCube.plugin;
 
 public class ConfigManager {
 
@@ -28,11 +28,11 @@ public class ConfigManager {
         return YamlConfiguration.loadConfiguration(file);
     }
 
-    public static void writeConfig(String s , String node , String value) {
+    public static void writeConfig(String s , String node, String value) {
         FileConfiguration fileConfiguration = getConfig(s);
-        fileConfiguration.set(node , value);
+        fileConfiguration.set(node, value);
         try {
-            fileConfiguration.save(new File(Main.plugin.getDataFolder(), s + ".yml"));
+            fileConfiguration.save(new File(MoonCube.plugin.getDataFolder(), s + ".yml"));
         } catch (IOException exception) {
             exception.printStackTrace();
         }

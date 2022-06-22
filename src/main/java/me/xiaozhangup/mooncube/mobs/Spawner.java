@@ -1,7 +1,7 @@
 package me.xiaozhangup.mooncube.mobs;
 
 import me.xiaozhangup.mooncube.Config;
-import me.xiaozhangup.mooncube.Main;
+import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.tools.INumber;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
@@ -66,7 +66,7 @@ public class Spawner implements Listener {
                 String coin = itemStack.getItemMeta().getDisplayName().replace("Coin|", "");
                 e.getPlayer().sendActionBar(IString.addColor(Config.COIN_ACTION.replace("{coin}", coin)));
                 e.getItem().remove();
-                Main.getEconomy().depositPlayer(e.getPlayer(), Double.parseDouble(coin));
+                MoonCube.getEconomy().depositPlayer(e.getPlayer(), Double.parseDouble(coin));
                 dailyCoin.put(e.getPlayer() , dailyCoin.get(e.getPlayer()) + Double.parseDouble(coin));
             } else {
                 e.getPlayer().sendActionBar(IString.addColor(Config.COIN_FULL));

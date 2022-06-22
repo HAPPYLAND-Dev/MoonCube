@@ -2,7 +2,7 @@ package me.xiaozhangup.mooncube;
 
 import java.util.List;
 
-import static me.xiaozhangup.mooncube.Main.plugin;
+import static me.xiaozhangup.mooncube.MoonCube.plugin;
 
 public class Config {
 

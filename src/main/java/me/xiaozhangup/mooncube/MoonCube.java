@@ -1,7 +1,9 @@
 package me.xiaozhangup.mooncube;
 
-import me.xiaozhangup.mooncube.config.ConfigManager;
+import me.xiaozhangup.mooncube.command.Command;
+import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.manager.ListenerManager;
 import me.xiaozhangup.mooncube.menu.MainMenu;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
@@ -17,10 +19,104 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin {
+public class MoonCube extends JavaPlugin {
 
     public static Plugin plugin;
+    
     private static Economy econ = null;
+   
+    
+
+    @Override
+    public void onEnable() {
+        plugin = this;
+
+        
+        getLogger().info("MoonCube Version " + plugin.getDescription().getVersion());
+        getLogger().info("");
+        //log print
+
+        
+        Config.loadConfig();
+        setupEconomy();
+        RuleManager.setAll();
+        //config
+
+        ListenerManager listenerManager = new ListenerManager();
+        listenerManager.addListeners(
+                new Spawner(), new Hey(), new Join(),
+                new ProfileEditer(), new TABConfig(), new RuleManager(),
+                new Ketboard(), new MainMenu()
+        );
+        listenerManager.register();
+        //event load
+
+        
+        ConfigManager.createFile("keymap");
+        ConfigManager.createFile("emodata");
+        //file
+
+        
+        Command.register("profile", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            ProfileEditer.openProfile(p);
+            return true;
+        });
+        
+        Command.register("tabc", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            TABConfig.openTAB(p);
+            return true;
+        });
+        
+        Command.register("mooncube", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            if (!p.isOp()) return false;
+            try {
+                switch (inside[0]) {
+                    case "profile" -> {
+                        Hey.openProfile(p , p);
+                        return true;
+                    }
+                    
+                    case "control" -> {
+                        Hey.openIsControl(p , p);
+                        return true;
+                    }
+                    
+                    case "main" -> {
+                        MainMenu.open(p);
+                        return true;
+                    }
+                    
+                    case "reload" -> {
+                        Config.loadConfig();
+                        Ketboard.loadKey();
+                        p.sendMessage(IString.addColor("&8[DeBug] &freload!"));
+                        return true;
+                    }
+                }
+                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload"));
+                return false;
+            } catch (Exception e) {
+                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload"));
+                return false;
+            }
+        });
+        
+        Command.register("menu", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            MainMenu.open(p);
+            return true;
+        });
+        //command
+
+        
+        TABConfig.setUp();
+        Ketboard.loadKey();
+        //misc
+    }
+
 
     public static Economy getEconomy() {
         return econ;
@@ -32,85 +128,6 @@ public class Main extends JavaPlugin {
             econ = economyProvider.getProvider();
         }
         return (econ != null);
-    }
-
-    @Override
-    public void onEnable() {
-        plugin = this;
-
-        getLogger().info("MoonCube Version " + plugin.getDescription().getVersion());
-        getLogger().info("");
-        //log print
-
-        Config.loadConfig();
-        setupEconomy();
-        RuleManager.setAll();
-        //config
-
-        Bukkit.getPluginManager().registerEvents(new Spawner(), this);
-        Bukkit.getPluginManager().registerEvents(new Hey(), this);
-        Bukkit.getPluginManager().registerEvents(new Join(), this);
-        Bukkit.getPluginManager().registerEvents(new ProfileEditer(), this);
-        Bukkit.getPluginManager().registerEvents(new TABConfig(), this);
-        Bukkit.getPluginManager().registerEvents(new RuleManager() , this);
-        Bukkit.getPluginManager().registerEvents(new Ketboard(), this);
-        Bukkit.getPluginManager().registerEvents(new MainMenu(), this);
-        //event load
-
-        ConfigManager.createFile("keymap");
-        ConfigManager.createFile("emodata");
-        //file
-
-        Bukkit.getPluginCommand("profile").setExecutor((commandSender, command, s, inside) -> {
-            Player p = (Player) commandSender;
-            ProfileEditer.openProfile(p);
-            return true;
-        });
-        Bukkit.getPluginCommand("tabc").setExecutor((commandSender, command, s, inside) -> {
-            Player p = (Player) commandSender;
-            TABConfig.openTAB(p);
-            return true;
-        });
-        Bukkit.getPluginCommand("mooncube").setExecutor((commandSender, command, s, inside) -> {
-            Player p = (Player) commandSender;
-            if (!p.isOp()) return false;
-            try {
-                if (inside[0].equals("profile")) {
-                    Hey.openProfile(p , p);
-                    return true;
-                }
-                if (inside[0].equals("control")) {
-                    Hey.openIsControl(p , p);
-                    return true;
-                }
-                if (inside[0].equals("main")) {
-                    MainMenu.open(p);
-                    return true;
-                }
-                if (inside[0].equals("reload")) {
-                    Config.loadConfig();
-                    Ketboard.loadKey();
-                    p.sendMessage(IString.addColor("&8[DeBug] &freload!"));
-                    return true;
-                }
-                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload"));
-                return false;
-            } catch (Exception e) {
-                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload"));
-                return false;
-            }
-        });
-
-        Bukkit.getPluginCommand("menu").setExecutor((commandSender, command, s, inside) -> {
-            Player p = (Player) commandSender;
-            MainMenu.open(p);
-            return true;
-        });
-        //command
-
-        TABConfig.setUp();
-        Ketboard.loadKey();
-        //misc
     }
 
 }

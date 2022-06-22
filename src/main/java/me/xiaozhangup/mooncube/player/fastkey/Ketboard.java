@@ -1,6 +1,6 @@
 package me.xiaozhangup.mooncube.player.fastkey;
 
-import me.xiaozhangup.mooncube.config.ConfigManager;
+import me.xiaozhangup.mooncube.manager.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
