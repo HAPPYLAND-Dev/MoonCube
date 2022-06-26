@@ -44,7 +44,11 @@ public class Join implements Listener {
                 } catch (IOException exception) {
                     exception.printStackTrace();
                 }
-
+                e.getPlayer().getInventory().clear();
+                for (int i = 0 ; i < 37 ; i ++) {
+                    if (ConfigManager.getConfig("kit").getItemStack("Slot." + i) == null) continue;
+                    e.getPlayer().getInventory().setItem(i , ConfigManager.getConfig("kit").getItemStack("Slot." + i));
+                }
             });
         }
     }

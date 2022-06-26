@@ -14,6 +14,7 @@ import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import me.xiaozhangup.mooncube.world.RuleManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -53,6 +54,7 @@ public class MoonCube extends JavaPlugin {
         ConfigManager.createFile("keymap");
         ConfigManager.createFile("emodata");
         ConfigManager.createFile("book");
+        ConfigManager.createFile("kit");
         //file
 
         
@@ -94,11 +96,27 @@ public class MoonCube extends JavaPlugin {
                         p.sendMessage(IString.addColor("&8[DeBug] &freload!"));
                         return true;
                     }
+                    case "setkit" -> {
+                        for (int i = 0 ; i < 37 ; i++) {
+                            if (p.getInventory().getItem(i) == null) continue;
+                            ConfigManager.writeConfig("kit" , "Slot." + i, p.getInventory().getItem(i));
+                            p.sendMessage(p.getInventory().getItem(i).toString());
+                        }
+                        return true;
+                    }
+                    case "testkit" -> {
+                        p.getInventory().clear();
+                        for (int i = 0 ; i < 37 ; i ++) {
+                            if (ConfigManager.getConfig("kit").getItemStack("Slot." + i) == null) continue;
+                            p.getInventory().setItem(i , ConfigManager.getConfig("kit").getItemStack("Slot." + i));
+                        }
+                        return true;
+                    }
                 }
-                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload"));
+                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit"));
                 return false;
             } catch (Exception e) {
-                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload"));
+                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit"));
                 return false;
             }
         });

@@ -28,7 +28,7 @@ public class ConfigManager {
         return YamlConfiguration.loadConfiguration(file);
     }
 
-    public static void writeConfig(String s , String node, String value) {
+    public static void writeConfig(String s , String node, Object value) {
         FileConfiguration fileConfiguration = getConfig(s);
         fileConfiguration.set(node, value);
         try {

@@ -86,6 +86,22 @@ public class Skull {
     }
 
 
+    public static ItemStack getSkull(Player player, String name, String... lores) {
+        ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
+        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+
+        skullMeta.setOwningPlayer(player);
+
+        skullMeta.setDisplayName(IString.addColor(name));
+        List<String> lore = new ArrayList<>();
+        for (String s : lores) {
+            lore.add(IString.addColor(s));
+        }
+        skullMeta.setLore(lore);
+        skull.setItemMeta(skullMeta);
+        return skull;
+    }
+
     public static ItemStack getSkull(Player player, String name) {
         ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
