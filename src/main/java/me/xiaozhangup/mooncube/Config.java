@@ -23,7 +23,7 @@ public class Config {
         COIN_HOLOGRAM = plugin.getConfig().getString("CoinHologram");
         COIN_FULL = plugin.getConfig().getString("CoinFull");
         BLACK_ITEMS = plugin.getConfig().getStringList("BlackItems");
-        BLACK_ITEMS = plugin.getConfig().getStringList("BlackSkillsWorld");
+        BLACK_SKILLS_WORLD = plugin.getConfig().getStringList("BlackSkillsWorld");
         DAILYMAX = plugin.getConfig().getDouble("DailyMax");
     }
 

@@ -15,7 +15,7 @@ public class Skills implements Listener {
 
         if (Config.BLACK_SKILLS_WORLD.contains(p.getWorld().getName())) {
             e.setCancelled(true);
-            p.sendMessage(IString.addColor("&8[b技能&8] &c这个世界无法使用技能!"));
+            p.sendMessage(IString.addColor("&8[&b技能&8] &c这个世界无法使用技能!"));
         }
     }
 }
