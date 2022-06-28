@@ -20,10 +20,11 @@ import org.bukkit.inventory.ItemStack;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Spawner implements Listener {
 
-    public static Map<Player, Double> dailyCoin = new HashMap<>();
+    public static Map<UUID, Double> dailyCoin = new HashMap<>();
 
     @EventHandler
     public void onMonDeath(EntityDeathEvent e) {
@@ -62,14 +63,15 @@ public class Spawner implements Listener {
                 return;
             }
             e.setCancelled(true);
-            if (dailyCoin.get(e.getPlayer()) <= Config.DAILYMAX) {
+            if (dailyCoin.get(e.getPlayer().getUniqueId()) <= Config.DAILYMAX) {
                 String coin = itemStack.getItemMeta().getDisplayName().replace("Coin|", "");
                 e.getPlayer().sendActionBar(IString.addColor(Config.COIN_ACTION.replace("{coin}", coin)));
                 e.getItem().remove();
                 MoonCube.getEconomy().depositPlayer(e.getPlayer(), Double.parseDouble(coin));
-                dailyCoin.put(e.getPlayer() , dailyCoin.get(e.getPlayer()) + Double.parseDouble(coin));
+                dailyCoin.put(e.getPlayer().getUniqueId() , dailyCoin.get(e.getPlayer().getUniqueId()) + Double.parseDouble(coin));
             } else {
                 e.getPlayer().sendActionBar(IString.addColor(Config.COIN_FULL));
+                e.getItem().remove();
             }
         }
     }

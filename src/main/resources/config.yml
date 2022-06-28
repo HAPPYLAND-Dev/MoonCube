@@ -10,3 +10,7 @@ BlackItems:
   - SNOWBALL
   - ENDER_PEARL
   - FISHING_ROD
+
+BlackSkillsWorld:
+  - "Lobby"
+  - "VoidWorld"

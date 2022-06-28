@@ -9,6 +9,7 @@ import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
 import me.xiaozhangup.mooncube.player.ProfileEditer;
+import me.xiaozhangup.mooncube.player.Skills;
 import me.xiaozhangup.mooncube.player.fastkey.Ketboard;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import me.xiaozhangup.mooncube.world.RuleManager;
@@ -45,7 +46,7 @@ public class MoonCube extends JavaPlugin {
         listenerManager.addListeners(
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditer(), new TABConfig(), new RuleManager(),
-                new Ketboard(), new MainMenu()
+                new Ketboard(), new MainMenu(), new Skills()
         );
         listenerManager.register();
         //event load
