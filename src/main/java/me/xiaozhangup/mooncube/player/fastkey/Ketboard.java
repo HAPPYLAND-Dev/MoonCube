@@ -32,7 +32,7 @@ public class Ketboard implements Listener {
     @EventHandler
     public void onPlayerKeyInput(PlayerItemHeldEvent e) {
         Player p = e.getPlayer();
-        if (p.isSneaking() && shortSnap.get(e.getNewSlot()) != null && timeSnap.get(p) != null && System.currentTimeMillis() - timeSnap.get(p) <= 220) {
+        if (shortSnap.get(e.getNewSlot()) != null && timeSnap.get(p) != null && System.currentTimeMillis() - timeSnap.get(p) <= 220) {
             e.setCancelled(true);
             Bukkit.dispatchCommand(p , shortSnap.get(e.getNewSlot()));
         }

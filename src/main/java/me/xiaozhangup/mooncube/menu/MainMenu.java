@@ -42,6 +42,7 @@ public class MainMenu implements Listener {
             menu.setItem(39 , IBuilder.buildItem(Material.CHEST_MINECART , "&x&F&F&9&D&3&F打开岛屿商店" , " " , "&7服务器交易物品的地方"));
             menu.setItem(40 , IBuilder.buildItem(Material.DIAMOND_SWORD , "&x&6&A&B&7&F&F打开技能菜单" , " " , "&7你的技能会在这里显示"));
             menu.setItem(44 , IBuilder.buildItem(Material.BARRIER , "&c关闭菜单"));
+            menu.setItem(43 , IBuilder.buildItem(Material.ENDER_CHEST , "&x&4&8&A&9&9&9赞助我们" , " " , "&7服务器的运行与开发需要大笔资金" , "&7您的赞助至关重要" , "&c所有赞助将全部用于维护服务器"));
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
@@ -59,6 +60,7 @@ public class MainMenu implements Listener {
                 case 39 -> Bukkit.dispatchCommand(p , "is shop");
                 case 40 -> Bukkit.dispatchCommand(p , "sk");
 
+                case 43 -> UniqueShop.open(p);
                 case 44 -> p.closeInventory();
             }
         }

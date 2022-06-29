@@ -5,6 +5,7 @@ import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.manager.ListenerManager;
 import me.xiaozhangup.mooncube.menu.MainMenu;
+import me.xiaozhangup.mooncube.menu.UniqueShop;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
@@ -14,11 +15,13 @@ import me.xiaozhangup.mooncube.player.fastkey.Ketboard;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import me.xiaozhangup.mooncube.world.RuleManager;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Calendar;
 
 public class MoonCube extends JavaPlugin {
 
@@ -46,7 +49,7 @@ public class MoonCube extends JavaPlugin {
         listenerManager.addListeners(
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditer(), new TABConfig(), new RuleManager(),
-                new Ketboard(), new MainMenu(), new Skills()
+                new Ketboard(), new MainMenu(), new Skills(), new UniqueShop()
         );
         listenerManager.register();
         //event load
@@ -132,7 +135,20 @@ public class MoonCube extends JavaPlugin {
         
         TABConfig.setUp();
         Ketboard.loadKey();
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            Spawner.dailyCoin.putIfAbsent(p.getUniqueId(), 0.0);
+        }
         //misc
+
+        Bukkit.getScheduler().runTaskTimer(this , () -> {
+            if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 1) {
+                Spawner.dailyCoin.clear();
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    Spawner.dailyCoin.putIfAbsent(p.getUniqueId(), 0.0);
+                }
+            }
+        } , 1L , 48000L);
+        //task
     }
 
 
