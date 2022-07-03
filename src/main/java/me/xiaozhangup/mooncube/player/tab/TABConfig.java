@@ -5,7 +5,9 @@ import me.neznamy.tab.api.TabPlayer;
 import me.neznamy.tab.api.bossbar.BossBarManager;
 import me.neznamy.tab.api.scoreboard.ScoreboardManager;
 import me.xiaozhangup.mooncube.gui.TabC;
+import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.menu.MainMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -90,6 +92,8 @@ public class TABConfig implements Listener {
             fastSet(boardoff, tab, 25, 26, 34, 35, 43, 44);
         }
 
+        tab.setItem(36 , IBuilder.buildItem(Material.COMPASS , "&c返回主页"));
+
         p.openInventory(tab);
     }
 
@@ -138,6 +142,9 @@ public class TABConfig implements Listener {
                     bossBarManager.setBossBarVisible(tabPlayer, true, false);
                     openTAB(p);
                 }
+            }
+            if (e.getRawSlot() == 36) {
+                MainMenu.open(p);
             }
         }
     }
