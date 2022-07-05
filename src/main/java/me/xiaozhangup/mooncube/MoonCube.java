@@ -120,11 +120,14 @@ public class MoonCube extends JavaPlugin {
                         }
                         return true;
                     }
+                    case "push" -> {
+                        Board.push();
+                    }
                 }
-                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit"));
+                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push"));
                 return false;
             } catch (Exception e) {
-                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit"));
+                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push"));
                 return false;
             }
         });

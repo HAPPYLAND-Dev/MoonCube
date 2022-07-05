@@ -3,9 +3,13 @@ package me.xiaozhangup.mooncube.message;
 import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.tools.INumber;
 import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.manager.ConfigManager;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,20 @@ public class Board {
     public static void print() {
         for (String s : messages) {
             MoonCube.plugin.getLogger().info(s);
+        }
+    }
+
+    public static void push() {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            p.closeInventory();
+            String book = ConfigManager.getConfig("plan").getString("book");
+            ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
+            BookMeta bookMeta = (BookMeta) itemStack.getItemMeta();
+            bookMeta.setAuthor("HAPPYLAND Studio");
+            bookMeta.setTitle("Server Message");
+            bookMeta.addPage(IString.addColor(book));
+            itemStack.setItemMeta(bookMeta);
+            p.openBook(itemStack);
         }
     }
 }
