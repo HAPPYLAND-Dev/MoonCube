@@ -6,6 +6,7 @@ import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.manager.ListenerManager;
 import me.xiaozhangup.mooncube.menu.MainMenu;
 import me.xiaozhangup.mooncube.menu.UniqueShop;
+import me.xiaozhangup.mooncube.message.Board;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
@@ -59,6 +60,7 @@ public class MoonCube extends JavaPlugin {
         ConfigManager.createFile("emodata");
         ConfigManager.createFile("book");
         ConfigManager.createFile("kit");
+        ConfigManager.createFile("plan");
         //file
 
         
@@ -97,6 +99,8 @@ public class MoonCube extends JavaPlugin {
                     case "reload" -> {
                         Config.loadConfig();
                         Ketboard.loadKey();
+                        Board.load();
+                        Board.print();
                         p.sendMessage(IString.addColor("&8[DeBug] &freload!"));
                         return true;
                     }
@@ -132,11 +136,12 @@ public class MoonCube extends JavaPlugin {
         });
         //command
 
-        
+        Board.load();
         TABConfig.setUp();
         Ketboard.loadKey();
+        Board.run();
         for (Player p : Bukkit.getOnlinePlayers()) {
-            Spawner.dailyCoin.putIfAbsent(p.getUniqueId(), 0.0);
+            Spawner.dailyCoin.put(p.getUniqueId(), 0.0);
         }
         //misc
 
@@ -144,7 +149,7 @@ public class MoonCube extends JavaPlugin {
             if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 1) {
                 Spawner.dailyCoin.clear();
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    Spawner.dailyCoin.putIfAbsent(p.getUniqueId(), 0.0);
+                    Spawner.dailyCoin.put(p.getUniqueId(), 0.0);
                 }
             }
         } , 1L , 48000L);

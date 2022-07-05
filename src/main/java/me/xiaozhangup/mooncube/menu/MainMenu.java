@@ -6,6 +6,7 @@ import me.xiaozhangup.mooncube.gui.TabC;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
+import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.player.ProfileEditer;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import org.bukkit.Bukkit;
@@ -17,6 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 
 public class MainMenu implements Listener {
 
@@ -44,6 +46,10 @@ public class MainMenu implements Listener {
             menu.setItem(44 , IBuilder.buildItem(Material.BARRIER , "&c关闭菜单"));
             menu.setItem(43 , IBuilder.buildItem(Material.ENDER_CHEST , "&x&4&8&A&9&9&9赞助我们" , " " , "&7服务器的运行与开发需要大笔资金" , "&7您的赞助至关重要" , "&c所有赞助将全部用于维护服务器"));
 
+            menu.setItem(11 , IBuilder.buildItem(Material.COMMAND_BLOCK_MINECART , "&x&F&F&C&0&4&6小众岛屿设置" , " " , "&7这些设置不太常用" , "&7但也有用"));
+            menu.setItem(15 , IBuilder.buildItem(Material.WRITABLE_BOOK , "&x&F&F&D&9&5&A打开更新记录" , " " , "&7服务器的版本记录"));
+            menu.setItem(24 , IBuilder.buildItem(Material.KNOWLEDGE_BOOK , "&x&6&0&A&D&5&E可能的更改" , " " , "&7HAPPYLAND Dev的计划性更改"));
+
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
     }
@@ -59,6 +65,30 @@ public class MainMenu implements Listener {
                 case 38 -> Bukkit.dispatchCommand(p , "emf toggle");
                 case 39 -> Bukkit.dispatchCommand(p , "is shop");
                 case 40 -> Bukkit.dispatchCommand(p , "sk");
+
+                case 11 -> Bukkit.dispatchCommand(p , "is settings");
+                case 15 -> {
+                    p.closeInventory();
+                    String book = ConfigManager.getConfig("book").getString("book");
+                    ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
+                    BookMeta bookMeta = (BookMeta) itemStack.getItemMeta();
+                    bookMeta.setAuthor("HAPPYLAND Studio");
+                    bookMeta.setTitle("Server Message");
+                    bookMeta.addPage(IString.addColor(book));
+                    itemStack.setItemMeta(bookMeta);
+                    p.openBook(itemStack);
+                }
+                case 24 -> {
+                    p.closeInventory();
+                    String book = ConfigManager.getConfig("plan").getString("book");
+                    ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
+                    BookMeta bookMeta = (BookMeta) itemStack.getItemMeta();
+                    bookMeta.setAuthor("HAPPYLAND Studio");
+                    bookMeta.setTitle("Server Message");
+                    bookMeta.addPage(IString.addColor(book));
+                    itemStack.setItemMeta(bookMeta);
+                    p.openBook(itemStack);
+                }
 
                 case 43 -> UniqueShop.open(p);
                 case 44 -> p.closeInventory();

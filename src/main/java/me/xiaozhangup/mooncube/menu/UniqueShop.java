@@ -59,6 +59,7 @@ public class UniqueShop implements Listener {
 
                 case 8 -> ProfileEditer.openProfile(p);
 
+                //TODO
 
                 case 43 -> MainMenu.open(p);
                 case 44 -> p.closeInventory();
