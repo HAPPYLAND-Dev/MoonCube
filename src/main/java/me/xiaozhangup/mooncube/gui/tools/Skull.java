@@ -40,7 +40,7 @@ public class Skull {
         GameProfile profile = new GameProfile(UUID.randomUUID(), "");
         profile.getProperties().put("textures", new Property("textures",
                 base64));
-        Field profileField = null;
+        Field profileField;
         try {
             profileField = skullMeta.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
@@ -60,7 +60,7 @@ public class Skull {
         GameProfile profile = new GameProfile(UUID.randomUUID(), "");
         profile.getProperties().put("textures", new Property("textures",
                 base64));
-        Field profileField = null;
+        Field profileField;
         try {
             profileField = skullMeta.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);

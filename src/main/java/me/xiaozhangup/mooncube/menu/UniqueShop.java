@@ -6,7 +6,7 @@ import me.xiaozhangup.mooncube.gui.Unique;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
-import me.xiaozhangup.mooncube.player.ProfileEditer;
+import me.xiaozhangup.mooncube.player.ProfileEditor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -57,7 +57,7 @@ public class UniqueShop implements Listener {
             e.setCancelled(true);
             switch (e.getRawSlot()) {
 
-                case 8 -> ProfileEditer.openProfile(p);
+                case 8 -> ProfileEditor.openProfile(p);
 
                 case 19 -> {
                     p.closeInventory();

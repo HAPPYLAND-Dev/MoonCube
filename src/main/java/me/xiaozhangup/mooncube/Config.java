@@ -9,7 +9,7 @@ public class Config {
     public static String COIN_ACTION;
     public static String COIN_HOLOGRAM;
     public static String COIN_FULL;
-    public static Double DAILYMAX;
+    public static Double DAILY_MAX;
 
     public static List<String> BLACK_ITEMS;
 
@@ -24,7 +24,7 @@ public class Config {
         COIN_FULL = plugin.getConfig().getString("CoinFull");
         BLACK_ITEMS = plugin.getConfig().getStringList("BlackItems");
         BLACK_SKILLS_WORLD = plugin.getConfig().getStringList("BlackSkillsWorld");
-        DAILYMAX = plugin.getConfig().getDouble("DailyMax");
+        DAILY_MAX = plugin.getConfig().getDouble("DailyMax");
     }
 
 }

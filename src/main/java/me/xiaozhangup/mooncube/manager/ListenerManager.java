@@ -27,6 +27,7 @@ public class ListenerManager {
 	
 	public void register() {
 		listeners.forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, MoonCube.plugin));
+		listeners.clear();
 	}
 	
 }

@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ProfileEditer implements Listener {
+public class ProfileEditor implements Listener {
 
     HashMap<Player, Boolean> input = new HashMap<>();
 

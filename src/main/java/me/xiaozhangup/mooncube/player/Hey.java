@@ -22,6 +22,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -40,9 +41,8 @@ public class Hey implements Listener {
 
     @EventHandler
     public void onPlayerClick(PlayerInteractEntityEvent e) {
-        if (e.getRightClicked().getType() != EntityType.PLAYER) {
-            return;
-        }
+        if (e.getHand() != EquipmentSlot.HAND || e.getRightClicked().getType() != EntityType.PLAYER) return;
+        
         Player ed = (Player) e.getRightClicked();
         Player p = e.getPlayer();
         Material material = p.getInventory().getItemInMainHand().getType();

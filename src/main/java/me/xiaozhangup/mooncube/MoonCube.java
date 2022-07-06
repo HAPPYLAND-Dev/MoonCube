@@ -10,13 +10,14 @@ import me.xiaozhangup.mooncube.message.Board;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
-import me.xiaozhangup.mooncube.player.ProfileEditer;
+import me.xiaozhangup.mooncube.player.ProfileEditor;
 import me.xiaozhangup.mooncube.player.Skills;
 import me.xiaozhangup.mooncube.player.fastkey.Ketboard;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import me.xiaozhangup.mooncube.world.RuleManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -27,8 +28,10 @@ import java.util.Calendar;
 public class MoonCube extends JavaPlugin {
 
     public static Plugin plugin;
+    public static ListenerManager listenerManager = new ListenerManager();
     
     private static Economy econ = null;
+    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push");
     
 
     @Override
@@ -46,10 +49,9 @@ public class MoonCube extends JavaPlugin {
         RuleManager.setAll();
         //config
 
-        ListenerManager listenerManager = new ListenerManager();
         listenerManager.addListeners(
                 new Spawner(), new Hey(), new Join(),
-                new ProfileEditer(), new TABConfig(), new RuleManager(),
+                new ProfileEditor(), new TABConfig(), new RuleManager(),
                 new Ketboard(), new MainMenu(), new Skills(), new UniqueShop()
         );
         listenerManager.register();
@@ -66,7 +68,7 @@ public class MoonCube extends JavaPlugin {
         
         Command.register("profile", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
-            ProfileEditer.openProfile(p);
+            ProfileEditor.openProfile(p);
             return true;
         });
         
@@ -77,9 +79,40 @@ public class MoonCube extends JavaPlugin {
         });
         
         Command.register("mooncube", (commandSender, command, s, inside) -> {
-            Player p = (Player) commandSender;
-            if (!p.isOp()) return false;
+            if(inside.length == 0) {
+                commandSender.sendMessage(commandHelper);
+                return false;
+            }
+            if(!(commandSender instanceof ConsoleCommandSender) && !(commandSender instanceof Player)) return false;
+            if(commandSender instanceof Player p && !p.isOp()) return false;
+
             try {
+                // Console and op could both execute the following commands.
+                switch (inside[0]) {
+                    case "" -> commandSender.sendMessage(commandHelper);
+                    
+                    case "reload" -> {
+                        Config.loadConfig();
+                        Ketboard.loadKey();
+                        Board.load();
+                        Board.print();
+                        commandSender.sendMessage(IString.addColor("&8[DeBug] &freload!"));
+                        return true;
+                    }
+                    
+                    case "push" -> {
+                        Board.push();
+                        return true;
+                    }
+                }
+            } catch (Exception e) {
+                commandSender.sendMessage(commandHelper);
+                return false;
+            }
+            
+            if(!(commandSender instanceof Player p)) return false;
+            try {
+                // Only op can execute the following commands.
                 switch (inside[0]) {
                     case "profile" -> {
                         Hey.openProfile(p , p);
@@ -96,14 +129,6 @@ public class MoonCube extends JavaPlugin {
                         return true;
                     }
                     
-                    case "reload" -> {
-                        Config.loadConfig();
-                        Ketboard.loadKey();
-                        Board.load();
-                        Board.print();
-                        p.sendMessage(IString.addColor("&8[DeBug] &freload!"));
-                        return true;
-                    }
                     case "setkit" -> {
                         for (int i = 0 ; i < 37 ; i++) {
                             if (p.getInventory().getItem(i) == null) continue;
@@ -112,6 +137,7 @@ public class MoonCube extends JavaPlugin {
                         }
                         return true;
                     }
+                    
                     case "testkit" -> {
                         p.getInventory().clear();
                         for (int i = 0 ; i < 37 ; i ++) {
@@ -120,16 +146,15 @@ public class MoonCube extends JavaPlugin {
                         }
                         return true;
                     }
-                    case "push" -> {
-                        Board.push();
-                    }
                 }
-                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push"));
-                return false;
-            } catch (Exception e) {
-                p.sendMessage(IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push"));
-                return false;
+                
+                p.sendMessage(commandHelper);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
+            
+            p.sendMessage(commandHelper);
+            return false;
         });
         
         Command.register("menu", (commandSender, command, s, inside) -> {
@@ -143,17 +168,11 @@ public class MoonCube extends JavaPlugin {
         TABConfig.setUp();
         Ketboard.loadKey();
         Board.run();
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            Spawner.dailyCoin.put(p.getUniqueId(), 0.0);
-        }
         //misc
 
         Bukkit.getScheduler().runTaskTimer(this , () -> {
             if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 1) {
                 Spawner.dailyCoin.clear();
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    Spawner.dailyCoin.put(p.getUniqueId(), 0.0);
-                }
             }
         } , 1L , 48000L);
         //task

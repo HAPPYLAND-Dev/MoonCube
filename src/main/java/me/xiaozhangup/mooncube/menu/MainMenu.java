@@ -2,12 +2,11 @@ package me.xiaozhangup.mooncube.menu;
 
 import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.HomeMenu;
-import me.xiaozhangup.mooncube.gui.TabC;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
-import me.xiaozhangup.mooncube.player.ProfileEditer;
+import me.xiaozhangup.mooncube.player.ProfileEditor;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -64,7 +63,7 @@ public class MainMenu implements Listener {
         if (e.getWhoClicked() instanceof Player p && e.getInventory().getHolder() instanceof HomeMenu) {
             e.setCancelled(true);
             switch (e.getRawSlot()) {
-                case 8 -> ProfileEditer.openProfile(p);
+                case 8 -> ProfileEditor.openProfile(p);
                 case 36 -> TABConfig.openTAB(p);
                 case 37 -> Bukkit.dispatchCommand(p , "is biome");
                 case 38 -> Bukkit.dispatchCommand(p , "emf toggle");

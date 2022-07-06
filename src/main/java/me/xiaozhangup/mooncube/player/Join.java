@@ -21,7 +21,6 @@ public class Join implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         if (e.getPlayer().hasPlayedBefore()) {
-            Spawner.dailyCoin.putIfAbsent(e.getPlayer().getUniqueId(), 0.0);
             Bukkit.getScheduler().runTaskLater(MoonCube.plugin , () -> {
                 String book = ConfigManager.getConfig("book").getString("book");
                 if (book != null) {
