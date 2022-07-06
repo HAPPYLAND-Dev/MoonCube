@@ -59,7 +59,18 @@ public class UniqueShop implements Listener {
 
                 case 8 -> ProfileEditer.openProfile(p);
 
-                //TODO
+                case 19 -> {
+                    p.closeInventory();
+                    Bukkit.dispatchCommand(p , "minepay buy Unqiue权限组 wechat");
+                }
+                case 12 -> {
+                    p.closeInventory();
+                    Bukkit.dispatchCommand(p , "minepay buy 7天飞行 wechat");
+                }
+                case 13 -> {
+                    p.closeInventory();
+                    Bukkit.dispatchCommand(p , "minepay buy 粘液科技全解 wechat");
+                }
 
                 case 43 -> MainMenu.open(p);
                 case 44 -> p.closeInventory();

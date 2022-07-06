@@ -47,6 +47,11 @@ public class MainMenu implements Listener {
             menu.setItem(43 , IBuilder.buildItem(Material.ENDER_CHEST , "&x&4&8&A&9&9&9赞助我们" , " " , "&7服务器的运行与开发需要大笔资金" , "&7您的赞助至关重要" , "&c所有赞助将全部用于维护服务器"));
 
             menu.setItem(11 , IBuilder.buildItem(Material.COMMAND_BLOCK_MINECART , "&x&F&F&C&0&4&6小众岛屿设置" , " " , "&7这些设置不太常用" , "&7但也有用"));
+            menu.setItem(12 , IBuilder.buildItem(Material.CAT_SPAWN_EGG , "&x&C&5&6&0&0&0宠物管理" , " " , "&7管理你的宠物"));
+            menu.setItem(13 , IBuilder.getBorder(Material.WHITE_STAINED_GLASS_PANE));
+            menu.setItem(20 , IBuilder.getBorder(Material.WHITE_STAINED_GLASS_PANE));
+            menu.setItem(21 , IBuilder.getBorder(Material.WHITE_STAINED_GLASS_PANE));
+            menu.setItem(22 , IBuilder.getBorder(Material.WHITE_STAINED_GLASS_PANE));
             menu.setItem(15 , IBuilder.buildItem(Material.WRITABLE_BOOK , "&x&F&F&D&9&5&A打开更新记录" , " " , "&7服务器的版本记录"));
             menu.setItem(24 , IBuilder.buildItem(Material.KNOWLEDGE_BOOK , "&x&6&0&A&D&5&E可能的更改" , " " , "&7HAPPYLAND Dev的计划性更改"));
 
@@ -67,6 +72,7 @@ public class MainMenu implements Listener {
                 case 40 -> Bukkit.dispatchCommand(p , "sk");
 
                 case 11 -> Bukkit.dispatchCommand(p , "is settings");
+                case 12 -> Bukkit.dispatchCommand(p , "companions");
                 case 15 -> {
                     p.closeInventory();
                     String book = ConfigManager.getConfig("book").getString("book");
