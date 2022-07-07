@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class UniqueShop implements Listener {
 
-    private static final ItemStack uniqueSkull = Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU4ZjE5ZGVmMzMwODVkYjU2NDkwOWZjOGMxYjJlYWJjMGViYzU5Y2Q4OTY2NWYzMWU1ODBmMWZjMjQ5N2I1OCJ9fX0=" , "&x&A&E&5&2&D&4Unqiue 权限组" , " " , "&f享有诸多特权,助理游戏进度", "&7特权列表:"  , "&c专属称号 &f[&9Unqiue&f]", "&e签到奖励翻倍" ,"&f/ec - 快速打开末影背包",  "&f/wb - 快速打开工作台" , "&f/anvial - 快速打开铁砧" ,"&f/top - 快速登顶" , "&f/jump - 快速传送" , "&f/heal - 快速恢复", "&f/sf charge - 快速充电" , "&7头颅库免费使用" , " ", "&f定价: &e24元/月" , "&e单击购买");
+    private static final ItemStack uniqueSkull = Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU4ZjE5ZGVmMzMwODVkYjU2NDkwOWZjOGMxYjJlYWJjMGViYzU5Y2Q4OTY2NWYzMWU1ODBmMWZjMjQ5N2I1OCJ9fX0=" , "&x&A&E&5&2&D&4Unqiue 权限组" , " " , "&f享有诸多特权,助理游戏进度", "&7特权列表:"  , "&e专属称号 &8[&9Unqiue&8]", "&e签到奖励翻倍" , "&e无限飞行" ,"&f/ec - 快速打开末影背包",  "&f/wb - 快速打开工作台" , "&f/anvil - 快速打开铁砧" ,"&f/top - 快速登顶" , "&f/jump - 快速传送" , "&f/heal - 快速恢复", "&f/sf charge - 快速充电" , "&7头颅库免费使用" , " ", "&f定价: &e24元/月" , "&e单击购买");
     private static final ItemStack flyItem = IBuilder.buildItem(Material.FEATHER , "&f无限飞行" , " " , "&7在服务器内无限飞行" , " " , "&f定价: &e3元/周" , "&e单击购买");
     private static final ItemStack slimefunUnlockAllItem = IBuilder.buildItem(Material.ENCHANTED_BOOK , "&x&D&0&5&C&E&3粘液科技物品全解锁" , " " , "&7解锁粘液科技所有物品", " ", "&f定价: &e27元" , "&e单击购买");
     private static final ItemStack contactItem = IBuilder.buildItem(Material.DARK_OAK_SIGN , "&x&C&6&8&4&0&0出现问题请联系QQ: &73296517911");
