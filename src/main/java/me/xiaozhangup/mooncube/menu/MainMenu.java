@@ -47,8 +47,8 @@ public class MainMenu implements Listener {
 
             menu.setItem(11 , IBuilder.buildItem(Material.COMMAND_BLOCK_MINECART , "&x&F&F&C&0&4&6小众岛屿设置" , " " , "&7这些设置不太常用" , "&7但也有用"));
             menu.setItem(12 , IBuilder.buildItem(Material.CAT_SPAWN_EGG , "&x&C&5&6&0&0&0宠物管理" , " " , "&7管理你的宠物"));
-            menu.setItem(13 , IBuilder.getBorder(Material.WHITE_STAINED_GLASS_PANE));
-            menu.setItem(20 , IBuilder.getBorder(Material.WHITE_STAINED_GLASS_PANE));
+            menu.setItem(13 , IBuilder.buildItem(Material.HONEY_BOTTLE , "&x&B&C&5&1&0&0游览其他岛屿" , " " , "&7游历其他玩家的岛屿"));
+            menu.setItem(20 , IBuilder.buildItem(Material.COD_BUCKET , "&x&F&F&F&F&8&9岛屿控制页" , " " , "&7等效于使用 /is 命令"));
             menu.setItem(21 , IBuilder.getBorder(Material.WHITE_STAINED_GLASS_PANE));
             menu.setItem(22 , IBuilder.getBorder(Material.WHITE_STAINED_GLASS_PANE));
             menu.setItem(15 , IBuilder.buildItem(Material.WRITABLE_BOOK , "&x&F&F&D&9&5&A打开更新记录" , " " , "&7服务器的版本记录"));
@@ -72,6 +72,8 @@ public class MainMenu implements Listener {
 
                 case 11 -> Bukkit.dispatchCommand(p , "is settings");
                 case 12 -> Bukkit.dispatchCommand(p , "companions");
+                case 13 -> Bukkit.dispatchCommand(p , "is visit");
+                case 20 -> Bukkit.dispatchCommand(p , "is");
                 case 15 -> {
                     p.closeInventory();
                     String book = ConfigManager.getConfig("book").getString("book");
