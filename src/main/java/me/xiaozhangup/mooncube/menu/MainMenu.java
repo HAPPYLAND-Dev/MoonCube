@@ -49,8 +49,8 @@ public class MainMenu implements Listener {
             menu.setItem(12 , IBuilder.buildItem(Material.CAT_SPAWN_EGG , "&x&C&5&6&0&0&0宠物管理" , " " , "&7管理你的宠物"));
             menu.setItem(13 , IBuilder.buildItem(Material.HONEY_BOTTLE , "&x&B&C&5&1&0&0游览其他岛屿" , " " , "&7游历其他玩家的岛屿"));
             menu.setItem(20 , IBuilder.buildItem(Material.COD_BUCKET , "&x&F&F&F&F&8&9岛屿控制页" , " " , "&7等效于使用 /is 命令"));
-            menu.setItem(21 , IBuilder.getBorder(Material.WHITE_STAINED_GLASS_PANE));
-            menu.setItem(22 , IBuilder.getBorder(Material.WHITE_STAINED_GLASS_PANE));
+            menu.setItem(21 , IBuilder.buildItem(Material.FISHING_ROD , "&x&F&9&6&8&3&A鱼的收购" , " " , "&7收购你钓上来的特殊的鱼"));
+            menu.setItem(22 , IBuilder.buildItem(Material.OAK_SIGN , "&x&F&F&9&E&4&0传送点" , " " , "&7点击打开传送点菜单"));
             menu.setItem(15 , IBuilder.buildItem(Material.WRITABLE_BOOK , "&x&F&F&D&9&5&A打开更新记录" , " " , "&7服务器的版本记录"));
             menu.setItem(24 , IBuilder.buildItem(Material.KNOWLEDGE_BOOK , "&x&6&0&A&D&5&E可能的更改" , " " , "&7HAPPYLAND Dev的计划性更改"));
 
@@ -74,6 +74,8 @@ public class MainMenu implements Listener {
                 case 12 -> Bukkit.dispatchCommand(p , "companions");
                 case 13 -> Bukkit.dispatchCommand(p , "is visit");
                 case 20 -> Bukkit.dispatchCommand(p , "is");
+                case 21 -> Bukkit.dispatchCommand(p , "emf shop");
+                case 22 -> Warps.open(p);
                 case 15 -> {
                     p.closeInventory();
                     String book = ConfigManager.getConfig("book").getString("book");

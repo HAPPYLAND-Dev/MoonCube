@@ -21,5 +21,7 @@ commands:
     description: Tab Settings
   menu:
     description: Menu
+  unique:
+    description: Unique shop
 authors:
   - xiaozhangup

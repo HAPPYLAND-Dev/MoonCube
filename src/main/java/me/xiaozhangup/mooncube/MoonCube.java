@@ -6,6 +6,7 @@ import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.manager.ListenerManager;
 import me.xiaozhangup.mooncube.menu.MainMenu;
 import me.xiaozhangup.mooncube.menu.UniqueShop;
+import me.xiaozhangup.mooncube.menu.Warps;
 import me.xiaozhangup.mooncube.message.Board;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
@@ -52,7 +53,8 @@ public class MoonCube extends JavaPlugin {
         listenerManager.addListeners(
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
-                new Ketboard(), new MainMenu(), new Skills(), new UniqueShop()
+                new Ketboard(), new MainMenu(), new Skills(), new UniqueShop(),
+                new Warps()
         );
         listenerManager.register();
         //event load
@@ -75,6 +77,12 @@ public class MoonCube extends JavaPlugin {
         Command.register("tabc", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
             TABConfig.openTAB(p);
+            return true;
+        });
+
+        Command.register("unique" , (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            UniqueShop.open(p);
             return true;
         });
         
