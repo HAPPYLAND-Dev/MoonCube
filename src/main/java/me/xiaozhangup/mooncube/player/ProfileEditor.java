@@ -102,7 +102,6 @@ public class ProfileEditor implements Listener {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
         openProfile(p);
     }
-
     @EventHandler
     public void onPlayerClick(InventoryClickEvent e) {
         if (e.getWhoClicked() instanceof Player p && e.getInventory().getHolder() instanceof Emo) {
