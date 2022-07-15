@@ -46,7 +46,8 @@ public class Hey implements Listener {
         Player ed = (Player) e.getRightClicked();
         Player p = e.getPlayer();
         Material material = p.getInventory().getItemInMainHand().getType();
-        if (Config.BLACK_ITEMS.contains(material.toString()) || material.toString().endsWith("POTION")) {
+        Material material1 = p.getInventory().getItemInOffHand().getType();
+        if (Config.BLACK_ITEMS.contains(material1.toString()) || Config.BLACK_ITEMS.contains(material.toString()) || material.toString().endsWith("POTION")) {
             return;
         }
         target.put(p, ed);
