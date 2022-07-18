@@ -83,13 +83,11 @@ public class EntityControl implements Listener {
     }
 
     public static void saveToFile() {
-        Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin , () -> {
-            List<Integer> lands = null;
-            count.forEach((landid , number) -> {
-                lands.add(landid);
-                ConfigManager.writeConfig("landcount", landid.toString() , number);
-            });
-            ConfigManager.writeConfig("landcount", "Lands" , lands);
+        List<Integer> lands = null;
+        count.forEach((landid, number) -> {
+            lands.add(landid);
+            ConfigManager.writeConfig("landcount", landid.toString(), number);
         });
+        ConfigManager.writeConfig("landcount", "Lands", lands);
     }
 }
