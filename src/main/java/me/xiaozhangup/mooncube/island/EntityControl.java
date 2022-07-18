@@ -28,9 +28,9 @@ public class EntityControl implements Listener {
     public void onEntitySpawn(EntitySpawnEvent e) {
         if (e.getEntityType() != EntityType.VILLAGER) return;
         Location location = e.getLocation();
-        Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(location);
-        int landId = island.get().getId();
         if (location.getWorld().getName().startsWith("IridiumSkyblock")) {
+            Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(location);
+            int landId = island.get().getId();
             count.putIfAbsent(landId , 0);
             if (count.get(landId) >= 10) {
                 e.setCancelled(true);
@@ -47,12 +47,13 @@ public class EntityControl implements Listener {
     public void onEntityDeath(EntityDeathEvent e) {
         if (e.getEntityType() != EntityType.VILLAGER) return;
         Location location = e.getEntity().getLocation();
-        Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(location);
-        int landId = island.get().getId();
+        if (location.getWorld().getName().startsWith("IridiumSkyblock")) {
+            Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(location);
+            int landId = island.get().getId();
+            count.putIfAbsent(landId, 0);
 
-        count.putIfAbsent(landId , 0);
-
-        count.put(landId , count.get(landId) - 1);
+            count.put(landId, count.get(landId) - 1);
+        }
     }
 
     public static void loadFromFile() {
