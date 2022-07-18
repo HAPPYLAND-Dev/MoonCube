@@ -50,6 +50,8 @@ public class EntityControl implements Listener {
         Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(location);
         int landId = island.get().getId();
 
+        count.putIfAbsent(landId , 0);
+
         count.put(landId , count.get(landId) - 1);
     }
 
