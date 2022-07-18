@@ -2,6 +2,7 @@ package me.xiaozhangup.mooncube;
 
 import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.island.EntityControl;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.manager.ListenerManager;
 import me.xiaozhangup.mooncube.menu.MainMenu;
@@ -54,7 +55,7 @@ public class MoonCube extends JavaPlugin {
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
                 new Ketboard(), new MainMenu(), new Skills(), new UniqueShop(),
-                new Warps()
+                new Warps(), new EntityControl()
         );
         listenerManager.register();
         //event load
@@ -65,6 +66,7 @@ public class MoonCube extends JavaPlugin {
         ConfigManager.createFile("book");
         ConfigManager.createFile("kit");
         ConfigManager.createFile("plan");
+        ConfigManager.createFile("landcount");
         //file
 
         
@@ -110,6 +112,11 @@ public class MoonCube extends JavaPlugin {
                     
                     case "push" -> {
                         Board.push();
+                        return true;
+                    }
+
+                    case "scanmob" -> {
+                        EntityControl.scanEntity();
                         return true;
                     }
                 }
@@ -176,6 +183,7 @@ public class MoonCube extends JavaPlugin {
         TABConfig.setUp();
         Ketboard.loadKey();
         Board.run();
+        EntityControl.loadFromFile();
         //misc
 
         Bukkit.getScheduler().runTaskTimer(this , () -> {
@@ -184,6 +192,11 @@ public class MoonCube extends JavaPlugin {
             }
         } , 1L , 48000L);
         //task
+    }
+
+    @Override
+    public void onDisable() {
+        EntityControl.saveToFile();
     }
 
 
