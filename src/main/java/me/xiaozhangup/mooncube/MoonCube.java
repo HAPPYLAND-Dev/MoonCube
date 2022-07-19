@@ -59,7 +59,6 @@ public class MoonCube extends JavaPlugin {
         );
         listenerManager.register();
         //event load
-
         
         ConfigManager.createFile("keymap");
         ConfigManager.createFile("emodata");
