@@ -51,6 +51,7 @@ public class MoonCube extends JavaPlugin {
         RuleManager.setAll();
         //config
 
+
         listenerManager.addListeners(
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
