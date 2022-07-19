@@ -187,6 +187,7 @@ public class MoonCube extends JavaPlugin {
         //misc
 
         Bukkit.getScheduler().runTaskTimer(this , () -> {
+            EntityControl.saveToFile(true);
             if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 1) {
                 Spawner.dailyCoin.clear();
             }
@@ -196,7 +197,7 @@ public class MoonCube extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        EntityControl.saveToFile();
+        EntityControl.saveToFile(false);
     }
 
 

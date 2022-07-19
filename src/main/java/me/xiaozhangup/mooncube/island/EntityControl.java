@@ -89,24 +89,33 @@ public class EntityControl implements Listener {
                     if (entity.getType() != EntityType.VILLAGER) continue;
                     Location location = entity.getLocation();
                     Optional<Island> island = islandManager.getIslandViaLocation(location);
-                    if(island.isEmpty()) continue;
+                    if (island.isEmpty()) continue;
                     int islandId = island.get().getId();
 
-                    int cnt = villagerCountMap.getOrDefault(islandId , 0);
-                    villagerCountMap.put(islandId , cnt + 1);
+                    int cnt = villagerCountMap.getOrDefault(islandId, 0);
+                    villagerCountMap.put(islandId, cnt + 1);
                 }
             }
         }
     }
 
-    public static void saveToFile() {
-        Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin , () -> {
-            List<Integer> lands = new ArrayList<>();
-            villagerCountMap.forEach((islandId , number) -> {
-                lands.add(islandId);
-                ConfigManager.writeConfig("landcount", islandId.toString() , number);
+    public static void saveToFile(Boolean b) {
+        if (b) {
+            Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
+                List<Integer> lands = new ArrayList<>();
+                villagerCountMap.forEach((islandId, number) -> {
+                    lands.add(islandId);
+                    ConfigManager.writeConfig("landcount", islandId.toString(), number);
+                });
+                ConfigManager.writeConfig("landcount", "Lands", lands);
             });
-            ConfigManager.writeConfig("landcount", "Lands" , lands);
-        });
+        } else {
+            List<Integer> lands = new ArrayList<>();
+            villagerCountMap.forEach((islandId, number) -> {
+                lands.add(islandId);
+                ConfigManager.writeConfig("landcount", islandId.toString(), number);
+            });
+            ConfigManager.writeConfig("landcount", "Lands", lands);
+        }
     }
 }
