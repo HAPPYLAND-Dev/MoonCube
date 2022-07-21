@@ -51,7 +51,7 @@ public class EntityControl implements Listener {
             if (cnt >= 10) {
                 e.setCancelled(true);
                 for (Player p : location.getNearbyPlayers(4)) {
-                    p.sendActionBar(IString.addColor("&c所在岛屿村民数量达到上限 10 &f(当前数量为 " + cnt + ")"));
+                    p.sendActionBar(IString.addColor("&c所在岛屿村民数量达到上限 10 &f(当前数量为 " + cnt + " )"));
                 }
             } else {
                 villagerCountMap.put(islandId , cnt + 1);

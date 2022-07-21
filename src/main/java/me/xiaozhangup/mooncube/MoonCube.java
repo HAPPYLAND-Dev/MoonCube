@@ -186,12 +186,15 @@ public class MoonCube extends JavaPlugin {
         EntityControl.loadFromFile();
         //misc
 
-        Bukkit.getScheduler().runTaskTimer(this , () -> {
+        Bukkit.getScheduler().runTaskTimer(this, () -> {
             EntityControl.saveToFile(true);
             if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 1) {
                 Spawner.dailyCoin.clear();
             }
-        } , 1L , 48000L);
+        }, 1L, 48000L);
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+            EntityControl.scanEntity();
+        }, 1L, 200L);
         //task
     }
 
