@@ -9,6 +9,7 @@ import me.xiaozhangup.mooncube.menu.MainMenu;
 import me.xiaozhangup.mooncube.menu.UniqueShop;
 import me.xiaozhangup.mooncube.menu.Warps;
 import me.xiaozhangup.mooncube.message.Board;
+import me.xiaozhangup.mooncube.mobs.Adder;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
@@ -56,7 +57,7 @@ public class MoonCube extends JavaPlugin {
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
                 new Ketboard(), new MainMenu(), new Skills(), new UniqueShop(),
-                new Warps(), new EntityControl()
+                new Warps(), new EntityControl(), new Adder()
         );
         listenerManager.register();
         //event load
@@ -192,9 +193,9 @@ public class MoonCube extends JavaPlugin {
                 Spawner.dailyCoin.clear();
             }
         }, 1L, 48000L);
-        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+        Bukkit.getScheduler().runTaskTimer(this, () -> {
             EntityControl.scanEntity();
-        }, 1L, 200L);
+        }, 1L, 400L);
         //task
     }
 
