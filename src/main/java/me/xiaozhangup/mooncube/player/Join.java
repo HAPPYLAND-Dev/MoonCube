@@ -1,16 +1,13 @@
 package me.xiaozhangup.mooncube.player;
 
 import me.xiaozhangup.mooncube.MoonCube;
-import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.gui.tools.BookTip;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BookMeta;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,13 +20,7 @@ public class Join implements Listener {
             Bukkit.getScheduler().runTaskLater(MoonCube.plugin, () -> {
                 String book = ConfigManager.getConfig("book").getString("book");
                 if (book != null) {
-                    ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
-                    BookMeta bookMeta = (BookMeta) itemStack.getItemMeta();
-                    bookMeta.setAuthor("HAPPYLAND Studio");
-                    bookMeta.setTitle("Server Message");
-                    bookMeta.addPage(IString.addColor(book));
-                    itemStack.setItemMeta(bookMeta);
-                    e.getPlayer().openBook(itemStack);
+                    BookTip.openBook(e.getPlayer(), book);
                 }
             }, 15L);
 
