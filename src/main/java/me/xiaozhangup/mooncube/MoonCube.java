@@ -70,7 +70,6 @@ public class MoonCube extends JavaPlugin {
         ConfigManager.createFile("book");
         ConfigManager.createFile("kit");
         ConfigManager.createFile("plan");
-        ConfigManager.createFile("landcount");
         //file
 
 
@@ -193,7 +192,6 @@ public class MoonCube extends JavaPlugin {
         TABConfig.setUp();
         Ketboard.loadKey();
         Board.run();
-        EntityControl.loadFromFile();
         //misc
 
         Bukkit.getScheduler().runTaskTimer(this, () -> {
@@ -201,15 +199,8 @@ public class MoonCube extends JavaPlugin {
                 Spawner.dailyCoin.clear();
             }
         }, 1L, 48000L);
-        Bukkit.getScheduler().runTaskTimer(this, () -> {
-            EntityControl.scanEntity();
-        }, 1L, 400L);
+        Bukkit.getScheduler().runTaskTimer(this, EntityControl::scanEntity, 1L, 400L);
         //task
-    }
-
-    @Override
-    public void onDisable() {
-        EntityControl.saveToFile(false);
     }
 
     private boolean setupEconomy() {

@@ -21,7 +21,10 @@ public class ArmorClear {
             String book = "&c&l您真的要这么做吗?\n&7这会清除你附近3x3x3的全息文字,并且不可撤销!虽然你可以通过重新放置对应机器来重新显示正确的全息文字.\n&0\n&0十秒内再次输入本命令确认清理!";
             BookTip.openBook(player, book);
             Bukkit.getScheduler().runTaskLater(MoonCube.plugin, () -> {
-                check.put(player, false);
+                if (check.get(player)) {
+                    check.put(player, false);
+                    player.sendMessage(IString.addColor("&8[&c清理&8] &7已到达10秒,您没有确认清除,已取消!"));
+                }
             }, 200L);
             return;
         }

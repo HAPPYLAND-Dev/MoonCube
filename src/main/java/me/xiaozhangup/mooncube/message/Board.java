@@ -4,7 +4,6 @@ import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.tools.BookTip;
 import me.xiaozhangup.mooncube.gui.tools.INumber;
 import me.xiaozhangup.mooncube.gui.tools.IString;
-import me.xiaozhangup.mooncube.island.EntityControl;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,7 +19,6 @@ public class Board {
     public static void run() {
         Bukkit.getScheduler().runTaskTimer(MoonCube.plugin, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                EntityControl.saveToFile(true);
                 player.sendMessage(messages.get(INumber.getRandom(0, messages.size() - 1)));
             }
         }, 0L, 9600L);
