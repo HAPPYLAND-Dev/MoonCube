@@ -5,33 +5,32 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 
 public abstract class Command implements CommandExecutor {
-	private final String name;
-	private final PluginCommand command;
-	
-	public Command(String name) {
-		this.name = name;
+    private final String name;
+    private final PluginCommand command;
 
-		PluginCommand pluginCommand = Bukkit.getPluginCommand(name);
-		if(pluginCommand == null) throw new RuntimeException("Cannot find plugin command '" + name + "'.");
+    public Command(String name) {
+        this.name = name;
 
-		this.command = pluginCommand;
-		pluginCommand.setExecutor(this);
-	}
+        PluginCommand pluginCommand = Bukkit.getPluginCommand(name);
+        if (pluginCommand == null) throw new RuntimeException("Cannot find plugin command '" + name + "'.");
 
-	public String getName() {
-		return name;
-	}
+        this.command = pluginCommand;
+        pluginCommand.setExecutor(this);
+    }
 
-	public PluginCommand getCommand() {
-		return command;
-	}
-	
-	
-	public static boolean register(String name, CommandExecutor executor) {
-		PluginCommand pluginCommand = Bukkit.getPluginCommand(name);
-		if(pluginCommand == null) return false;
+    public static boolean register(String name, CommandExecutor executor) {
+        PluginCommand pluginCommand = Bukkit.getPluginCommand(name);
+        if (pluginCommand == null) return false;
 
-		pluginCommand.setExecutor(executor);
-		return true;
-	}
+        pluginCommand.setExecutor(executor);
+        return true;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public PluginCommand getCommand() {
+        return command;
+    }
 }

@@ -30,12 +30,12 @@ public class Spawner implements Listener {
 
     public static Map<UUID, Double> dailyCoin = new HashMap<>();
 
-    
+
     private final DecimalFormat decimalFormat = new DecimalFormat("0.00");
     private final ItemStack ball = Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTA5ODcwNTk0OWZjNGM0YjI4ZWI4MzQ3NDVjNTc2YTFjMzVkOGQ3MDIyMGM5YTBiNTQyZGVmOGY0NzA5Nzc4YyJ9fX0=");
     private final String COIN_NAME = "Coin|";
-    
-    
+
+
     @EventHandler
     public void onMonDeath(EntityDeathEvent e) {
         LivingEntity entity = e.getEntity();
@@ -47,10 +47,10 @@ public class Spawner implements Listener {
             else coinValue = INumber.getRandom(point, entity.getMaxHealth() / 10);
 
             AtomicBoolean flag = new AtomicBoolean(false);
-            for(Item item : entity.getWorld().getNearbyEntitiesByType(Item.class, entity.getLocation(), 3)) {
+            for (Item item : entity.getWorld().getNearbyEntitiesByType(Item.class, entity.getLocation(), 3)) {
                 ItemStack itemStack = item.getItemStack();
                 ItemNameConsumer.check(itemStack, (meta, name) -> {
-                    if(name.startsWith(COIN_NAME)) {
+                    if (name.startsWith(COIN_NAME)) {
                         String newCoin = decimalFormat.format(Double.parseDouble(name.replace(COIN_NAME, "")) + coinValue);
                         meta.setDisplayName(COIN_NAME + newCoin);
                         itemStack.setItemMeta(meta);
@@ -58,8 +58,8 @@ public class Spawner implements Listener {
                         flag.set(true);
                     }
                 });
-                
-                if(flag.get()) return;
+
+                if (flag.get()) return;
             }
 
             String coin = decimalFormat.format(coinValue);
@@ -76,34 +76,34 @@ public class Spawner implements Listener {
             item.setThrower(entity.getUniqueId());
             item.setOwner(entity.getKiller().getUniqueId());
             item.setCustomName(IString.addColor(Config.COIN_HOLOGRAM.replace("{coin}", coin)));
-            
+
         }
     }
 
     @EventHandler
     public void onPlayerPickup(PlayerAttemptPickupItemEvent e) {
         ItemStack itemStack = e.getItem().getItemStack();
-        if(itemStack.getType() != Material.PLAYER_HEAD) return;
-        
+        if (itemStack.getType() != Material.PLAYER_HEAD) return;
+
         if (itemStack.hasItemMeta()) {
             ItemMeta itemMeta = itemStack.getItemMeta();
-            if(itemMeta.hasDisplayName()) {
+            if (itemMeta.hasDisplayName()) {
                 String itemName = itemMeta.getDisplayName();
                 if (!itemName.startsWith(COIN_NAME)) {
                     return;
                 }
                 e.setCancelled(true);
-                
+
                 Player player = e.getPlayer();
                 UUID uuid = player.getUniqueId();
-                
+
                 double playerDailyCoin = dailyCoin.getOrDefault(uuid, 0.0);
                 if (playerDailyCoin <= Config.DAILY_MAX) {
                     String coin = itemName.replace(COIN_NAME, "");
                     player.sendActionBar(IString.addColor(Config.COIN_ACTION.replace("{coin}", coin)));
                     e.getItem().remove();
                     MoonCube.getEconomy().depositPlayer(player, Double.parseDouble(coin));
-                    dailyCoin.put(uuid , playerDailyCoin + Double.parseDouble(coin));
+                    dailyCoin.put(uuid, playerDailyCoin + Double.parseDouble(coin));
                 } else {
                     player.sendActionBar(IString.addColor(Config.COIN_FULL));
                     e.getItem().remove();
@@ -114,8 +114,8 @@ public class Spawner implements Listener {
 
     @EventHandler
     public void onHopperWork(InventoryPickupItemEvent e) {
-        if(e.getInventory().getType() != InventoryType.HOPPER) return;
-        
+        if (e.getInventory().getType() != InventoryType.HOPPER) return;
+
         ItemStack itemStack = e.getItem().getItemStack();
         ItemNameConsumer.check(itemStack, (meta, name) -> {
             if (itemStack.getType() != Material.PLAYER_HEAD) {

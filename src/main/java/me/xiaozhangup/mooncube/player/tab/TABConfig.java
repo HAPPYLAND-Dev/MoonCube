@@ -92,7 +92,7 @@ public class TABConfig implements Listener {
             fastSet(boardoff, tab, 25, 26, 34, 35, 43, 44);
         }
 
-        tab.setItem(36 , IBuilder.buildItem(Material.COMPASS , "&c返回主页"));
+        tab.setItem(36, IBuilder.buildItem(Material.COMPASS, "&c返回主页"));
 
         p.openInventory(tab);
     }

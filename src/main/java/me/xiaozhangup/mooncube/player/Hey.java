@@ -39,79 +39,6 @@ public class Hey implements Listener {
     private final HashMap<Player, Player> target = new HashMap<>();
     IslandManager islandManager = new IslandManager();
 
-    @EventHandler
-    public void onPlayerClick(PlayerInteractEntityEvent e) {
-        if (e.getHand() != EquipmentSlot.HAND || e.getRightClicked().getType() != EntityType.PLAYER) return;
-        
-        Player ed = (Player) e.getRightClicked();
-        Player p = e.getPlayer();
-        Material material = p.getInventory().getItemInMainHand().getType();
-        Material material1 = p.getInventory().getItemInOffHand().getType();
-        if (Config.BLACK_ITEMS.contains(material1.toString()) || Config.BLACK_ITEMS.contains(material.toString()) || material.toString().endsWith("POTION")) {
-            return;
-        }
-        target.put(p, ed);
-        if (p.isSneaking()) {
-            openIsControl(p, ed);
-        } else {
-            openProfile(p, ed);
-        }
-    }
-
-    @EventHandler
-    public void onInvClick(InventoryClickEvent e) {
-        if (e.getWhoClicked() instanceof Player player) {
-            if (e.getInventory().getHolder() instanceof HeyProfile) {
-                e.setCancelled(true);
-                if (e.getRawSlot() == 42) {
-                    executeCommandAndClose(player, "is visit");
-                }
-                else if (e.getRawSlot() == 43) {
-                    executeCommandAndClose(player, "trade");
-                }
-            }
-            if (e.getInventory().getHolder() instanceof IsControl) {
-                e.setCancelled(true);
-                if (e.getRawSlot() == 10) {
-                    executeCommandAndClose(player, "is visit");
-                }
-                else if (e.getRawSlot() == 11) {
-                    executeCommandAndClose(player, "is uninvite");
-                }
-                else if (e.getRawSlot() == 12) {
-                    executeCommandAndClose(player, "is invite");
-                }
-                else if (e.getRawSlot() == 13) {
-                    executeCommandAndClose(player, "is transfer");
-                }
-                else if (e.getRawSlot() == 14 && e.getClick() == ClickType.RIGHT) {
-                    executeCommandAndOpen(player, "is unban");
-                }
-                else if (e.getRawSlot() == 14 && e.getClick() == ClickType.LEFT) {
-                    executeCommandAndOpen(player, "is ban");
-                }
-                else if (e.getRawSlot() == 15 && e.getClick() == ClickType.RIGHT) {
-                    executeCommandAndOpen(player, "is untrust");
-                }
-                else if (e.getRawSlot() == 15 && e.getClick() == ClickType.LEFT) {
-                    executeCommandAndOpen(player, "is trust");
-                }
-            }
-        }
-    }
-
-    private void executeCommandAndOpen(Player player, String command) {
-        Bukkit.dispatchCommand(player, command + " " + target.get(player).getName());
-        openIsControl(player, target.get(player));
-        player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
-    }
-
-    private void executeCommandAndClose(Player player, String command) {
-        Bukkit.dispatchCommand(player, command + " " + target.get(player).getName());
-        player.closeInventory();
-        player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
-    }
-
     public static void openIsControl(Player p, Player ed) {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
         Inventory iscontrol = Bukkit.createInventory(new IsControl(), 27, IString.addColor("对于玩家 " + ed.getName() + " 的岛屿选项"));
@@ -294,5 +221,70 @@ public class Hey implements Listener {
                 p.openInventory(profile);
             });
         });
+    }
+
+    @EventHandler
+    public void onPlayerClick(PlayerInteractEntityEvent e) {
+        if (e.getHand() != EquipmentSlot.HAND || e.getRightClicked().getType() != EntityType.PLAYER) return;
+
+        Player ed = (Player) e.getRightClicked();
+        Player p = e.getPlayer();
+        Material material = p.getInventory().getItemInMainHand().getType();
+        Material material1 = p.getInventory().getItemInOffHand().getType();
+        if (Config.BLACK_ITEMS.contains(material1.toString()) || Config.BLACK_ITEMS.contains(material.toString()) || material.toString().endsWith("POTION")) {
+            return;
+        }
+        target.put(p, ed);
+        if (p.isSneaking()) {
+            openIsControl(p, ed);
+        } else {
+            openProfile(p, ed);
+        }
+    }
+
+    @EventHandler
+    public void onInvClick(InventoryClickEvent e) {
+        if (e.getWhoClicked() instanceof Player player) {
+            if (e.getInventory().getHolder() instanceof HeyProfile) {
+                e.setCancelled(true);
+                if (e.getRawSlot() == 42) {
+                    executeCommandAndClose(player, "is visit");
+                } else if (e.getRawSlot() == 43) {
+                    executeCommandAndClose(player, "trade");
+                }
+            }
+            if (e.getInventory().getHolder() instanceof IsControl) {
+                e.setCancelled(true);
+                if (e.getRawSlot() == 10) {
+                    executeCommandAndClose(player, "is visit");
+                } else if (e.getRawSlot() == 11) {
+                    executeCommandAndClose(player, "is uninvite");
+                } else if (e.getRawSlot() == 12) {
+                    executeCommandAndClose(player, "is invite");
+                } else if (e.getRawSlot() == 13) {
+                    executeCommandAndClose(player, "is transfer");
+                } else if (e.getRawSlot() == 14 && e.getClick() == ClickType.RIGHT) {
+                    executeCommandAndOpen(player, "is unban");
+                } else if (e.getRawSlot() == 14 && e.getClick() == ClickType.LEFT) {
+                    executeCommandAndOpen(player, "is ban");
+                } else if (e.getRawSlot() == 15 && e.getClick() == ClickType.RIGHT) {
+                    executeCommandAndOpen(player, "is untrust");
+                } else if (e.getRawSlot() == 15 && e.getClick() == ClickType.LEFT) {
+                    executeCommandAndOpen(player, "is trust");
+                }
+            }
+        }
+    }
+
+    private void executeCommandAndOpen(Player player, String command) {
+        Bukkit.dispatchCommand(player, command + " " + target.get(player).getName());
+        openIsControl(player, target.get(player));
+        player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+    }
+
+    private void executeCommandAndClose(Player player, String command) {
+        Bukkit.dispatchCommand(player, command + " " + target.get(player).getName());
+        player.closeInventory();
+        player.playSound(player, Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
     }
 }

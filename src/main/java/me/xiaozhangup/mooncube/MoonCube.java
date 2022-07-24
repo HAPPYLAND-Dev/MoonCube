@@ -10,6 +10,7 @@ import me.xiaozhangup.mooncube.menu.UniqueShop;
 import me.xiaozhangup.mooncube.menu.Warps;
 import me.xiaozhangup.mooncube.message.Board;
 import me.xiaozhangup.mooncube.mobs.Adder;
+import me.xiaozhangup.mooncube.mobs.ArmorClear;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
@@ -30,23 +31,25 @@ import java.util.Calendar;
 
 public class MoonCube extends JavaPlugin {
 
+    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push");
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
-    
     private static Economy econ = null;
-    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push");
-    
+
+    public static Economy getEconomy() {
+        return econ;
+    }
 
     @Override
     public void onEnable() {
         plugin = this;
 
-        
+
         getLogger().info("MoonCube Version " + plugin.getDescription().getVersion());
         getLogger().info("");
         //log print
 
-        
+
         Config.loadConfig();
         setupEconomy();
         RuleManager.setAll();
@@ -61,7 +64,7 @@ public class MoonCube extends JavaPlugin {
         );
         listenerManager.register();
         //event load
-        
+
         ConfigManager.createFile("keymap");
         ConfigManager.createFile("emodata");
         ConfigManager.createFile("book");
@@ -70,38 +73,44 @@ public class MoonCube extends JavaPlugin {
         ConfigManager.createFile("landcount");
         //file
 
-        
+
         Command.register("profile", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
             ProfileEditor.openProfile(p);
             return true;
         });
-        
+
         Command.register("tabc", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
             TABConfig.openTAB(p);
             return true;
         });
 
-        Command.register("unique" , (commandSender, command, s, inside) -> {
+        Command.register("unique", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
             UniqueShop.open(p);
             return true;
         });
-        
+
+        Command.register("holoclear", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            ArmorClear.clear(p);
+            return true;
+        });
+
         Command.register("mooncube", (commandSender, command, s, inside) -> {
-            if(inside.length == 0) {
+            if (inside.length == 0) {
                 commandSender.sendMessage(commandHelper);
                 return false;
             }
-            if(!(commandSender instanceof ConsoleCommandSender) && !(commandSender instanceof Player)) return false;
-            if(commandSender instanceof Player p && !p.isOp()) return false;
+            if (!(commandSender instanceof ConsoleCommandSender) && !(commandSender instanceof Player)) return false;
+            if (commandSender instanceof Player p && !p.isOp()) return false;
 
             try {
                 // Console and op could both execute the following commands.
                 switch (inside[0]) {
                     case "" -> commandSender.sendMessage(commandHelper);
-                    
+
                     case "reload" -> {
                         Config.loadConfig();
                         Ketboard.loadKey();
@@ -110,7 +119,7 @@ public class MoonCube extends JavaPlugin {
                         commandSender.sendMessage(IString.addColor("&8[DeBug] &freload!"));
                         return true;
                     }
-                    
+
                     case "push" -> {
                         Board.push();
                         return true;
@@ -125,54 +134,54 @@ public class MoonCube extends JavaPlugin {
                 commandSender.sendMessage(commandHelper);
                 return false;
             }
-            
-            if(!(commandSender instanceof Player p)) return false;
+
+            if (!(commandSender instanceof Player p)) return false;
             try {
                 // Only op can execute the following commands.
                 switch (inside[0]) {
                     case "profile" -> {
-                        Hey.openProfile(p , p);
+                        Hey.openProfile(p, p);
                         return true;
                     }
-                    
+
                     case "control" -> {
-                        Hey.openIsControl(p , p);
+                        Hey.openIsControl(p, p);
                         return true;
                     }
-                    
+
                     case "main" -> {
                         MainMenu.open(p);
                         return true;
                     }
-                    
+
                     case "setkit" -> {
-                        for (int i = 0 ; i < 37 ; i++) {
+                        for (int i = 0; i < 37; i++) {
                             if (p.getInventory().getItem(i) == null) continue;
-                            ConfigManager.writeConfig("kit" , "Slot." + i, p.getInventory().getItem(i));
+                            ConfigManager.writeConfig("kit", "Slot." + i, p.getInventory().getItem(i));
                             p.sendMessage(p.getInventory().getItem(i).toString());
                         }
                         return true;
                     }
-                    
+
                     case "testkit" -> {
                         p.getInventory().clear();
-                        for (int i = 0 ; i < 37 ; i ++) {
+                        for (int i = 0; i < 37; i++) {
                             if (ConfigManager.getConfig("kit").getItemStack("Slot." + i) == null) continue;
-                            p.getInventory().setItem(i , ConfigManager.getConfig("kit").getItemStack("Slot." + i));
+                            p.getInventory().setItem(i, ConfigManager.getConfig("kit").getItemStack("Slot." + i));
                         }
                         return true;
                     }
                 }
-                
+
                 p.sendMessage(commandHelper);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            
+
             p.sendMessage(commandHelper);
             return false;
         });
-        
+
         Command.register("menu", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
             MainMenu.open(p);
@@ -188,7 +197,6 @@ public class MoonCube extends JavaPlugin {
         //misc
 
         Bukkit.getScheduler().runTaskTimer(this, () -> {
-            EntityControl.saveToFile(true);
             if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 1) {
                 Spawner.dailyCoin.clear();
             }
@@ -202,11 +210,6 @@ public class MoonCube extends JavaPlugin {
     @Override
     public void onDisable() {
         EntityControl.saveToFile(false);
-    }
-
-
-    public static Economy getEconomy() {
-        return econ;
     }
 
     private boolean setupEconomy() {

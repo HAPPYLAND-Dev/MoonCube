@@ -8,6 +8,7 @@ depend:
   - IridiumSkyblock
   - TAB
   - AureliumSkills
+  - ProtocolLib
 commands:
   mooncube:
     description: MoonCube Main Command
@@ -23,5 +24,7 @@ commands:
     description: Menu
   unique:
     description: Unique shop
+  holoclear:
+    description: Clear holo text
 authors:
   - xiaozhangup

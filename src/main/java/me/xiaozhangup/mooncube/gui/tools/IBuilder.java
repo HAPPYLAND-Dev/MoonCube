@@ -17,7 +17,7 @@ public class IBuilder {
         return itemStack;
     }
 
-    public static ItemStack buildItem(Material material , String name) {
+    public static ItemStack buildItem(Material material, String name) {
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(IString.addColor(name));
@@ -25,7 +25,7 @@ public class IBuilder {
         return itemStack;
     }
 
-    public static ItemStack buildItem(Material material , String name , String... lores) {
+    public static ItemStack buildItem(Material material, String name, String... lores) {
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(IString.addColor(name));

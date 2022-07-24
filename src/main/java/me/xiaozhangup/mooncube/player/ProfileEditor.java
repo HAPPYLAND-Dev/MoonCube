@@ -73,8 +73,8 @@ public class ProfileEditor implements Listener {
             profile.setItem(31, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZlYTk5YWQ5NWI1NzAxNzVmZGEyNWMzYTY5Nzg4ZDZhOWI4NTRhYTEzZjhhNWZmNjNmNmVmZWRmNTgxZGZiNiJ9fX0=", "&f思索"));
             profile.setItem(32, Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFiZmFiZjBhZGIyYTYxNWU5MDFmZTAwNDBlMzIyYzUxZmI3ZDExYzgyY2ZhZmEyMWU1MjIxYTVmNmEyZTAzMCJ9fX0=", "&f吐了"));
 
-            profile.setItem(44 , IBuilder.buildItem(Material.BARRIER , "&c关闭菜单"));
-            profile.setItem(43 , IBuilder.buildItem(Material.COMPASS , "&c返回主页"));
+            profile.setItem(44, IBuilder.buildItem(Material.BARRIER, "&c关闭菜单"));
+            profile.setItem(43, IBuilder.buildItem(Material.COMPASS, "&c返回主页"));
 
             ItemStack dailyemo = Skull.getSkull(ConfigManager.getConfig("emodata").getString(p.getName() + ".emobase"));
             ItemMeta emoMeta = dailyemo.getItemMeta();
@@ -102,6 +102,7 @@ public class ProfileEditor implements Listener {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
         openProfile(p);
     }
+
     @EventHandler
     public void onPlayerClick(InventoryClickEvent e) {
         if (e.getWhoClicked() instanceof Player p && e.getInventory().getHolder() instanceof Emo) {
@@ -114,21 +115,36 @@ public class ProfileEditor implements Listener {
             } else {
                 Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
                     switch (e.getRawSlot()) {
-                        case 10 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzVhNDZmODMzNGU0OWQyNzMzODRlYjcyYjJhYzE1ZTI0YTY0MGQ3NjQ4ZTRiMjhjMzQ4ZWZjZTkzZGM5N2FiIn19fQ==");
-                        case 11 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWM0OWJkNDEzODYwM2E5MDRmYWFmZTEzNjZmNmJmYjczZWJkMTY3NDA1OGE4OTg1NjYyOGViMmM5NWMyMCJ9fX0=");
-                        case 12 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWMyNjcyYWFhZTU4ZjNkMTg1MmQxOWI4NDIyY2FmNzBiMzI1ODJmOGRlM2ZjYjVjN2MyNGRhY2I3ZWJjMyJ9fX0=");
-                        case 13 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzMyZmUxMjFhNjNlYWFiZDk5Y2VkNmQxYWNjOTE3OTg2NTJkMWVlODA4NGQyZjkxMjdkOGEzMTVjYWQ1Y2U0In19fQ==");
-                        case 14 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGIwNDQ3NDY0OWY5MDdhY2Y2YmEwNGY4Y2VhNjViMjZhOTEwY2UyNGJhYjJjNmEzZmE2NzU5ZWFjZmZhZiJ9fX0=");
-                        case 19 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDU4Njg1MjlmYmY0YmU2MjkzNzEyNzViMTEzOGRhYjkyOTU3NjAyMTcxNmVlNzM3ZGIxMjYzNGFhMTI1YWYzIn19fQ==");
-                        case 20 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDE2ZjNkY2U5NzdkOGI3OTdlMWU0NzZmNWFiOTM2MTllZDJmMmIyMWE0OWFjOTM3NDMxNDBjZjY3YTA4OCJ9fX0=");
-                        case 21 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWZmNDlhODY0NWRkNjhiNjhmMGJhZmEyMjY1YmFkOTMyZjc1MWM1ODRlNGY3MzFmZDcxNzNhNWU1YjI2ZDMifX19");
-                        case 22 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2VmNTc1NjI5YTI2ODlkNjNhM2EzZTkxYmQzNDJlYzNmNzhiNGYzOTc2ODdjMDgzM2JmNmQ2NGJmMjZkMTJlOCJ9fX0=");
-                        case 23 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGQ4ZjVmYjM4N2NhNjZmYzJmNjViOTFmY2IyMzE2MDQ1NDhlODU2NTg5NWJiOTZjNjc2OTg0MjA1ZTZmMTkifX19");
-                        case 28 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDM5YzNkZjdhNjI4YWY4ZDc1MWVjY2ExOTc2NDJjZGMxYTA3YzMwZTMyODliMmQzMjYxZjdhNjVjZjM5NWIifX19");
-                        case 29 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjFkNGJlYTM2NmFjYTU4ZGQ1YjIyZTk0MGJjZGQ0YmE0NWJmODg0MjFmNmQ4MzExNThiODc5ZjJjOGFiY2UxOCJ9fX0=");
-                        case 30 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNjZDU0NzJhNDZmNDZlNGNkZmRhOWFkZWEyMzIwY2NjZmJhZTExMTk4YjZhYWUxNjNkMTdjNGI1YjQ2NjZkIn19fQ==");
-                        case 31 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZlYTk5YWQ5NWI1NzAxNzVmZGEyNWMzYTY5Nzg4ZDZhOWI4NTRhYTEzZjhhNWZmNjNmNmVmZWRmNTgxZGZiNiJ9fX0=");
-                        case 32 -> setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFiZmFiZjBhZGIyYTYxNWU5MDFmZTAwNDBlMzIyYzUxZmI3ZDExYzgyY2ZhZmEyMWU1MjIxYTVmNmEyZTAzMCJ9fX0=");
+                        case 10 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzVhNDZmODMzNGU0OWQyNzMzODRlYjcyYjJhYzE1ZTI0YTY0MGQ3NjQ4ZTRiMjhjMzQ4ZWZjZTkzZGM5N2FiIn19fQ==");
+                        case 11 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWM0OWJkNDEzODYwM2E5MDRmYWFmZTEzNjZmNmJmYjczZWJkMTY3NDA1OGE4OTg1NjYyOGViMmM5NWMyMCJ9fX0=");
+                        case 12 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWMyNjcyYWFhZTU4ZjNkMTg1MmQxOWI4NDIyY2FmNzBiMzI1ODJmOGRlM2ZjYjVjN2MyNGRhY2I3ZWJjMyJ9fX0=");
+                        case 13 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzMyZmUxMjFhNjNlYWFiZDk5Y2VkNmQxYWNjOTE3OTg2NTJkMWVlODA4NGQyZjkxMjdkOGEzMTVjYWQ1Y2U0In19fQ==");
+                        case 14 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGIwNDQ3NDY0OWY5MDdhY2Y2YmEwNGY4Y2VhNjViMjZhOTEwY2UyNGJhYjJjNmEzZmE2NzU5ZWFjZmZhZiJ9fX0=");
+                        case 19 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDU4Njg1MjlmYmY0YmU2MjkzNzEyNzViMTEzOGRhYjkyOTU3NjAyMTcxNmVlNzM3ZGIxMjYzNGFhMTI1YWYzIn19fQ==");
+                        case 20 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDE2ZjNkY2U5NzdkOGI3OTdlMWU0NzZmNWFiOTM2MTllZDJmMmIyMWE0OWFjOTM3NDMxNDBjZjY3YTA4OCJ9fX0=");
+                        case 21 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWZmNDlhODY0NWRkNjhiNjhmMGJhZmEyMjY1YmFkOTMyZjc1MWM1ODRlNGY3MzFmZDcxNzNhNWU1YjI2ZDMifX19");
+                        case 22 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2VmNTc1NjI5YTI2ODlkNjNhM2EzZTkxYmQzNDJlYzNmNzhiNGYzOTc2ODdjMDgzM2JmNmQ2NGJmMjZkMTJlOCJ9fX0=");
+                        case 23 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGQ4ZjVmYjM4N2NhNjZmYzJmNjViOTFmY2IyMzE2MDQ1NDhlODU2NTg5NWJiOTZjNjc2OTg0MjA1ZTZmMTkifX19");
+                        case 28 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDM5YzNkZjdhNjI4YWY4ZDc1MWVjY2ExOTc2NDJjZGMxYTA3YzMwZTMyODliMmQzMjYxZjdhNjVjZjM5NWIifX19");
+                        case 29 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjFkNGJlYTM2NmFjYTU4ZGQ1YjIyZTk0MGJjZGQ0YmE0NWJmODg0MjFmNmQ4MzExNThiODc5ZjJjOGFiY2UxOCJ9fX0=");
+                        case 30 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNjZDU0NzJhNDZmNDZlNGNkZmRhOWFkZWEyMzIwY2NjZmJhZTExMTk4YjZhYWUxNjNkMTdjNGI1YjQ2NjZkIn19fQ==");
+                        case 31 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZlYTk5YWQ5NWI1NzAxNzVmZGEyNWMzYTY5Nzg4ZDZhOWI4NTRhYTEzZjhhNWZmNjNmNmVmZWRmNTgxZGZiNiJ9fX0=");
+                        case 32 ->
+                                setEmo(p, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWFiZmFiZjBhZGIyYTYxNWU5MDFmZTAwNDBlMzIyYzUxZmI3ZDExYzgyY2ZhZmEyMWU1MjIxYTVmNmEyZTAzMCJ9fX0=");
 
                         case 43 -> MainMenu.open(p);
                         case 44 -> p.closeInventory();
@@ -149,7 +165,7 @@ public class ProfileEditor implements Listener {
                 e.getPlayer().sendMessage(IString.addColor("&8[&x&8&F&B&C&8&F签名&8] &c签名设置已取消"));
             } else {
                 e.getPlayer().sendMessage(IString.addColor("&8[&x&8&F&B&C&8&F签名&8] &f签名设置成功!"));
-                ConfigManager.writeConfig("emodata" , e.getPlayer().getName() + ".text", e.getMessage());
+                ConfigManager.writeConfig("emodata", e.getPlayer().getName() + ".text", e.getMessage());
             }
             openProfile(e.getPlayer());
         }

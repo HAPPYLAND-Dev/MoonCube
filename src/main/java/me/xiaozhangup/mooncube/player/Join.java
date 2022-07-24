@@ -3,7 +3,6 @@ package me.xiaozhangup.mooncube.player;
 import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
-import me.xiaozhangup.mooncube.mobs.Spawner;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -21,7 +20,7 @@ public class Join implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         if (e.getPlayer().hasPlayedBefore()) {
-            Bukkit.getScheduler().runTaskLater(MoonCube.plugin , () -> {
+            Bukkit.getScheduler().runTaskLater(MoonCube.plugin, () -> {
                 String book = ConfigManager.getConfig("book").getString("book");
                 if (book != null) {
                     ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
@@ -32,7 +31,7 @@ public class Join implements Listener {
                     itemStack.setItemMeta(bookMeta);
                     e.getPlayer().openBook(itemStack);
                 }
-            } , 15L);
+            }, 15L);
 
         } else {
             Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
@@ -44,9 +43,9 @@ public class Join implements Listener {
                     exception.printStackTrace();
                 }
                 e.getPlayer().getInventory().clear();
-                for (int i = 0 ; i < 37 ; i ++) {
+                for (int i = 0; i < 37; i++) {
                     if (ConfigManager.getConfig("kit").getItemStack("Slot." + i) == null) continue;
-                    e.getPlayer().getInventory().setItem(i , ConfigManager.getConfig("kit").getItemStack("Slot." + i));
+                    e.getPlayer().getInventory().setItem(i, ConfigManager.getConfig("kit").getItemStack("Slot." + i));
                 }
             });
         }

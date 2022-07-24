@@ -12,7 +12,7 @@ public class IString {
     public String code = "§";
 
     public static String addColor(String s) {
-        return s.replace("&" , "§");
+        return s.replace("&", "§");
     }
 
     public static String getStringFromURL(String s) {
