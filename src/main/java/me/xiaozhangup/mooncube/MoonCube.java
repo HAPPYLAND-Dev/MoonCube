@@ -31,7 +31,7 @@ import java.util.Calendar;
 
 public class MoonCube extends JavaPlugin {
 
-    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push");
+    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push;scanmob;getbook");
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
     private static Economy econ = null;
@@ -60,7 +60,7 @@ public class MoonCube extends JavaPlugin {
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
                 new Ketboard(), new MainMenu(), new Skills(), new UniqueShop(),
-                new Warps(), new EntityControl(), new Adder()
+                new Warps(), new EntityControl(), new Adder(), new ItemAdders()
         );
         listenerManager.register();
         //event load
@@ -168,6 +168,11 @@ public class MoonCube extends JavaPlugin {
                             if (ConfigManager.getConfig("kit").getItemStack("Slot." + i) == null) continue;
                             p.getInventory().setItem(i, ConfigManager.getConfig("kit").getItemStack("Slot." + i));
                         }
+                        return true;
+                    }
+
+                    case "getbook" -> {
+                        p.getInventory().addItem(ItemAdders.iabook);
                         return true;
                     }
                 }
