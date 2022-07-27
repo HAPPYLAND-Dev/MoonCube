@@ -3,6 +3,8 @@ package me.xiaozhangup.mooncube;
 import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.island.EntityControl;
+import me.xiaozhangup.mooncube.item.BlockSaver;
+import me.xiaozhangup.mooncube.item.ItemSaver;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.manager.ListenerManager;
 import me.xiaozhangup.mooncube.menu.MainMenu;
@@ -21,6 +23,7 @@ import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import me.xiaozhangup.mooncube.world.RuleManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.block.Block;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -31,7 +34,7 @@ import java.util.Calendar;
 
 public class MoonCube extends JavaPlugin {
 
-    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push;scanmob;getbook");
+    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push;scanmob");
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
     private static Economy econ = null;
@@ -70,6 +73,7 @@ public class MoonCube extends JavaPlugin {
         ConfigManager.createFile("book");
         ConfigManager.createFile("kit");
         ConfigManager.createFile("plan");
+        ConfigManager.createFile("items");
         //file
 
 
@@ -170,11 +174,6 @@ public class MoonCube extends JavaPlugin {
                         }
                         return true;
                     }
-
-                    case "getbook" -> {
-                        p.getInventory().addItem(ItemAdders.iabook);
-                        return true;
-                    }
                 }
 
                 p.sendMessage(commandHelper);
@@ -190,6 +189,36 @@ public class MoonCube extends JavaPlugin {
             Player p = (Player) commandSender;
             MainMenu.open(p);
             return true;
+        });
+
+        Command.register("iaguide", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            p.getInventory().addItem(ItemAdders.iabook);
+            return true;
+        });
+
+        Command.register("moonitem", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            if (inside[0].equals("block")) {
+                if (inside[1].equals("save")) {
+                    Block block = p.getTargetBlock(4);
+
+                    if (block == null) return false;
+                    BlockSaver.saveBlockMeta(block.getBlockData(), inside[2]);
+                    return true;
+                }
+            }
+            if (inside[0].equals("item")) {
+                if (inside[1].equals("save")) {
+                    ItemSaver.saveItemtoFile(p.getInventory().getItemInMainHand(), inside[2]);
+                    return true;
+                }
+                if (inside[1].equals("load")) {
+                    p.getInventory().addItem(ItemSaver.loadFromFile(inside[2]));
+                    return true;
+                }
+            }
+            return false;
         });
         //command
 

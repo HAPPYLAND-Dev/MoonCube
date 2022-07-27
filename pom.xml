@@ -97,11 +97,6 @@
             <version>Beta1.3.5</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.github.unldenis</groupId>
-            <artifactId>Hologram-Lib</artifactId>
-            <version>master-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 </project>

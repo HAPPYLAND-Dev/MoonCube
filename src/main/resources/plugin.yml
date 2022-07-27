@@ -26,5 +26,9 @@ commands:
     description: Unique shop
   holoclear:
     description: Clear holo text
+  iaguide:
+    description: Get ia guide book
+  moonitem:
+    description: MoonCube NBT Saver
 authors:
   - xiaozhangup

@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,12 +18,12 @@ public class Join implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         if (e.getPlayer().hasPlayedBefore()) {
-            Bukkit.getScheduler().runTaskLater(MoonCube.plugin, () -> {
-                String book = ConfigManager.getConfig("book").getString("book");
-                if (book != null) {
-                    BookTip.openBook(e.getPlayer(), book);
-                }
-            }, 15L);
+//            Bukkit.getScheduler().runTaskLater(MoonCube.plugin, () -> {
+//                String book = ConfigManager.getConfig("book").getString("book");
+//                if (book != null && e.getPlayer().hasResourcePack()) {
+//                    BookTip.openBook(e.getPlayer(), book);
+//                }
+//            }, 15L);
 
         } else {
             Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
@@ -39,6 +40,16 @@ public class Join implements Listener {
                     e.getPlayer().getInventory().setItem(i, ConfigManager.getConfig("kit").getItemStack("Slot." + i));
                 }
             });
+        }
+    }
+
+    @EventHandler
+    public void onLoad(PlayerResourcePackStatusEvent e) {
+        if (e.getStatus() == PlayerResourcePackStatusEvent.Status.SUCCESSFULLY_LOADED) {
+            String book = ConfigManager.getConfig("book").getString("book");
+            if (book != null) {
+                BookTip.openBook(e.getPlayer(), book);
+            }
         }
     }
 }
