@@ -37,4 +37,18 @@ public class IBuilder {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
+
+    public static ItemStack buildItem(Material material, String name, Integer i, String... lores) {
+        ItemStack itemStack = new ItemStack(material);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(IString.addColor(name));
+        List<String> lore = new ArrayList<>();
+        for (String s : lores) {
+            lore.add(IString.addColor(s));
+        }
+        itemMeta.setLore(lore);
+        itemMeta.setCustomModelData(i);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
 }
