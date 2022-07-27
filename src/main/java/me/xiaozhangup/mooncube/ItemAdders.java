@@ -21,7 +21,7 @@ public class ItemAdders implements Listener {
         ItemStack itemStack = e.getItem();
         Action action = e.getAction();
         if (e.getHand() == EquipmentSlot.HAND) {
-            if (itemStack != null && itemStack.equals(iabook)) {
+            if (itemStack != null && itemStack == iabook) {
                 if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
                     Bukkit.dispatchCommand(p, "iaemoji");
                 }
