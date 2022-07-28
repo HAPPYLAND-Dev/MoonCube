@@ -4,6 +4,7 @@ import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.island.EntityControl;
 import me.xiaozhangup.mooncube.item.BlockSaver;
+import me.xiaozhangup.mooncube.item.Gener;
 import me.xiaozhangup.mooncube.item.ItemSaver;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.manager.ListenerManager;
@@ -63,7 +64,8 @@ public class MoonCube extends JavaPlugin {
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
                 new Ketboard(), new MainMenu(), new Skills(), new UniqueShop(),
-                new Warps(), new EntityControl(), new Adder(), new ItemAdders()
+                new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
+                new Gener()
         );
         listenerManager.register();
         //event load
@@ -226,6 +228,7 @@ public class MoonCube extends JavaPlugin {
         TABConfig.setUp();
         Ketboard.loadKey();
         Board.run();
+        Gener.load();
         //misc
 
         Bukkit.getScheduler().runTaskTimer(this, () -> {
