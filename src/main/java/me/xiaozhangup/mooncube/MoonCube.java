@@ -4,7 +4,6 @@ import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.island.EntityControl;
 import me.xiaozhangup.mooncube.item.BlockSaver;
-import me.xiaozhangup.mooncube.item.Gener;
 import me.xiaozhangup.mooncube.item.ItemSaver;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.manager.ListenerManager;
@@ -227,7 +226,6 @@ public class MoonCube extends JavaPlugin {
         TABConfig.setUp();
         Ketboard.loadKey();
         Board.run();
-        Gener.load();
         //misc
 
         Bukkit.getScheduler().runTaskTimer(this, () -> {
