@@ -33,5 +33,7 @@ commands:
     description: MoonCube NBT Saver
   arcaneavl:
     description: Arcane anvil
+  arcanebk:
+    description: Arcane book
 authors:
   - xiaozhangup
