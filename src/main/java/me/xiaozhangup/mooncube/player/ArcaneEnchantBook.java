@@ -27,6 +27,8 @@ public class ArcaneEnchantBook implements Listener {
         ARCANE_ENCHANT_BOOK.setItemMeta(im);
     }
 
+    private static final Random RAND = new Random();
+
     @SuppressWarnings("deprecation")
     @EventHandler
     public void onInter(PlayerInteractEvent evt) {
@@ -38,10 +40,10 @@ public class ArcaneEnchantBook implements Listener {
             if (i.getType().equals(Material.PLAYER_HEAD) && i.getItemMeta().hasCustomModelData()
                     && i.getItemMeta().getCustomModelData() == -114519) {
                 evt.setCancelled(true);
-                Enchantment e = Enchantment.values()[new Random().nextInt(Enchantment.values().length)];
+                Enchantment e = ORI_ENCHS[RAND.nextInt(ORI_ENCHS.length)];
                 ItemStack eb = new ItemStack(Material.ENCHANTED_BOOK);
                 EnchantmentStorageMeta ebm = (EnchantmentStorageMeta) eb.getItemMeta();
-                ebm.addStoredEnchant(e, new Random().nextInt(10) + 1, true);
+                ebm.addStoredEnchant(e, RAND.nextInt(10) + 1, true);
                 eb.setItemMeta(ebm);
                 i.setAmount(i.getAmount() - 1);
                 evt.getPlayer().playSound(evt.getPlayer(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1f, 1f);
@@ -53,4 +55,19 @@ public class ArcaneEnchantBook implements Listener {
             }
         }
     }
+
+    private static final Enchantment[] ORI_ENCHS = new Enchantment[] {
+            Enchantment.PROTECTION_ENVIRONMENTAL, Enchantment.PROTECTION_FIRE, Enchantment.PROTECTION_FALL,
+            Enchantment.PROTECTION_EXPLOSIONS,
+            Enchantment.PROTECTION_PROJECTILE, Enchantment.OXYGEN, Enchantment.WATER_WORKER, Enchantment.THORNS,
+            Enchantment.DEPTH_STRIDER, Enchantment.FROST_WALKER, Enchantment.BINDING_CURSE, Enchantment.DAMAGE_ALL,
+            Enchantment.DAMAGE_UNDEAD, Enchantment.DAMAGE_ARTHROPODS, Enchantment.KNOCKBACK, Enchantment.FIRE_ASPECT,
+            Enchantment.LOOT_BONUS_MOBS, Enchantment.SWEEPING_EDGE, Enchantment.DIG_SPEED, Enchantment.SILK_TOUCH,
+            Enchantment.DURABILITY, Enchantment.LOOT_BONUS_BLOCKS, Enchantment.ARROW_DAMAGE,
+            Enchantment.ARROW_KNOCKBACK, Enchantment.ARROW_FIRE, Enchantment.ARROW_INFINITE, Enchantment.LUCK,
+            Enchantment.LURE, Enchantment.LOYALTY, Enchantment.IMPALING, Enchantment.RIPTIDE, Enchantment.CHANNELING,
+            Enchantment.MULTISHOT, Enchantment.QUICK_CHARGE, Enchantment.PIERCING, Enchantment.MENDING,
+            Enchantment.VANISHING_CURSE, Enchantment.SOUL_SPEED, Enchantment.SWIFT_SNEAK
+    };
+
 }
