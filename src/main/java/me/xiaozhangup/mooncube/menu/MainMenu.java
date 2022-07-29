@@ -46,7 +46,7 @@ public class MainMenu implements Listener {
             menu.setItem(43, IBuilder.buildItem(Material.ENDER_CHEST, "&x&4&8&A&9&9&9赞助我们", " ", "&7服务器的运行与开发需要大笔资金", "&7您的赞助至关重要", "&c所有赞助将全部用于维护服务器"));
 
             menu.setItem(11, IBuilder.buildItem(Material.COMMAND_BLOCK_MINECART, "&x&F&F&C&0&4&6小众岛屿设置", " ", "&7这些设置不太常用", "&7但也有用"));
-            menu.setItem(12, IBuilder.buildItem(Material.CAT_SPAWN_EGG, "&x&C&5&6&0&0&0宠物管理", " ", "&7管理你的宠物"));
+            menu.setItem(12, IBuilder.buildItem(Material.CAT_SPAWN_EGG, "&x&C&5&6&0&0&0宠物管理", " ", "&7管理你的宠物 (/pet)", " ", "&e如何捕捉宠物?", "&e使用栓绳击杀生物", "&e便有可能将对应生物", "&e变为你的宠物"));
             menu.setItem(13, IBuilder.buildItem(Material.HONEY_BOTTLE, "&x&B&C&5&1&0&0游览其他岛屿", " ", "&7游历其他玩家的岛屿"));
             menu.setItem(20, IBuilder.buildItem(Material.COD_BUCKET, "&x&F&F&F&F&8&9岛屿控制页", " ", "&7等效于使用 /is 命令"));
             menu.setItem(21, IBuilder.buildItem(Material.FISHING_ROD, "&x&F&9&6&8&3&A鱼的收购", " ", "&7收购你钓上来的特殊的鱼"));
@@ -71,7 +71,7 @@ public class MainMenu implements Listener {
                 case 40 -> Bukkit.dispatchCommand(p, "sk");
 
                 case 11 -> Bukkit.dispatchCommand(p, "is settings");
-                case 12 -> Bukkit.dispatchCommand(p, "companions");
+                case 12 -> Bukkit.dispatchCommand(p, "pet");
                 case 13 -> Bukkit.dispatchCommand(p, "is visit");
                 case 20 -> Bukkit.dispatchCommand(p, "is");
                 case 21 -> Bukkit.dispatchCommand(p, "emf shop");
