@@ -51,6 +51,7 @@ public class ArcaneAnvil implements Listener {
 
     private static int judgeItem(ItemStack itm) {
         if (itm.getType().equals(Material.PLAYER_HEAD)) {
+            if (!itm.getItemMeta().hasCustomModelData()) return 100;
             switch (itm.getItemMeta().getCustomModelData()) {
                 case -114514:
                     return 50;
