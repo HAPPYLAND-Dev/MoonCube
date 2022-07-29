@@ -1,5 +1,6 @@
 package me.xiaozhangup.mooncube.player;
 
+import me.xiaozhangup.mooncube.gui.tools.Skull;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -15,25 +16,23 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import me.xiaozhangup.mooncube.gui.tools.Skull;
-
 public class ArcaneAnvil implements Listener {
 
     public static final ItemStack ARCANE_LAPIS_GEM_ROUGH = Skull.getSkull(
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2ZjZWJlNTRkYmMzNDVlYTdlMjIyMDZmNzAzZTZiMzNiZWZiZTk1YjZhOTE4YmQxNzU0Yjc2MTg4YmM2NWJiNSJ9fX0=",
-            "&x&1&E&9&0&F&F粗糙的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e50%");
+            "&x&1&E&9&0&F&F粗糙的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e50%", " ", "&7将它拿在副手然后打开背包", "&7用附魔书按下Shift点击装备来附魔", "&7空的书本按下Shift点击已附魔的东西祛魔");
     public static final ItemStack ARCANE_LAPIS_GEM_FINE = Skull.getSkull(
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzYxNjFkYWEzNTg5ZWM5YzgxODc0NTlhYzM2ZmQ0ZGQyNjQ2YzA0MDY3OGQzYmZhY2I3MmEyMjEwYzZjODAxYyJ9fX0=",
-            "&x&1&E&9&0&F&F精致的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e95%");
+            "&x&1&E&9&0&F&F精致的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e95%", " ", "&7将它拿在副手然后打开背包", "&7用附魔书按下Shift点击装备来附魔", "&7空的书本按下Shift点击已附魔的东西祛魔");
     public static final ItemStack ARCANE_LAPIS_GEM_PERFECT = Skull.getSkull(
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGU5M2ViYWNiNjBiNzE3OTMzNTVmZGUwZDRiYmE0M2E5YzVlYzA5YzNmMzg4OTdjNDhjMWY4NTc1MjNhMGEyOSJ9fX0=",
-            "&x&1&E&9&0&F&F完美的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e100%");
+            "&x&1&E&9&0&F&F完美的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e100%", " ", "&7将它拿在副手然后打开背包", "&7用附魔书按下Shift点击装备来附魔", "&7空的书本按下Shift点击已附魔的东西祛魔");
     public static final ItemStack ARCANE_LAPIS_GEM_FLAWED = Skull.getSkull(
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGEwYWY5OWU4ZDg3MDMxOTRhODQ3YTU1MjY4Y2Y1ZWY0YWM0ZWIzYjI0YzBlZDg2NTUxMzM5ZDEwYjY0NjUyOSJ9fX0=",
-            "&x&1&E&9&0&F&F瑕疵的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e60%");
+            "&x&1&E&9&0&F&F瑕疵的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e60%", " ", "&7将它拿在副手然后打开背包", "&7用附魔书按下Shift点击装备来附魔", "&7空的书本按下Shift点击已附魔的东西祛魔");
     public static final ItemStack ARCANE_LAPIS_GEM_FLAWLESS = Skull.getSkull(
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTU3Y2ZhOWM3NWJhNTg0NjQ1ZWUyYWY2ZDk4NjdkNzY3ZGRlYTQ2NjdjZGZjNzJkYzEwNjFkZDE5NzVjYTdkMCJ9fX0=",
-            "&x&1&E&9&0&F&F无瑕的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e75%");
+            "&x&1&E&9&0&F&F无瑕的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e75%", " ", "&7将它拿在副手然后打开背包", "&7用附魔书按下Shift点击装备来附魔", "&7空的书本按下Shift点击已附魔的东西祛魔");
 
     static {
         setCustomModelData(ARCANE_LAPIS_GEM_ROUGH, -114514);
