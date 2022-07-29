@@ -30,5 +30,7 @@ commands:
     description: Get ia guide book
   moonitem:
     description: MoonCube NBT Saver
+  arcaneavl:
+    description: Arcane anvil
 authors:
   - xiaozhangup

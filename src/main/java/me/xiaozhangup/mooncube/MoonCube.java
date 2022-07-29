@@ -14,6 +14,7 @@ import me.xiaozhangup.mooncube.message.Board;
 import me.xiaozhangup.mooncube.mobs.Adder;
 import me.xiaozhangup.mooncube.mobs.ArmorClear;
 import me.xiaozhangup.mooncube.mobs.Spawner;
+import me.xiaozhangup.mooncube.player.ArcaneAnvil;
 import me.xiaozhangup.mooncube.player.Hey;
 import me.xiaozhangup.mooncube.player.Join;
 import me.xiaozhangup.mooncube.player.ProfileEditor;
@@ -63,7 +64,8 @@ public class MoonCube extends JavaPlugin {
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
                 new Ketboard(), new MainMenu(), new Skills(), new UniqueShop(),
-                new Warps(), new EntityControl(), new Adder(), new ItemAdders()
+                new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
+                new ArcaneAnvil()
         );
         listenerManager.register();
         //event load
@@ -220,6 +222,13 @@ public class MoonCube extends JavaPlugin {
             }
             return false;
         });
+
+        Command.register("arcaneavl", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            if (p.isOp()) p.getInventory().addItem(ArcaneAnvil.ARCANE_LAPIS_GEM_ROUGH, ArcaneAnvil.ARCANE_LAPIS_GEM_FLAWED, ArcaneAnvil.ARCANE_LAPIS_GEM_FLAWLESS, ArcaneAnvil.ARCANE_LAPIS_GEM_FINE, ArcaneAnvil.ARCANE_LAPIS_GEM_PERFECT);
+            return true;
+        });
+
         //command
 
         Board.load();
