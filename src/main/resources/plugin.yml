@@ -9,6 +9,7 @@ depend:
   - TAB
   - AureliumSkills
   - ProtocolLib
+  - ItemsAdder
 commands:
   mooncube:
     description: MoonCube Main Command
