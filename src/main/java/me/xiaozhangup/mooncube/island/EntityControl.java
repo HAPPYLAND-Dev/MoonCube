@@ -23,6 +23,7 @@ public class EntityControl implements Listener {
     public static ConcurrentHashMap<Integer, Integer> villagerCountMap = new ConcurrentHashMap<>();
 
     private static IslandManager islandManager;
+    private static final Integer amount = 20;
 
 
     public EntityControl() {
@@ -61,10 +62,10 @@ public class EntityControl implements Listener {
             int islandId = island.get().getId();
 
             int cnt = villagerCountMap.getOrDefault(islandId, 0);
-            if (cnt >= 10) {
+            if (cnt >= amount) {
                 e.setCancelled(true);
                 for (Player p : location.getNearbyPlayers(4)) {
-                    p.sendActionBar(IString.addColor("&c所在岛屿村民数量达到上限 10 &f(当前数量为 " + cnt + " )"));
+                    p.sendActionBar(IString.addColor("&c所在岛屿村民数量达到上限 " + amount + " &f(当前数量为 " + cnt + " )"));
                 }
             } else {
                 villagerCountMap.put(islandId, cnt + 1);

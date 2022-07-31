@@ -38,6 +38,19 @@ public class IBuilder {
         return itemStack;
     }
 
+    public static ItemStack buildItems(Material material, String name, Integer i, String... lores) {
+        ItemStack itemStack = new ItemStack(material, i);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(IString.addColor(name));
+        List<String> lore = new ArrayList<>();
+        for (String s : lores) {
+            lore.add(IString.addColor(s));
+        }
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
     public static ItemStack buildItem(Material material, String name, Integer i, String... lores) {
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();
