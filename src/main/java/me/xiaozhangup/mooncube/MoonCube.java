@@ -1,5 +1,7 @@
 package me.xiaozhangup.mooncube;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.island.EntityControl;
@@ -14,12 +16,7 @@ import me.xiaozhangup.mooncube.message.Board;
 import me.xiaozhangup.mooncube.mobs.Adder;
 import me.xiaozhangup.mooncube.mobs.ArmorClear;
 import me.xiaozhangup.mooncube.mobs.Spawner;
-import me.xiaozhangup.mooncube.player.ArcaneAnvil;
-import me.xiaozhangup.mooncube.player.ArcaneEnchantBook;
-import me.xiaozhangup.mooncube.player.Hey;
-import me.xiaozhangup.mooncube.player.Join;
-import me.xiaozhangup.mooncube.player.ProfileEditor;
-import me.xiaozhangup.mooncube.player.Skills;
+import me.xiaozhangup.mooncube.player.*;
 import me.xiaozhangup.mooncube.player.fastkey.Ketboard;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import me.xiaozhangup.mooncube.world.RuleManager;
@@ -39,6 +36,7 @@ public class MoonCube extends JavaPlugin {
     private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push;scanmob");
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
+    public static ProtocolManager protocolManager;
     private static Economy econ = null;
 
     public static Economy getEconomy() {
@@ -48,6 +46,7 @@ public class MoonCube extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        protocolManager = ProtocolLibrary.getProtocolManager();
 
 
         getLogger().info("MoonCube Version " + plugin.getDescription().getVersion());
@@ -251,14 +250,15 @@ public class MoonCube extends JavaPlugin {
         }, 1L, 48000L);
         Bukkit.getScheduler().runTaskTimer(this, EntityControl::scanEntity, 1L, 400L);
         //task
+
+        //protocol
     }
 
-    private boolean setupEconomy() {
+    private void setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
         if (economyProvider != null) {
             econ = economyProvider.getProvider();
         }
-        return (econ != null);
     }
 
 }
