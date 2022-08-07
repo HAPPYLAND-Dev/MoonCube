@@ -1,7 +1,5 @@
 package me.xiaozhangup.mooncube;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
 import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.island.EntityControl;
@@ -36,7 +34,6 @@ public class MoonCube extends JavaPlugin {
     private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push;scanmob");
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
-    public static ProtocolManager protocolManager;
     private static Economy econ = null;
 
     public static Economy getEconomy() {
@@ -46,7 +43,6 @@ public class MoonCube extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        protocolManager = ProtocolLibrary.getProtocolManager();
 
 
         getLogger().info("MoonCube Version " + plugin.getDescription().getVersion());
