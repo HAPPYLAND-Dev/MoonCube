@@ -17,7 +17,7 @@ public class Board {
     static List<String> messages = new ArrayList<>();
 
     public static void run() {
-        Bukkit.getScheduler().runTaskTimer(MoonCube.plugin, () -> {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(MoonCube.plugin, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.sendMessage(messages.get(INumber.getRandom(0, messages.size() - 1)));
             }
