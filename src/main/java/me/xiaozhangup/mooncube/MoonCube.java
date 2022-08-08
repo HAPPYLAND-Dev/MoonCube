@@ -11,6 +11,7 @@ import me.xiaozhangup.mooncube.menu.MainMenu;
 import me.xiaozhangup.mooncube.menu.UniqueShop;
 import me.xiaozhangup.mooncube.menu.Warps;
 import me.xiaozhangup.mooncube.message.Board;
+import me.xiaozhangup.mooncube.message.Death;
 import me.xiaozhangup.mooncube.mobs.Adder;
 import me.xiaozhangup.mooncube.mobs.ArmorClear;
 import me.xiaozhangup.mooncube.mobs.Spawner;
@@ -61,7 +62,7 @@ public class MoonCube extends JavaPlugin {
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
                 new Ketboard(), new MainMenu(), new Skills(), new UniqueShop(),
                 new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
-                new ArcaneAnvil(), new ArcaneEnchantBook()
+                new ArcaneAnvil(), new ArcaneEnchantBook(), new Death()
         );
         listenerManager.register();
         //event load
