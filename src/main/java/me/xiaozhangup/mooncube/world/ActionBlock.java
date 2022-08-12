@@ -4,7 +4,6 @@ import me.xiaozhangup.mooncube.manager.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,16 +16,15 @@ import java.util.HashMap;
 public class ActionBlock implements Listener {
 
     public static HashMap<String, String> mem = new HashMap<>();
-    public static FileConfiguration action = ConfigManager.getConfig("action");
 
     public static void add(Block block, String s) {
-        action.set(asString(block), s);
+        ConfigManager.getConfig("action").set(asString(block), s);
         mem.put(asString(block), s);
     }
 
     public static void remove(Block block) {
         if (hasAction(block)) {
-            action.set(asString(block), null);
+            ConfigManager.getConfig("action").set(asString(block), null);
             mem.remove(asString(block));
         }
     }
@@ -44,7 +42,7 @@ public class ActionBlock implements Listener {
 
     public static void load() {
         mem.clear();
-        action.getKeys(false).forEach(key -> mem.put(key, action.getString(key)));
+        ConfigManager.getConfig("action").getKeys(false).forEach(key -> mem.put(key, ConfigManager.getConfig("action").getString(key)));
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
