@@ -7,6 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -46,7 +47,7 @@ public class ActionBlock implements Listener {
         action.getKeys(false).forEach(key -> mem.put(key, action.getString(key)));
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onPlayerClickBlock(PlayerInteractEvent e) {
         if (e.getHand() != EquipmentSlot.HAND) {
             return;
@@ -58,6 +59,7 @@ public class ActionBlock implements Listener {
         }
         String date = mem.get(asString(block));
         if (date != null) {
+            e.setCancelled(true);
             Bukkit.dispatchCommand(p, date);
         }
     }
