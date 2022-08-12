@@ -12,7 +12,9 @@ public abstract class Command implements CommandExecutor {
         this.name = name;
 
         PluginCommand pluginCommand = Bukkit.getPluginCommand(name);
-        if (pluginCommand == null) throw new RuntimeException("Cannot find plugin command '" + name + "'.");
+        if (pluginCommand == null) {
+            throw new RuntimeException("Cannot find plugin command '" + name + "'.");
+        }
 
         this.command = pluginCommand;
         pluginCommand.setExecutor(this);
@@ -20,7 +22,9 @@ public abstract class Command implements CommandExecutor {
 
     public static boolean register(String name, CommandExecutor executor) {
         PluginCommand pluginCommand = Bukkit.getPluginCommand(name);
-        if (pluginCommand == null) return false;
+        if (pluginCommand == null) {
+            return false;
+        }
 
         pluginCommand.setExecutor(executor);
         return true;

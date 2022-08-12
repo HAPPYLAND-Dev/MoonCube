@@ -107,7 +107,15 @@ public class MoonCube extends JavaPlugin {
         Command.register("actionblockadd", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
             Block block = p.getTargetBlock(5);
-            ActionBlock.add(block, inside[0]);
+            StringBuilder commands = new StringBuilder(inside[0]);
+            for (String s1 : inside) {
+                if (inside[0].equals(s1)) {
+                    continue;
+                }
+                commands.append(" ").append(s1);
+            }
+            ActionBlock.add(block, commands.toString());
+            p.sendMessage("Bind: " + commands);
             return true;
         });
 
