@@ -35,5 +35,9 @@ commands:
     description: Arcane anvil
   arcanebk:
     description: Arcane book
+  actionblockadd:
+    description: Add ActionBlock
+  actionblockremove:
+    description: Remove ActionBlock
 authors:
   - xiaozhangup

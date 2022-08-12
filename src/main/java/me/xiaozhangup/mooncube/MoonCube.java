@@ -18,12 +18,14 @@ import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.*;
 import me.xiaozhangup.mooncube.player.fastkey.Ketboard;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
+import me.xiaozhangup.mooncube.world.ActionBlock;
 import me.xiaozhangup.mooncube.world.RuleManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -62,7 +64,8 @@ public class MoonCube extends JavaPlugin {
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
                 new Ketboard(), new MainMenu(), new Skills(), new UniqueShop(),
                 new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
-                new ArcaneAnvil(), new ArcaneEnchantBook(), new Death()
+                new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
+                new ActionBlock()
         );
         listenerManager.register();
         //event load
@@ -73,6 +76,7 @@ public class MoonCube extends JavaPlugin {
         ConfigManager.createFile("kit");
         ConfigManager.createFile("plan");
         ConfigManager.createFile("items");
+        ConfigManager.createFile("action");
         //file
 
 
@@ -100,13 +104,31 @@ public class MoonCube extends JavaPlugin {
             return true;
         });
 
+        Command.register("actionblockadd", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            Block block = p.getTargetBlock(5);
+            ActionBlock.add(block, inside[0]);
+            return true;
+        });
+
+        Command.register("actionblockremove", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            Block block = p.getTargetBlock(5);
+            ActionBlock.remove(block);
+            return true;
+        });
+
         Command.register("mooncube", (commandSender, command, s, inside) -> {
             if (inside.length == 0) {
                 commandSender.sendMessage(commandHelper);
                 return false;
             }
-            if (!(commandSender instanceof ConsoleCommandSender) && !(commandSender instanceof Player)) return false;
-            if (commandSender instanceof Player p && !p.isOp()) return false;
+            if (!(commandSender instanceof ConsoleCommandSender) && !(commandSender instanceof Player)) {
+                return false;
+            }
+            if (commandSender instanceof Player p && !p.isOp()) {
+                return false;
+            }
 
             try {
                 // Console and op could both execute the following commands.
@@ -118,6 +140,7 @@ public class MoonCube extends JavaPlugin {
                         Ketboard.loadKey();
                         Board.load();
                         Board.print();
+                        ActionBlock.load();
                         commandSender.sendMessage(IString.addColor("&8[DeBug] &freload!"));
                         return true;
                     }
@@ -137,7 +160,9 @@ public class MoonCube extends JavaPlugin {
                 return false;
             }
 
-            if (!(commandSender instanceof Player p)) return false;
+            if (!(commandSender instanceof Player p)) {
+                return false;
+            }
             try {
                 // Only op can execute the following commands.
                 switch (inside[0]) {
@@ -158,9 +183,12 @@ public class MoonCube extends JavaPlugin {
 
                     case "setkit" -> {
                         for (int i = 0; i < 37; i++) {
-                            if (p.getInventory().getItem(i) == null) continue;
+                            ItemStack itemStack = p.getInventory().getItem(i);
+                            if (itemStack == null) {
+                                continue;
+                            }
                             ConfigManager.writeConfig("kit", "Slot." + i, p.getInventory().getItem(i));
-                            p.sendMessage(p.getInventory().getItem(i).toString());
+                            p.sendMessage(itemStack.toString());
                         }
                         return true;
                     }
@@ -168,7 +196,9 @@ public class MoonCube extends JavaPlugin {
                     case "testkit" -> {
                         p.getInventory().clear();
                         for (int i = 0; i < 37; i++) {
-                            if (ConfigManager.getConfig("kit").getItemStack("Slot." + i) == null) continue;
+                            if (ConfigManager.getConfig("kit").getItemStack("Slot." + i) == null) {
+                                continue;
+                            }
                             p.getInventory().setItem(i, ConfigManager.getConfig("kit").getItemStack("Slot." + i));
                         }
                         return true;
@@ -198,21 +228,23 @@ public class MoonCube extends JavaPlugin {
 
         Command.register("moonitem", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
-            if (inside[0].equals("block")) {
-                if (inside[1].equals("save")) {
+            if ("block".equals(inside[0])) {
+                if ("save".equals(inside[1])) {
                     Block block = p.getTargetBlock(4);
 
-                    if (block == null) return false;
+                    if (block == null) {
+                        return false;
+                    }
                     BlockSaver.saveBlockMeta(block.getBlockData(), inside[2]);
                     return true;
                 }
             }
-            if (inside[0].equals("item")) {
-                if (inside[1].equals("save")) {
+            if ("item".equals(inside[0])) {
+                if ("save".equals(inside[1])) {
                     ItemSaver.saveItemtoFile(p.getInventory().getItemInMainHand(), inside[2]);
                     return true;
                 }
-                if (inside[1].equals("load")) {
+                if ("load".equals(inside[1])) {
                     p.getInventory().addItem(ItemSaver.loadFromFile(inside[2]));
                     return true;
                 }
@@ -222,19 +254,24 @@ public class MoonCube extends JavaPlugin {
 
         Command.register("arcaneavl", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
-            if (p.isOp()) p.getInventory().addItem(ArcaneAnvil.ARCANE_LAPIS_GEM_ROUGH, ArcaneAnvil.ARCANE_LAPIS_GEM_FLAWED, ArcaneAnvil.ARCANE_LAPIS_GEM_FLAWLESS, ArcaneAnvil.ARCANE_LAPIS_GEM_FINE, ArcaneAnvil.ARCANE_LAPIS_GEM_PERFECT);
+            if (p.isOp()) {
+                p.getInventory().addItem(ArcaneAnvil.ARCANE_LAPIS_GEM_ROUGH, ArcaneAnvil.ARCANE_LAPIS_GEM_FLAWED, ArcaneAnvil.ARCANE_LAPIS_GEM_FLAWLESS, ArcaneAnvil.ARCANE_LAPIS_GEM_FINE, ArcaneAnvil.ARCANE_LAPIS_GEM_PERFECT);
+            }
             return true;
         });
 
         Command.register("arcanebk", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
-            if (p.isOp()) p.getInventory().addItem(ArcaneEnchantBook.ARCANE_ENCHANT_BOOK);
+            if (p.isOp()) {
+                p.getInventory().addItem(ArcaneEnchantBook.ARCANE_ENCHANT_BOOK);
+            }
             return true;
         });
 
         //command
 
         Board.load();
+        ActionBlock.load();
         TABConfig.setUp();
         Ketboard.loadKey();
         Board.run();
