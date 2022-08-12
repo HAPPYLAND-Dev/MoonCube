@@ -18,13 +18,13 @@ public class ActionBlock implements Listener {
     public static HashMap<String, String> mem = new HashMap<>();
 
     public static void add(Block block, String s) {
-        ConfigManager.getConfig("action").set(asString(block), s);
+        ConfigManager.writeConfig("action", asString(block), s);
         mem.put(asString(block), s);
     }
 
     public static void remove(Block block) {
         if (hasAction(block)) {
-            ConfigManager.getConfig("action").set(asString(block), null);
+            ConfigManager.writeConfig("action", asString(block), null);
             mem.remove(asString(block));
         }
     }
