@@ -1,5 +1,7 @@
 package me.xiaozhangup.mooncube;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.island.EntityControl;
@@ -39,6 +41,7 @@ public class MoonCube extends JavaPlugin {
     public static ListenerManager listenerManager = new ListenerManager();
     private static Economy econ = null;
 
+    public static ProtocolManager protocolManager;
     public static Economy getEconomy() {
         return econ;
     }
@@ -46,7 +49,7 @@ public class MoonCube extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-
+        protocolManager = ProtocolLibrary.getProtocolManager();
 
         getLogger().info("MoonCube Version " + plugin.getDescription().getVersion());
         getLogger().info("");
