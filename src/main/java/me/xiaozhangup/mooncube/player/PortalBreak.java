@@ -4,6 +4,7 @@ import me.xiaozhangup.mooncube.gui.tools.IString;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,17 +37,22 @@ public class PortalBreak implements Listener {
         Action action = e.getAction();
         if (e.getHand() != EquipmentSlot.HAND) return;
         if (action.isLeftClick() && block != null && block.getType() == Material.END_PORTAL_FRAME) {
-            if (itemStack != null && itemStack.getType() == Material.GOLDEN_PICKAXE) {
+            if (itemStack != null) {
                 if (itemStack.getType() == Material.GOLDEN_PICKAXE) {
                     Location location = block.getLocation();
                     Block gold = location.add(0, 1, 0).getBlock();
-                    if (check(p, block) && check(p, gold)) {
-                        p.sendMessage(breakd);
-                        block.setType(Material.AIR);
-                        gold.setType(Material.AIR);
-                        location.getWorld().dropItem(location, frame);
+                    if (gold.getType() == Material.GOLD_BLOCK) {
+                        if (check(p, block) && check(p, gold)) {
+                            p.sendMessage(breakd);
+                            block.setType(Material.AIR);
+                            gold.setType(Material.AIR);
+                            p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                            location.getWorld().dropItem(location, frame);
+                        } else {
+                            p.sendMessage(deny);
+                        }
                     } else {
-                        p.sendMessage(deny);
+                        p.sendMessage(guide);
                     }
                 } else {
                     p.sendMessage(pickaxe);
