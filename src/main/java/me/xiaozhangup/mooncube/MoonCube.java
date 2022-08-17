@@ -68,7 +68,7 @@ public class MoonCube extends JavaPlugin {
                 new Ketboard(), new MainMenu(), new Skills(), new UniqueShop(),
                 new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
-                new ActionBlock()
+                new ActionBlock(), new PortalBreak()
         );
         listenerManager.register();
         //event load
