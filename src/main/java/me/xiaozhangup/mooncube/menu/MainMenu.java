@@ -51,7 +51,7 @@ public class MainMenu implements Listener {
             menu.setItem(13, IBuilder.buildItem(Material.HONEY_BOTTLE, "&x&B&C&5&1&0&0游览其他岛屿", " ", "&e左键 &8- &7查看岛屿转送点", "&e右键 &8- &7浏览全部玩家的岛屿"));
             menu.setItem(20, IBuilder.buildItem(Material.FISHING_ROD, "&x&F&9&6&8&3&A鱼的收购", " ", "&7收购你钓上来的特殊的鱼"));
             menu.setItem(21, IBuilder.buildItem(Material.OAK_SIGN, "&x&F&F&9&E&4&0服务器传送点", " ", "&7点击打开传送点菜单"));
-            menu.setItem(22, IBuilder.buildItem(Material.ENCHANTED_BOOK, "&x&7&C&4&3&B&D扩展附魔百科", " ","&e善用附魔检验台!", " ", "&7点击打开扩展附魔菜单"));
+            menu.setItem(22, IBuilder.buildItem(Material.BLUE_CANDLE, "&x&7&C&4&3&B&D扩展附魔百科", " ","&e善用附魔检验台!", " ", "&7点击打开扩展附魔菜单"));
             menu.setItem(15, IBuilder.buildItem(Material.WRITABLE_BOOK, "&x&F&F&D&9&5&A打开更新记录", " ", "&7服务器的版本记录"));
             menu.setItem(24, IBuilder.buildItem(Material.KNOWLEDGE_BOOK, "&x&6&0&A&D&5&E可能的更改", " ", "&7HAPPYLAND Dev的计划性更改"));
 
