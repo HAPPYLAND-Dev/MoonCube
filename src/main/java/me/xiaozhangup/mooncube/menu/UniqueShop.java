@@ -62,8 +62,8 @@ public class UniqueShop implements Listener {
             menu.setItem(13, iakey);
             menu.setItem(14, enchkey);
             menu.setItem(15, magickey);
-            menu.setItem(16, aoshubook);
-            menu.setItem(17, baoshi);
+            menu.setItem(21, aoshubook);
+            menu.setItem(22, baoshi);
 
             //TODO
             menu.setItem(36, IBuilder.buildItem(Material.GRAY_BANNER, "&x&7&5&7&5&7&5当前个人信息", " ", "&fUnique到期时间: " + PlaceholderAPI.setPlaceholders(p, "%luckperms_group_expiry_time_unique%")));
@@ -109,12 +109,12 @@ public class UniqueShop implements Listener {
                     Bukkit.dispatchCommand(p, "minepay buy magic wechat");
                 }
 
-                case 16 -> {
+                case 21 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy aoshu wechat");
                 }
 
-                case 17 -> {
+                case 22 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy baoshi wechat");
                 }
