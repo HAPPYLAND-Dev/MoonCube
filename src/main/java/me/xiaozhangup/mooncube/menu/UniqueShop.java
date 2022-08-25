@@ -32,6 +32,14 @@ public class UniqueShop implements Listener {
     private static final ItemStack closeItem = IBuilder.buildItem(Material.BARRIER, "&c关闭菜单");
     private static final ItemStack backItem = IBuilder.buildItem(Material.COMPASS, "&c返回主页");
 
+    private static final ItemStack aoshubook = Skull.getSkull(
+            "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmVmZTY1MDViYzg0MGFiZmQ4NjY2MjYxMDE3ZWMyMGE2ODQ2ODU2MWJjM2NmMmZhZDYzOWE0ZWM5NDc4OWZhMCJ9fX0=",
+            "&6奥术之书", "", "&f古老而被尘封的物品", "&f依稀看出它是一本附魔书", "", "&e右键 &f打开书本","", "&7必开出高级附魔" , "", "&f定价: &e8元/2个", "&e单击购买");
+
+    private static final ItemStack baoshi = Skull.getSkull(
+            "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGU5M2ViYWNiNjBiNzE3OTMzNTVmZGUwZDRiYmE0M2E5YzVlYzA5YzNmMzg4OTdjNDhjMWY4NTc1MjNhMGEyOSJ9fX0=",
+            "&x&1&E&9&0&F&F完美的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e100%", " ",
+            "&7将它拿在副手然后打开背包", "&7用附魔书按下 Shift 点击装备来附魔", "&7空的书本按下 Shift 点击已附魔的东西祛魔", "", "&f定价: &e6元/1个", "&e单击购买");
 
     public static void open(Player p) {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
@@ -54,6 +62,8 @@ public class UniqueShop implements Listener {
             menu.setItem(13, iakey);
             menu.setItem(14, enchkey);
             menu.setItem(15, magickey);
+            menu.setItem(16, aoshubook);
+            menu.setItem(17, baoshi);
 
             //TODO
             menu.setItem(36, IBuilder.buildItem(Material.GRAY_BANNER, "&x&7&5&7&5&7&5当前个人信息", " ", "&fUnique到期时间: " + PlaceholderAPI.setPlaceholders(p, "%luckperms_group_expiry_time_unique%")));
@@ -97,6 +107,16 @@ public class UniqueShop implements Listener {
                 case 15 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy magic wechat");
+                }
+
+                case 16 -> {
+                    p.closeInventory();
+                    Bukkit.dispatchCommand(p, "minepay buy aoshu wechat");
+                }
+
+                case 17 -> {
+                    p.closeInventory();
+                    Bukkit.dispatchCommand(p, "minepay buy baoshi wechat");
                 }
 
                 case 43 -> MainMenu.open(p);

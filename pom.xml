@@ -117,6 +117,13 @@
             <version>4.7.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>top.minepay</groupId>
+            <artifactId>MinePayApi</artifactId>
+            <version>1.5-RELEASE</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/MinePay-Release-2.8.4.jar</systemPath>
+        </dependency>
     </dependencies>
 
 </project>

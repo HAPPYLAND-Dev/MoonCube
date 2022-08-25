@@ -10,6 +10,7 @@ depend:
   - AureliumSkills
   - ProtocolLib
   - ItemsAdder
+  - MinePay
 commands:
   mooncube:
     description: MoonCube Main Command
