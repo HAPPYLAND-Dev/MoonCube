@@ -41,6 +41,8 @@ public class UniqueShop implements Listener {
             "&x&1&E&9&0&F&F完美的蓝宝石", "", "&f消耗一个蓝宝石和 20 级经验", "&f来进行一次手动附魔或祛魔", "", "&f成功机率: &e100%", " ",
             "&7将它拿在副手然后打开背包", "&7用附魔书按下 Shift 点击装备来附魔", "&7空的书本按下 Shift 点击已附魔的东西祛魔", "", "&f定价: &e6元/1个", "&e单击购买");
 
+    private static final ItemStack purpleboard = IBuilder.getBorder(Material.PURPLE_STAINED_GLASS_PANE);
+
     public static void open(Player p) {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
         Inventory menu = Bukkit.createInventory(new Unique(), 45, IString.addColor("主菜单 | 你好! " + p.getName() + " !"));
@@ -58,12 +60,12 @@ public class UniqueShop implements Listener {
             //, " ", "&f定价: &e24元/月" , "&e单击购买"
             menu.setItem(8, Skull.getSkull(p, "&7" + p.getName(), " ", "&e单击修改名片"));
             menu.setItem(19, uniqueSkull);
-            menu.setItem(12, flyItem);
-            menu.setItem(13, iakey);
-            menu.setItem(14, enchkey);
-            menu.setItem(15, magickey);
-            menu.setItem(21, aoshubook);
-            menu.setItem(22, baoshi);
+            menu.setItem(13, flyItem);
+            menu.setItem(14, iakey);
+            menu.setItem(15, enchkey);
+            menu.setItem(16, magickey);
+            menu.setItem(22, aoshubook);
+            menu.setItem(23, baoshi);
 
             //TODO
             menu.setItem(36, IBuilder.buildItem(Material.GRAY_BANNER, "&x&7&5&7&5&7&5当前个人信息", " ", "&fUnique到期时间: " + PlaceholderAPI.setPlaceholders(p, "%luckperms_group_expiry_time_unique%")));
@@ -71,6 +73,8 @@ public class UniqueShop implements Listener {
 
             menu.setItem(44, closeItem);
             menu.setItem(43, backItem);
+
+            fillGUI(menu, 18, 20, 28, 29, 27, 9 ,10, 11);
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
@@ -89,32 +93,32 @@ public class UniqueShop implements Listener {
                     Bukkit.dispatchCommand(p, "minepay buy Unqiue权限组 wechat");
                 }
 
-                case 12 -> {
+                case 13 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy 7天飞行 wechat");
                 }
 
-                case 13 -> {
+                case 14 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy ia wechat");
                 }
 
-                case 14 -> {
+                case 15 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy ench wechat");
                 }
 
-                case 15 -> {
+                case 16 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy magic wechat");
                 }
 
-                case 21 -> {
+                case 22 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy aoshu wechat");
                 }
 
-                case 22 -> {
+                case 23 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy baoshi wechat");
                 }
@@ -123,6 +127,12 @@ public class UniqueShop implements Listener {
 
                 case 44 -> p.closeInventory();
             }
+        }
+    }
+
+    public static void fillGUI(Inventory inventory , int... i) {
+        for (int slot : i) {
+            inventory.setItem(slot, purpleboard);
         }
     }
 }
