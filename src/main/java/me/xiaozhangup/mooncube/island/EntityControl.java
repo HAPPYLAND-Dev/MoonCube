@@ -1,5 +1,6 @@
 package me.xiaozhangup.mooncube.island;
 
+import com.destroystokyo.paper.event.entity.EntityRemoveFromWorldEvent;
 import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.database.Island;
 import com.iridium.iridiumskyblock.managers.IslandManager;
@@ -34,24 +35,6 @@ public class EntityControl implements Listener {
         }
     }
 
-    public static void scanEntity() {
-        villagerCountMap.clear();
-        for (World world : Bukkit.getWorlds()) {
-            if (world.getName().startsWith("IridiumSkyblock")) {
-                for (Entity entity : world.getEntities()) {
-                    if (entity.getType() != EntityType.VILLAGER) continue;
-                    Location location = entity.getLocation();
-                    Optional<Island> island = islandManager.getIslandViaLocation(location);
-                    if (island.isEmpty()) continue;
-                    int islandId = island.get().getId();
-
-                    int cnt = villagerCountMap.getOrDefault(islandId, 0);
-                    villagerCountMap.put(islandId, cnt + 1);
-                }
-            }
-        }
-    }
-
     @EventHandler
     public void onEntitySpawn(EntitySpawnEvent e) {
         if (e.getEntityType() != EntityType.VILLAGER) return;
@@ -75,6 +58,20 @@ public class EntityControl implements Listener {
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent e) {
+        if (e.getEntityType() != EntityType.VILLAGER) return;
+        Location location = e.getEntity().getLocation();
+        if (location.getWorld().getName().startsWith("IridiumSkyblock")) {
+            Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(location);
+            if (island.isEmpty()) return;
+            int islandId = island.get().getId();
+
+            int cnt = villagerCountMap.getOrDefault(islandId, 0);
+            if (cnt > 0) villagerCountMap.put(islandId, cnt - 1);
+        }
+    }
+
+    @EventHandler
+    public void onEntityDeath(EntityRemoveFromWorldEvent e) {
         if (e.getEntityType() != EntityType.VILLAGER) return;
         Location location = e.getEntity().getLocation();
         if (location.getWorld().getName().startsWith("IridiumSkyblock")) {

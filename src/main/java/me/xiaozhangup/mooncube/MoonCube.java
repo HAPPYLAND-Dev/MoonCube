@@ -37,7 +37,7 @@ import java.util.Calendar;
 
 public class MoonCube extends JavaPlugin {
 
-    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push;scanmob");
+    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push");
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
     private static Economy econ = null;
@@ -159,11 +159,6 @@ public class MoonCube extends JavaPlugin {
 
                     case "push" -> {
                         Board.push();
-                        return true;
-                    }
-
-                    case "scanmob" -> {
-                        EntityControl.scanEntity();
                         return true;
                     }
                 }
@@ -294,7 +289,6 @@ public class MoonCube extends JavaPlugin {
                 Spawner.dailyCoin.clear();
             }
         }, 1L, 48000L);
-        Bukkit.getScheduler().runTaskTimer(this, EntityControl::scanEntity, 1L, 400L);
         //task
 
         //protocol
