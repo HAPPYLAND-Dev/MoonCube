@@ -2,6 +2,7 @@ package me.xiaozhangup.mooncube;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import me.xiaozhangup.mooncube.chunk.AutoRemove;
 import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.island.EntityControl;
@@ -69,7 +70,8 @@ public class MoonCube extends JavaPlugin {
                 new Ketboard(), new MainMenu(), new Skills(), new UniqueShop(),
                 new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
-                new ActionBlock(), new PortalBreak(), new PayEvent()
+                new ActionBlock(), new PortalBreak(), new PayEvent(),
+                new AutoRemove()
         );
         listenerManager.register();
         //event load
