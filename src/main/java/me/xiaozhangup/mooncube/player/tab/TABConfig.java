@@ -110,7 +110,7 @@ public class TABConfig implements Listener {
 
     public static void setUp() {
         int[] ibossbarSlot = {1, 2, 3, 4, 5, 6, 7};
-        int[] iboardSlot = {24, 25, 33, 34, 42, 43};
+        int[] iboardSlot = {25, 26, 34, 35, 43, 44};
         for (Integer bossbar : ibossbarSlot) {
             bossbarSlot.add(bossbar);
         }
