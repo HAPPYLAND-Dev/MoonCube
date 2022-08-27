@@ -19,12 +19,26 @@ import org.bukkit.inventory.ItemStack;
 
 public class UniqueShop implements Listener {
 
-    private static final ItemStack uniqueSkull = Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU4ZjE5ZGVmMzMwODVkYjU2NDkwOWZjOGMxYjJlYWJjMGViYzU5Y2Q4OTY2NWYzMWU1ODBmMWZjMjQ5N2I1OCJ9fX0=", "&x&A&E&5&2&D&4Unqiue 权限组", " ", "&f享有诸多特权,助理游戏进度", "&7特权列表:", "&e专属称号 &8[&9Unqiue&8]", "&e签到奖励翻倍", "&e无限飞行", "&f/ec - 快速打开末影背包", "&f/wb - 快速打开工作台", "&f/anvil - 快速打开铁砧", "&f/top - 快速登顶", "&f/jump - 快速传送", "&f/heal - 快速恢复", "&7头颅库免费使用", " ", "&f定价: &e24元/月", "&e单击购买");
+    private static final ItemStack uniqueSkull = Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU4ZjE5ZGVmMzMwODVkYjU2NDkwOWZjOGMxYjJlYWJjMGViYzU5Y2Q4OTY2NWYzMWU1ODBmMWZjMjQ5N2I1OCJ9fX0=",
+            "&x&A&E&5&2&D&4Unqiue 权限组",
+            "&7畅享 HAPPYLAND 提供的游戏内容",
+            " ",
+            "&f特权列表:",
+            "&e专属称号 &8[&9Unqiue&8]",
+            "&e更丰富的签到奖励 无限飞行",
+            "&6放置更多的精灵,农场",
+            "&6存储多达16只宠物",
+            "&f/ec - 快速打开末影箱",
+            "&f/wb - 快速打开工作台",
+            "&f/anvil - 快速打开铁砧",
+            "&f/top - 快速登顶",
+            "&f/jump - 快速传送",
+            "&f/heal - 快速恢复健康",
+            "&7头颅库免费使用",
+            " ",
+            "&f定价: &e24元/月",
+            "&e单击购买");
     private static final ItemStack flyItem = IBuilder.buildItem(Material.FEATHER, "&f无限飞行", " ", "&7在服务器内无限飞行", "&e在相同的一个月内,你可以购买Unique以更便宜的价格", "&e在获取飞行的同时享受其他更多权益!", " ", "&f定价: &e7元/周", "&e单击购买");
-    //    private static final ItemStack slimefunUnlockAllItem = IBuilder.buildItem(Material.ENCHANTED_BOOK, "&x&D&0&5&C&E&3粘液科技物品全解锁", " ", "&7解锁粘液科技所有物品", " ", "&f定价: &e27元", "&e单击购买");
-//    private static final ItemStack gener = Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2Y5ZjM1NmY1ZmU3ZDFiYzkyY2RkZmFlYmEzZWU3NzNhYzlkZjFjYzRkMWMyZjhmZTVmNDcwMTMwMzJjNTUxZCJ9fX0=", "&6无尽发电机&r", " ", "&r当接收到红石信号时工作", "", "&5创造发电机", "&8⇨ &e⚡ &7发电效率由接收到的红石信号强度决定", "&7*一个就够带动极多机器", "&7*并且没有任何消耗! (3800J/s)", " ", "&f定价: &e32元/个", "&e单击购买");
-//    private static final ItemStack infgener = IBuilder.buildItem(Material.LIGHT_BLUE_GLAZED_TERRACOTTA, "&b无尽发电机", " ", "&7利用宇宙能量发电", " ", "&8⇨ &e⚡ &76000000 J 可储存", "&8⇨ &e⚡ &76000 J/s", " ", "&f定价: &e72元/个", "&e单击购买");
-
     private static final ItemStack iakey = IBuilder.buildItems(Material.TRIPWIRE_HOOK, "&5&l附魔书抽奖箱钥匙&r", 4, " ", "&f定价: &e32元/4个", "&e单击购买");
     private static final ItemStack enchkey = IBuilder.buildItems(Material.TRIPWIRE_HOOK, "&3&l饰品箱子钥匙&r", 4, " ", "&f定价: &e12元/4个", "&e单击购买");
     private static final ItemStack magickey = IBuilder.buildItems(Material.TRIPWIRE_HOOK, "&f&l神奇抽奖箱钥匙&r", 6, " ", "&f定价: &e12元/6个", "&e单击购买");
