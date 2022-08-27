@@ -8,12 +8,14 @@ import me.xiaozhangup.mooncube.gui.TabC;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.menu.MainMenu;
+import me.xiaozhangup.mooncube.player.Respawn;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -26,6 +28,8 @@ public class TABConfig implements Listener {
 
     public static List<Integer> bossbarSlot = new ArrayList<>();
     public static List<Integer> boardSlot = new ArrayList<>();
+
+    public static ItemStack respawn = IBuilder.buildItem(Material.RED_BED, "&x&9&5&a&5&a&6重生点设置", " ", "&e左键 &8- &7设置重生点到脚下位置", "&e右键 &8- &7恢复重生点到默认设置");
 
     public static void openTAB(Player p) {
         Inventory tab = Bukkit.createInventory(new TabC(), 45, IString.addColor("游戏页面控件置"));
@@ -93,6 +97,7 @@ public class TABConfig implements Listener {
         }
 
         tab.setItem(36, IBuilder.buildItem(Material.COMPASS, "&c返回主页"));
+        tab.setItem(37, respawn);
 
         p.openInventory(tab);
     }
@@ -105,7 +110,7 @@ public class TABConfig implements Listener {
 
     public static void setUp() {
         int[] ibossbarSlot = {1, 2, 3, 4, 5, 6, 7};
-        int[] iboardSlot = {25, 26, 34, 35, 43, 44};
+        int[] iboardSlot = {24, 25, 33, 34, 42, 43};
         for (Integer bossbar : ibossbarSlot) {
             bossbarSlot.add(bossbar);
         }
@@ -132,8 +137,7 @@ public class TABConfig implements Listener {
                     scoreboardManager.setScoreboardVisible(tabPlayer, true, false);
                     openTAB(p);
                 }
-            }
-            if (bossbarSlot.contains(e.getRawSlot())) {
+            } else if (bossbarSlot.contains(e.getRawSlot())) {
                 p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
                 if (bossBarManager.hasBossBarVisible(tabPlayer)) {
                     bossBarManager.setBossBarVisible(tabPlayer, false, false);
@@ -142,9 +146,18 @@ public class TABConfig implements Listener {
                     bossBarManager.setBossBarVisible(tabPlayer, true, false);
                     openTAB(p);
                 }
-            }
-            if (e.getRawSlot() == 36) {
+            } else if (e.getRawSlot() == 36) {
                 MainMenu.open(p);
+            } else if (e.getRawSlot() == 37) {
+                if (e.getClick() == ClickType.LEFT) {
+                    p.closeInventory();
+                    Respawn.setLocation(p);
+                    p.sendMessage(IString.addColor("&8[&x&9&5&a&5&a&6重生&8] &7已将重生点设置到你当前的位置"));
+                } else if (e.getClick() == ClickType.RIGHT) {
+                    p.closeInventory();
+                    Respawn.removeLocation(p);
+                    p.sendMessage(IString.addColor("&8[&x&9&5&a&5&a&6重生&8] &c已取消你的重生点设置"));
+                }
             }
         }
     }

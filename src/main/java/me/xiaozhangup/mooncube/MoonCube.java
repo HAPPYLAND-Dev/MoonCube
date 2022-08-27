@@ -71,7 +71,7 @@ public class MoonCube extends JavaPlugin {
                 new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
                 new ActionBlock(), new PortalBreak(), new PayEvent(),
-                new AutoRemove()
+                new AutoRemove(), new Respawn()
         );
         listenerManager.register();
         //event load
@@ -83,6 +83,7 @@ public class MoonCube extends JavaPlugin {
         ConfigManager.createFile("plan");
         ConfigManager.createFile("items");
         ConfigManager.createFile("action");
+        ConfigManager.createFile("playerdate");
         //file
 
 

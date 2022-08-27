@@ -38,7 +38,7 @@ public class MainMenu implements Listener {
 
             //TODO
             menu.setItem(8, Skull.getSkull(p, "&7" + p.getName(), " ", "&e单击修改名片"));
-            menu.setItem(36, IBuilder.buildItem(Material.BOOK, "&x&7&B&5&E&5&7编辑界面控件", " ", "&7开启或关闭计分板和BossBar"));
+            menu.setItem(36, IBuilder.buildItem(Material.BOOK, "&x&7&B&5&E&5&7游戏设置", " ", "&7调整你的界面或者是其他功能"));
             menu.setItem(37, IBuilder.buildItem(Material.WATER_BUCKET, "&x&6&3&C&C&F&F切换岛屿生物群系", " ", "&7切换岛屿的群系"));
             menu.setItem(38, IBuilder.buildItem(Material.COD, "&x&4&F&B&3&B&F开启或关闭特殊钓鱼", " ", "&7如果你需要回到原版的钓鱼", "&7调整它即可"));
             menu.setItem(39, IBuilder.buildItem(Material.CHEST_MINECART, "&x&F&F&9&D&3&F打开岛屿商店", " ", "&7服务器交易物品的地方"));
