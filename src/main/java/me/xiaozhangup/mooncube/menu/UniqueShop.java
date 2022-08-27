@@ -28,6 +28,7 @@ public class UniqueShop implements Listener {
             "&e更丰富的签到奖励 无限飞行",
             "&6放置更多的精灵,农场",
             "&6存储多达16只宠物",
+            "&6肆意修改自己的前缀",
             "&f/ec - 快速打开末影箱",
             "&f/wb - 快速打开工作台",
             "&f/anvil - 快速打开铁砧",
@@ -45,10 +46,11 @@ public class UniqueShop implements Listener {
     private static final ItemStack contactItem = IBuilder.buildItem(Material.DARK_OAK_SIGN, "&x&C&6&8&4&0&0出现问题请联系QQ: &73296517911");
     private static final ItemStack closeItem = IBuilder.buildItem(Material.BARRIER, "&c关闭菜单");
     private static final ItemStack backItem = IBuilder.buildItem(Material.COMPASS, "&c返回主页");
+    private static final ItemStack tagset = IBuilder.buildItem(Material.NAME_TAG, "&x&f&7&d&7&9&4前缀修改权限", " ", "&7购买一次,终生有效", "&7你可以无限次修改前缀", " ", "&f定价: &e6元/永久", "&e单击购买" );
 
     private static final ItemStack aoshubook = Skull.getSkull(
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmVmZTY1MDViYzg0MGFiZmQ4NjY2MjYxMDE3ZWMyMGE2ODQ2ODU2MWJjM2NmMmZhZDYzOWE0ZWM5NDc4OWZhMCJ9fX0=",
-            "&6奥术之书", "", "&f古老而被尘封的物品", "&f依稀看出它是一本附魔书", "", "&e右键 &f打开书本","", "&7必开出高级附魔" , "", "&f定价: &e8元/2个", "&e单击购买");
+            "&6奥术之书", "", "&f古老而被尘封的物品", "&f依稀看出它是一本附魔书", "", "&e右键 &f打开书本","", "&7必开出高级附魔" , " ", "&f定价: &e8元/2个", "&e单击购买");
 
     private static final ItemStack baoshi = Skull.getSkull(
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGU5M2ViYWNiNjBiNzE3OTMzNTVmZGUwZDRiYmE0M2E5YzVlYzA5YzNmMzg4OTdjNDhjMWY4NTc1MjNhMGEyOSJ9fX0=",
@@ -80,6 +82,7 @@ public class UniqueShop implements Listener {
             menu.setItem(16, magickey);
             menu.setItem(22, aoshubook);
             menu.setItem(23, baoshi);
+            menu.setItem(24, tagset);
 
             //TODO
             menu.setItem(36, IBuilder.buildItem(Material.GRAY_BANNER, "&x&7&5&7&5&7&5当前个人信息", " ", "&fUnique到期时间: " + PlaceholderAPI.setPlaceholders(p, "%luckperms_group_expiry_time_unique%")));
@@ -135,6 +138,11 @@ public class UniqueShop implements Listener {
                 case 23 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy baoshi wechat");
+                }
+
+                case 24 -> {
+                    p.closeInventory();
+                    Bukkit.dispatchCommand(p, "minepay buy tagset wechat");
                 }
 
                 case 43 -> MainMenu.open(p);

@@ -11,6 +11,7 @@ import me.xiaozhangup.mooncube.item.ItemSaver;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.manager.ListenerManager;
 import me.xiaozhangup.mooncube.menu.MainMenu;
+import me.xiaozhangup.mooncube.menu.NameTag;
 import me.xiaozhangup.mooncube.menu.UniqueShop;
 import me.xiaozhangup.mooncube.menu.Warps;
 import me.xiaozhangup.mooncube.message.Board;
@@ -71,7 +72,7 @@ public class MoonCube extends JavaPlugin {
                 new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
                 new ActionBlock(), new PortalBreak(), new PayEvent(),
-                new AutoRemove(), new Respawn()
+                new AutoRemove(), new Respawn(), new NameTag()
         );
         listenerManager.register();
         //event load

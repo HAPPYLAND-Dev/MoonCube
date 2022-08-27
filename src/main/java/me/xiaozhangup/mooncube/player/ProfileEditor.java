@@ -7,6 +7,7 @@ import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.menu.MainMenu;
+import me.xiaozhangup.mooncube.menu.NameTag;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -29,6 +30,8 @@ import java.util.List;
 public class ProfileEditor implements Listener {
 
     HashMap<Player, Boolean> input = new HashMap<>();
+
+    private static ItemStack tagset = IBuilder.buildItem(Material.SADDLE, "&x&f&7&d&7&9&4修改名称前缀");
 
     public static void openProfile(Player p) {
         Inventory profile = Bukkit.createInventory(new Emo(), 45, IString.addColor("编辑你的个人资料"));
@@ -84,7 +87,7 @@ public class ProfileEditor implements Listener {
             emoMeta.setLore(lore);
             dailyemo.setItemMeta(emoMeta);
             profile.setItem(34, dailyemo);
-
+            profile.setItem(25, tagset);
             profile.setItem(16, sign);
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(profile));
@@ -148,6 +151,7 @@ public class ProfileEditor implements Listener {
 
                         case 43 -> MainMenu.open(p);
                         case 44 -> p.closeInventory();
+                        case 25 -> NameTag.open(p);
                     }
                 });
             }
