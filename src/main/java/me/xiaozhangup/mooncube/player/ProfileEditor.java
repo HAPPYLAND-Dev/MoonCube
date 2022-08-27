@@ -151,7 +151,7 @@ public class ProfileEditor implements Listener {
 
                         case 43 -> MainMenu.open(p);
                         case 44 -> p.closeInventory();
-                        case 25 -> NameTag.open(p);
+                        case 25 -> Bukkit.getScheduler().runTask(MoonCube.plugin, () -> NameTag.open(p));
                     }
                 });
             }

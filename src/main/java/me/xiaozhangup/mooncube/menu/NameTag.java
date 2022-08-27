@@ -1,6 +1,7 @@
 package me.xiaozhangup.mooncube.menu;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.TagMenu;
 import me.xiaozhangup.mooncube.gui.WarpHolder;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
@@ -12,8 +13,10 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -59,11 +62,15 @@ public class NameTag implements Listener {
 
     @EventHandler
     public void onPlayerClick(InventoryClickEvent e) {
-        if (e.getWhoClicked() instanceof Player p && e.getInventory().getHolder() instanceof WarpHolder) {
+        if (e.getWhoClicked() instanceof Player p && e.getInventory().getHolder() instanceof TagMenu) {
             e.setCancelled(true);
             switch (e.getRawSlot()) {
 
-                case 24 -> TagChangePack.clearAll(p);
+                case 24 -> {
+                    TagChangePack.clearAll(p);
+                    p.closeInventory();
+                    p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &e你成功清除了你的称号"));
+                }
                 case 22 -> {
                     p.closeInventory();
                     p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &e请在聊天框中输入你想要的称号,支持颜色代码! &7(字符不可超过6个)"));
@@ -77,20 +84,21 @@ public class NameTag implements Listener {
     }
 
     @EventHandler
-    public void onPlayerChat(PlayerChatEvent e) {
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
         String inputtext = e.getMessage();
-        if (input.contains(p)) {
-            e.setCancelled(true);
-            input.remove(p);
-            if (inputtext.length() > 6) {
-                p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &c你提供的文本过长了!"));
-                return;
+            if (input.contains(p)) {
+                e.setCancelled(true);
+                input.remove(p);
+                if (inputtext.length() > 6) {
+                    p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &c你提供的文本过长了!&7 (你输入的数量" + inputtext.length() + ")"));
+                    p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &7输入字符串: &r" + inputtext));
+                    return;
+                }
+                TagChangePack.clearAll(p);
+                TagChangePack.setPerfix(p, inputtext);
+                p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &f已经成功设置了你的称号&r " + inputtext + " &f!"));
             }
-            TagChangePack.setPerfix(p, inputtext);
-            p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &f已经成功设置了你的称号!"));
-            open(p);
-        }
     }
 
 }
