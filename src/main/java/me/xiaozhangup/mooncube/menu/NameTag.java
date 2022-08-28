@@ -95,6 +95,10 @@ public class NameTag implements Listener {
                     p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &7输入字符串: &r" + inputtext));
                     return;
                 }
+                if (inputtext.equals("Dev")) {
+                    p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &c你的称号含有非法字符!"));
+                    return;
+                }
                 TagChangePack.clearAll(p);
                 TagChangePack.setPerfix(p, inputtext);
                 p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &f已经成功设置了你的称号&r " + inputtext + " &f!"));
