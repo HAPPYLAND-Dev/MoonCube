@@ -1,5 +1,6 @@
 package me.xiaozhangup.mooncube.menu;
 
+import me.xiaozhangup.mooncube.ItemAdders;
 import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.HomeMenu;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
@@ -52,8 +53,8 @@ public class MainMenu implements Listener {
             menu.setItem(20, IBuilder.buildItem(Material.FISHING_ROD, "&x&F&9&6&8&3&A鱼的收购", " ", "&7收购你钓上来的特殊的鱼"));
             menu.setItem(21, IBuilder.buildItem(Material.OAK_SIGN, "&x&F&F&9&E&4&0服务器传送点", " ", "&7点击打开传送点菜单"));
             menu.setItem(22, IBuilder.buildItem(Material.PURPLE_CANDLE, "&x&7&C&4&3&B&D扩展附魔百科", " ","&e善用附魔检验台!", " ", "&7点击打开扩展附魔菜单"));
-            menu.setItem(15, IBuilder.buildItem(Material.WRITABLE_BOOK, "&x&F&F&D&9&5&A打开更新记录", " ", "&7服务器的版本记录"));
-            menu.setItem(24, IBuilder.buildItem(Material.KNOWLEDGE_BOOK, "&x&6&0&A&D&5&E可能的更改", " ", "&7HAPPYLAND Dev的计划性更改"));
+            menu.setItem(15, IBuilder.buildItem(Material.WRITABLE_BOOK, "&x&F&F&D&9&5&A服务器公告", " ", "&e左键 &8- &7服务器的版本记录", "&e右键 &8- &7HAPPYLAND Dev的计划性更改"));
+            menu.setItem(24, IBuilder.buildItem(Material.KNOWLEDGE_BOOK, "&x&6&0&A&D&5&E获取指导书", " ", "&7获得如下两本指导书:", "&a额外物品 &7合成书", "&2科技线 &7指导书"));
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
@@ -90,26 +91,30 @@ public class MainMenu implements Listener {
                 case 21 -> Warps.open(p);
                 case 22 -> Bukkit.dispatchCommand(p, "nereusopus menu");
                 case 15 -> {
-                    p.closeInventory();
-                    String book = ConfigManager.getConfig("book").getString("book");
-                    ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
-                    BookMeta bookMeta = (BookMeta) itemStack.getItemMeta();
-                    bookMeta.setAuthor("HAPPYLAND Studio");
-                    bookMeta.setTitle("Server Message");
-                    bookMeta.addPage(IString.addColor(book));
-                    itemStack.setItemMeta(bookMeta);
-                    p.openBook(itemStack);
+                    if (e.getClick() == ClickType.LEFT) {
+                        p.closeInventory();
+                        String book = ConfigManager.getConfig("book").getString("book");
+                        ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
+                        BookMeta bookMeta = (BookMeta) itemStack.getItemMeta();
+                        bookMeta.setAuthor("HAPPYLAND Studio");
+                        bookMeta.setTitle("Server Message");
+                        bookMeta.addPage(IString.addColor(book));
+                        itemStack.setItemMeta(bookMeta);
+                        p.openBook(itemStack);
+                    } else if (e.getClick() == ClickType.RIGHT) {
+                        p.closeInventory();
+                        String book = ConfigManager.getConfig("plan").getString("book");
+                        ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
+                        BookMeta bookMeta = (BookMeta) itemStack.getItemMeta();
+                        bookMeta.setAuthor("HAPPYLAND Studio");
+                        bookMeta.setTitle("Server Message");
+                        bookMeta.addPage(IString.addColor(book));
+                        itemStack.setItemMeta(bookMeta);
+                        p.openBook(itemStack);
+                    }
                 }
                 case 24 -> {
-                    p.closeInventory();
-                    String book = ConfigManager.getConfig("plan").getString("book");
-                    ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
-                    BookMeta bookMeta = (BookMeta) itemStack.getItemMeta();
-                    bookMeta.setAuthor("HAPPYLAND Studio");
-                    bookMeta.setTitle("Server Message");
-                    bookMeta.addPage(IString.addColor(book));
-                    itemStack.setItemMeta(bookMeta);
-                    p.openBook(itemStack);
+                    p.getInventory().addItem(ItemAdders.iabook, ItemAdders.novabook);
                 }
 
                 case 43 -> UniqueShop.open(p);
