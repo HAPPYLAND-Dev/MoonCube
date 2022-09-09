@@ -55,6 +55,10 @@
             <id>dmulloy2-repo</id>
             <url>https://repo.dmulloy2.net/repository/public/</url>
         </repository>
+        <repository>
+            <id>xenondevs</id>
+            <url>https://repo.xenondevs.xyz/releases</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -123,6 +127,12 @@
             <version>1.5-RELEASE</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/MinePay-Release-2.8.4.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>xyz.xenondevs.nova</groupId>
+            <artifactId>Nova-API</artifactId>
+            <version>0.10</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

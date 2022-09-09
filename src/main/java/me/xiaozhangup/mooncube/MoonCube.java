@@ -6,6 +6,7 @@ import me.xiaozhangup.mooncube.chunk.AutoRemove;
 import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.island.EntityControl;
+import me.xiaozhangup.mooncube.island.NovaHook;
 import me.xiaozhangup.mooncube.item.BlockSaver;
 import me.xiaozhangup.mooncube.item.ItemSaver;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
@@ -34,6 +35,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import xyz.xenondevs.nova.api.Nova;
 
 import java.util.Calendar;
 
@@ -42,6 +44,8 @@ public class MoonCube extends JavaPlugin {
     private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push");
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
+    Nova nova = Nova.getNova();
+
     private static Economy econ = null;
 
     public static ProtocolManager protocolManager;
@@ -286,6 +290,7 @@ public class MoonCube extends JavaPlugin {
         TABConfig.setUp();
         Ketboard.loadKey();
         Board.run();
+        nova.registerProtectionIntegration(new NovaHook());
         //misc
 
         Bukkit.getScheduler().runTaskTimer(this, () -> {
