@@ -5,6 +5,8 @@ import com.comphenix.protocol.ProtocolManager;
 import me.xiaozhangup.mooncube.chunk.AutoRemove;
 import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.guide.ABook;
+import me.xiaozhangup.mooncube.guide.TreePicker;
 import me.xiaozhangup.mooncube.island.EntityControl;
 import me.xiaozhangup.mooncube.island.NovaHook;
 import me.xiaozhangup.mooncube.item.BlockSaver;
@@ -41,10 +43,9 @@ import java.util.Calendar;
 
 public class MoonCube extends JavaPlugin {
 
-    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push");
+    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push;getallbook");
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
-    Nova nova = Nova.getNova();
 
     private static Economy econ = null;
 
@@ -56,6 +57,7 @@ public class MoonCube extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        Nova nova = Nova.getNova();
         protocolManager = ProtocolLibrary.getProtocolManager();
 
         getLogger().info("MoonCube Version " + plugin.getDescription().getVersion());
@@ -76,7 +78,8 @@ public class MoonCube extends JavaPlugin {
                 new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
                 new ActionBlock(), new PortalBreak(), new PayEvent(),
-                new AutoRemove(), new Respawn(), new NameTag()
+                new AutoRemove(), new Respawn(), new NameTag(),
+                new TreePicker()
         );
         listenerManager.register();
         //event load
@@ -89,6 +92,7 @@ public class MoonCube extends JavaPlugin {
         ConfigManager.createFile("items");
         ConfigManager.createFile("action");
         ConfigManager.createFile("playerdate");
+        ConfigManager.createFile("guide");
         //file
 
 
@@ -110,11 +114,17 @@ public class MoonCube extends JavaPlugin {
             return true;
         });
 
-        Command.register("holoclear", (commandSender, command, s, inside) -> {
+        Command.register("treepicker", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
-            ArmorClear.clear(p);
+            TreePicker.open(p);
             return true;
         });
+
+//        Command.register("holoclear", (commandSender, command, s, inside) -> {
+//            Player p = (Player) commandSender;
+//            ArmorClear.clear(p);
+//            return true;
+//        });
 
         Command.register("actionblockadd", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
@@ -161,6 +171,7 @@ public class MoonCube extends JavaPlugin {
                         Board.load();
                         Board.print();
                         ActionBlock.load();
+                        ABook.freshGuide();
                         commandSender.sendMessage(IString.addColor("&8[DeBug] &freload!"));
                         return true;
                     }
@@ -217,6 +228,10 @@ public class MoonCube extends JavaPlugin {
                             p.getInventory().setItem(i, ConfigManager.getConfig("kit").getItemStack("Slot." + i));
                         }
                         return true;
+                    }
+
+                    case "getallbook" -> {
+                        p.getInventory().addItem(TreePicker.book, ItemAdders.novabook, ItemAdders.iabook);
                     }
                 }
 
@@ -290,6 +305,7 @@ public class MoonCube extends JavaPlugin {
         TABConfig.setUp();
         Ketboard.loadKey();
         Board.run();
+        ABook.freshGuide();
         nova.registerProtectionIntegration(new NovaHook());
         //misc
 

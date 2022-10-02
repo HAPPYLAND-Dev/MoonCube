@@ -41,5 +41,7 @@ commands:
     description: Add ActionBlock
   actionblockremove:
     description: Remove ActionBlock
+  treepicker:
+    description: Open PickTree GUI
 authors:
   - xiaozhangup

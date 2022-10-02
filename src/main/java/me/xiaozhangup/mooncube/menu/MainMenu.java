@@ -6,6 +6,8 @@ import me.xiaozhangup.mooncube.gui.HomeMenu;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
+import me.xiaozhangup.mooncube.guide.ABook;
+import me.xiaozhangup.mooncube.guide.TreePicker;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.player.ProfileEditor;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
@@ -54,7 +56,7 @@ public class MainMenu implements Listener {
             menu.setItem(21, IBuilder.buildItem(Material.OAK_SIGN, "&x&F&F&9&E&4&0服务器传送点", " ", "&7点击打开传送点菜单"));
             menu.setItem(22, IBuilder.buildItem(Material.PURPLE_CANDLE, "&x&7&C&4&3&B&D扩展附魔百科", " ","&e善用附魔检验台!", " ", "&7点击打开扩展附魔菜单"));
             menu.setItem(15, IBuilder.buildItem(Material.WRITABLE_BOOK, "&x&F&F&D&9&5&A服务器公告", " ", "&e左键 &8- &7服务器的版本记录", "&e右键 &8- &7HAPPYLAND Dev的计划性更改"));
-            menu.setItem(24, IBuilder.buildItem(Material.KNOWLEDGE_BOOK, "&x&6&0&A&D&5&E获取指导书", " ", "&7获得如下两本指导书:", "&a额外物品 &7合成书", "&2科技线 &7指导书"));
+            menu.setItem(24, IBuilder.buildItem(Material.KNOWLEDGE_BOOK, "&x&6&0&A&D&5&E获取指导书", " ", "&7获得如下三本指导书:", "&a额外物品 &7合成书", "&2科技线 &7指导书", "&f引导之书"));
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
@@ -114,7 +116,7 @@ public class MainMenu implements Listener {
                     }
                 }
                 case 24 -> {
-                    p.getInventory().addItem(ItemAdders.iabook, ItemAdders.novabook);
+                    p.getInventory().addItem(ItemAdders.iabook, ItemAdders.novabook, TreePicker.book);
                 }
 
                 case 43 -> UniqueShop.open(p);

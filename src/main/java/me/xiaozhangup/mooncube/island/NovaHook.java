@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.xenondevs.nova.api.protection.ProtectionIntegration;
+import xyz.xenondevs.nova.api.tileentity.TileEntity;
 
 import java.util.Optional;
 
@@ -46,6 +47,42 @@ public class NovaHook implements ProtectionIntegration {
     @Override
     public boolean canUseItem(@NotNull OfflinePlayer offlinePlayer, @NotNull ItemStack itemStack, @NotNull Location location) {
         return checkIridiumSkyblockPlayer(offlinePlayer, location, PermissionType.INTERACT);
+    }
+
+    @NotNull
+    @Override
+    public ExecutionMode getExecutionMode() {
+        return ExecutionMode.NONE;
+    }
+
+    @Override
+    public boolean canBreak(@NotNull TileEntity tileEntity, @Nullable ItemStack itemStack, @NotNull Location location) {
+        return canBreak(tileEntity.getOwner(), itemStack, location);
+    }
+
+    @Override
+    public boolean canHurtEntity(@NotNull TileEntity tileEntity, @NotNull Entity entity, @Nullable ItemStack itemStack) {
+        return canHurtEntity(tileEntity.getOwner(), entity, itemStack);
+    }
+
+    @Override
+    public boolean canInteractWithEntity(@NotNull TileEntity tileEntity, @NotNull Entity entity, @Nullable ItemStack itemStack) {
+        return canInteractWithEntity(tileEntity.getOwner(), entity, itemStack);
+    }
+
+    @Override
+    public boolean canPlace(@NotNull TileEntity tileEntity, @NotNull ItemStack itemStack, @NotNull Location location) {
+        return canPlace(tileEntity.getOwner(), itemStack, location);
+    }
+
+    @Override
+    public boolean canUseBlock(@NotNull TileEntity tileEntity, @Nullable ItemStack itemStack, @NotNull Location location) {
+        return canUseBlock(tileEntity.getOwner(), itemStack, location);
+    }
+
+    @Override
+    public boolean canUseItem(@NotNull TileEntity tileEntity, @NotNull ItemStack itemStack, @NotNull Location location) {
+        return canUseItem(tileEntity.getOwner(), itemStack, location);
     }
 
     private boolean checkIridiumSkyblockPlayer(OfflinePlayer player, Location location,  PermissionType permissionType) {

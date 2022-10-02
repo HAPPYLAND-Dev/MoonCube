@@ -1,6 +1,7 @@
 package me.xiaozhangup.mooncube;
 
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
+import me.xiaozhangup.mooncube.guide.TreePicker;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -35,6 +36,9 @@ public class ItemAdders implements Listener {
                 if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
                     Bukkit.dispatchCommand(p, "nova items");
                 }
+            } else if (itemStack != null && itemStack.hasItemMeta() && itemStack.getItemMeta().hasCustomModelData() && itemStack.getItemMeta().getCustomModelData() == 3) {
+                e.setCancelled(true);
+                TreePicker.open(p);
             }
         }
     }

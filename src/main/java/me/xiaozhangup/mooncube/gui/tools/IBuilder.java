@@ -1,5 +1,6 @@
 package me.xiaozhangup.mooncube.gui.tools;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -42,6 +43,54 @@ public class IBuilder {
         ItemStack itemStack = new ItemStack(material, i);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(IString.addColor(name));
+        List<String> lore = new ArrayList<>();
+        for (String s : lores) {
+            lore.add(IString.addColor(s));
+        }
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    public static ItemStack buildItem(Material material, Component name, Integer i, String... lores) {
+        ItemStack itemStack = new ItemStack(material);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.displayName(name);
+        List<String> lore = new ArrayList<>();
+        for (String s : lores) {
+            lore.add(IString.addColor(s));
+        }
+        itemMeta.setLore(lore);
+        itemMeta.setCustomModelData(i);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    public static ItemStack buildItem(Material material, Component name) {
+        ItemStack itemStack = new ItemStack(material);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.displayName(name);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    public static ItemStack buildItem(Material material, Component name, String... lores) {
+        ItemStack itemStack = new ItemStack(material);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.displayName(name);
+        List<String> lore = new ArrayList<>();
+        for (String s : lores) {
+            lore.add(IString.addColor(s));
+        }
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    public static ItemStack buildItems(Material material, Component name, Integer i, String... lores) {
+        ItemStack itemStack = new ItemStack(material, i);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.displayName(name);
         List<String> lore = new ArrayList<>();
         for (String s : lores) {
             lore.add(IString.addColor(s));
