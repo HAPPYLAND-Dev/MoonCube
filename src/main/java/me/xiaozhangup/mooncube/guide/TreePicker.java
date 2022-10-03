@@ -5,7 +5,6 @@ import me.xiaozhangup.mooncube.gui.ABookHolder;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
-import me.xiaozhangup.mooncube.player.ProfileEditor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;

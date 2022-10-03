@@ -5,10 +5,7 @@ import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.database.Island;
 import com.iridium.iridiumskyblock.managers.IslandManager;
 import me.xiaozhangup.mooncube.gui.tools.IString;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,10 +18,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class EntityControl implements Listener {
 
-    public static ConcurrentHashMap<Integer, Integer> villagerCountMap = new ConcurrentHashMap<>();
-
-    private static IslandManager islandManager;
     private static final Integer amount = 20;
+    public static ConcurrentHashMap<Integer, Integer> villagerCountMap = new ConcurrentHashMap<>();
+    private static IslandManager islandManager;
 
 
     public EntityControl() {

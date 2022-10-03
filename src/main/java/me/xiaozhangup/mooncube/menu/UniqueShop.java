@@ -46,11 +46,11 @@ public class UniqueShop implements Listener {
     private static final ItemStack contactItem = IBuilder.buildItem(Material.DARK_OAK_SIGN, "&x&C&6&8&4&0&0出现问题请联系QQ: &73296517911");
     private static final ItemStack closeItem = IBuilder.buildItem(Material.BARRIER, "&c关闭菜单");
     private static final ItemStack backItem = IBuilder.buildItem(Material.COMPASS, "&c返回主页");
-    private static final ItemStack tagset = IBuilder.buildItem(Material.NAME_TAG, "&x&f&7&d&7&9&4前缀修改权限", " ", "&7购买一次,终生有效", "&7你可以无限次修改前缀", " ", "&f定价: &e6元/永久", "&e单击购买" );
+    private static final ItemStack tagset = IBuilder.buildItem(Material.NAME_TAG, "&x&f&7&d&7&9&4前缀修改权限", " ", "&7购买一次,终生有效", "&7你可以无限次修改前缀", " ", "&f定价: &e6元/永久", "&e单击购买");
 
     private static final ItemStack aoshubook = Skull.getSkull(
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmVmZTY1MDViYzg0MGFiZmQ4NjY2MjYxMDE3ZWMyMGE2ODQ2ODU2MWJjM2NmMmZhZDYzOWE0ZWM5NDc4OWZhMCJ9fX0=",
-            "&6奥术之书", "", "&f古老而被尘封的物品", "&f依稀看出它是一本附魔书", "", "&e右键 &f打开书本","", "&7必开出高级附魔" , " ", "&f定价: &e8元/2个", "&e单击购买");
+            "&6奥术之书", "", "&f古老而被尘封的物品", "&f依稀看出它是一本附魔书", "", "&e右键 &f打开书本", "", "&7必开出高级附魔", " ", "&f定价: &e8元/2个", "&e单击购买");
 
     private static final ItemStack baoshi = Skull.getSkull(
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGU5M2ViYWNiNjBiNzE3OTMzNTVmZGUwZDRiYmE0M2E5YzVlYzA5YzNmMzg4OTdjNDhjMWY4NTc1MjNhMGEyOSJ9fX0=",
@@ -91,12 +91,17 @@ public class UniqueShop implements Listener {
             menu.setItem(44, closeItem);
             menu.setItem(43, backItem);
 
-            fillGUI(menu, 18, 20, 28, 29, 27, 9 ,10, 11);
+            fillGUI(menu, 18, 20, 28, 29, 27, 9, 10, 11);
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
     }
 
+    public static void fillGUI(Inventory inventory, int... i) {
+        for (int slot : i) {
+            inventory.setItem(slot, purpleboard);
+        }
+    }
 
     @EventHandler
     public void onPlayerClick(InventoryClickEvent e) {
@@ -149,12 +154,6 @@ public class UniqueShop implements Listener {
 
                 case 44 -> p.closeInventory();
             }
-        }
-    }
-
-    public static void fillGUI(Inventory inventory , int... i) {
-        for (int slot : i) {
-            inventory.setItem(slot, purpleboard);
         }
     }
 }

@@ -6,7 +6,6 @@ import me.xiaozhangup.mooncube.gui.HomeMenu;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
-import me.xiaozhangup.mooncube.guide.ABook;
 import me.xiaozhangup.mooncube.guide.TreePicker;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.player.ProfileEditor;
@@ -49,12 +48,12 @@ public class MainMenu implements Listener {
             menu.setItem(44, IBuilder.buildItem(Material.BARRIER, "&c关闭菜单"));
             menu.setItem(43, IBuilder.buildItem(Material.ENDER_CHEST, "&x&4&8&A&9&9&9赞助我们", " ", "&7服务器的运行与开发需要大笔资金", "&7您的赞助至关重要", "&c所有赞助将全部用于维护服务器"));
 
-            menu.setItem(11, IBuilder.buildItem(Material.COMMAND_BLOCK_MINECART, "&x&F&F&C&0&4&6岛屿操作", " ", "&7小众岛屿设置不太常用", "&7但也有用", " ","&e左键 &8- &7岛屿控制页", "&e右键 &8- &7小众岛屿设置"));
+            menu.setItem(11, IBuilder.buildItem(Material.COMMAND_BLOCK_MINECART, "&x&F&F&C&0&4&6岛屿操作", " ", "&7小众岛屿设置不太常用", "&7但也有用", " ", "&e左键 &8- &7岛屿控制页", "&e右键 &8- &7小众岛屿设置"));
             menu.setItem(12, IBuilder.buildItem(Material.CAT_SPAWN_EGG, "&x&C&5&6&0&0&0宠物管理", " ", "&7管理你的宠物 (/pet)", " ", "&e如何捕捉宠物?", "&e使用栓绳击杀生物", "&e便有可能将对应生物", "&e变为你的宠物"));
             menu.setItem(13, IBuilder.buildItem(Material.HONEY_BOTTLE, "&x&B&C&5&1&0&0游览其他岛屿", " ", "&e左键 &8- &7查看岛屿转送点", "&e右键 &8- &7浏览全部玩家的岛屿"));
             menu.setItem(20, IBuilder.buildItem(Material.FISHING_ROD, "&x&F&9&6&8&3&A鱼的收购", " ", "&7收购你钓上来的特殊的鱼"));
             menu.setItem(21, IBuilder.buildItem(Material.OAK_SIGN, "&x&F&F&9&E&4&0服务器传送点", " ", "&7点击打开传送点菜单"));
-            menu.setItem(22, IBuilder.buildItem(Material.PURPLE_CANDLE, "&x&7&C&4&3&B&D扩展附魔百科", " ","&e善用附魔检验台!", " ", "&7点击打开扩展附魔菜单"));
+            menu.setItem(22, IBuilder.buildItem(Material.PURPLE_CANDLE, "&x&7&C&4&3&B&D扩展附魔百科", " ", "&e善用附魔检验台!", " ", "&7点击打开扩展附魔菜单"));
             menu.setItem(15, IBuilder.buildItem(Material.WRITABLE_BOOK, "&x&F&F&D&9&5&A服务器公告", " ", "&e左键 &8- &7服务器的版本记录", "&e右键 &8- &7HAPPYLAND Dev的计划性更改"));
             menu.setItem(24, IBuilder.buildItem(Material.KNOWLEDGE_BOOK, "&x&6&0&A&D&5&E获取指导书", " ", "&7获得如下三本指导书:", "&a额外物品 &7合成书", "&2科技线 &7指导书", "&f引导之书"));
 

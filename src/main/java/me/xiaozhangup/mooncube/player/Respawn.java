@@ -14,15 +14,6 @@ public class Respawn implements Listener {
 
     public static String path = "playerdate";
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onPlayerRespawn(PlayerRespawnEvent e) {
-        Player p = e.getPlayer();
-        Location set = getSet(p);
-        if (set != null) {
-            e.setRespawnLocation(set);
-        }
-    }
-
     @Nullable
     public static Location getSet(Player p) {
         return ConfigManager.getConfig(path).getLocation(p.getUniqueId() + ".Respawn");
@@ -34,6 +25,15 @@ public class Respawn implements Listener {
 
     public static void removeLocation(Player p) {
         ConfigManager.writeConfig(path, p.getUniqueId() + ".Respawn", null);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onPlayerRespawn(PlayerRespawnEvent e) {
+        Player p = e.getPlayer();
+        Location set = getSet(p);
+        if (set != null) {
+            e.setRespawnLocation(set);
+        }
     }
 
 }

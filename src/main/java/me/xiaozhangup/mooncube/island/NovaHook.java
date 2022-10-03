@@ -85,7 +85,7 @@ public class NovaHook implements ProtectionIntegration {
         return canUseItem(tileEntity.getOwner(), itemStack, location);
     }
 
-    private boolean checkIridiumSkyblockPlayer(OfflinePlayer player, Location location,  PermissionType permissionType) {
+    private boolean checkIridiumSkyblockPlayer(OfflinePlayer player, Location location, PermissionType permissionType) {
         User user = INSTANCE.getUserManager().getUser(player);
         Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(location);
         if (island.isEmpty())

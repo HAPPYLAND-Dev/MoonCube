@@ -1,9 +1,7 @@
 package me.xiaozhangup.mooncube.menu;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.TagMenu;
-import me.xiaozhangup.mooncube.gui.WarpHolder;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
@@ -13,11 +11,9 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -87,22 +83,22 @@ public class NameTag implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
         String inputtext = e.getMessage();
-            if (input.contains(p)) {
-                e.setCancelled(true);
-                input.remove(p);
-                if (inputtext.length() > 6) {
-                    p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &c你提供的文本过长了!&7 (你输入的数量" + inputtext.length() + ")"));
-                    p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &7输入字符串: &r" + inputtext));
-                    return;
-                }
-                if (inputtext.equals("Dev")) {
-                    p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &c你的称号含有非法字符!"));
-                    return;
-                }
-                TagChangePack.clearAll(p);
-                TagChangePack.setPerfix(p, inputtext);
-                p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &f已经成功设置了你的称号&r " + inputtext + " &f!"));
+        if (input.contains(p)) {
+            e.setCancelled(true);
+            input.remove(p);
+            if (inputtext.length() > 6) {
+                p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &c你提供的文本过长了!&7 (你输入的数量" + inputtext.length() + ")"));
+                p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &7输入字符串: &r" + inputtext));
+                return;
             }
+            if (inputtext.equals("Dev")) {
+                p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &c你的称号含有非法字符!"));
+                return;
+            }
+            TagChangePack.clearAll(p);
+            TagChangePack.setPerfix(p, inputtext);
+            p.sendMessage(IString.addColor("&8[&x&f&7&d&7&9&4前缀&8] &f已经成功设置了你的称号&r " + inputtext + " &f!"));
+        }
     }
 
 }

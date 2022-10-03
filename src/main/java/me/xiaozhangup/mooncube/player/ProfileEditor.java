@@ -29,9 +29,8 @@ import java.util.List;
 
 public class ProfileEditor implements Listener {
 
-    HashMap<Player, Boolean> input = new HashMap<>();
-
     private static ItemStack tagset = IBuilder.buildItem(Material.SADDLE, "&x&f&7&d&7&9&4修改名称前缀");
+    HashMap<Player, Boolean> input = new HashMap<>();
 
     public static void openProfile(Player p) {
         Inventory profile = Bukkit.createInventory(new Emo(), 45, IString.addColor("编辑你的个人资料"));

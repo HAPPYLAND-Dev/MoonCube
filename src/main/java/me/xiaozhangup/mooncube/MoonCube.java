@@ -21,7 +21,6 @@ import me.xiaozhangup.mooncube.message.Board;
 import me.xiaozhangup.mooncube.message.Death;
 import me.xiaozhangup.mooncube.minepay.PayEvent;
 import me.xiaozhangup.mooncube.mobs.Adder;
-import me.xiaozhangup.mooncube.mobs.ArmorClear;
 import me.xiaozhangup.mooncube.mobs.Spawner;
 import me.xiaozhangup.mooncube.player.*;
 import me.xiaozhangup.mooncube.player.fastkey.Ketboard;
@@ -46,10 +45,9 @@ public class MoonCube extends JavaPlugin {
     private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push;getallbook");
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
-
+    public static ProtocolManager protocolManager;
     private static Economy econ = null;
 
-    public static ProtocolManager protocolManager;
     public static Economy getEconomy() {
         return econ;
     }

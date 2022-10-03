@@ -1,5 +1,7 @@
 package me.xiaozhangup.mooncube.player;
 
+import me.xiaozhangup.mooncube.gui.tools.INumber;
+import me.xiaozhangup.mooncube.gui.tools.Skull;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -13,9 +15,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import me.xiaozhangup.mooncube.gui.tools.INumber;
-import me.xiaozhangup.mooncube.gui.tools.Skull;
 
 public class ArcaneAnvil implements Listener {
 
@@ -74,6 +73,41 @@ public class ArcaneAnvil implements Listener {
             }
         }
         return 100;
+    }
+
+    private static Pair<Boolean, Integer> judgeCondition(Player ety, ItemStack cur,
+                                                         ItemStack cor) {
+        boolean pass = true;
+        int loseChance;
+
+        if (cur == null || cor == null)
+            return Pair.of(false, 100);
+
+        if (cur.getAmount() != 1 || cor.getAmount() != 1)
+            return Pair.of(false, 100);
+
+        Material type = cur.getType();
+        Material tp = cor.getType();
+        if (type.name().matches(".*AIR.*") || type.getMaxStackSize() != 1 || type.getMaxDurability() < 1
+                || (!tp.equals(Material.BOOK) && !tp.equals(Material.ENCHANTED_BOOK))) {
+            return Pair.of(false, 100);
+        }
+
+        if (ety.getLevel() < 20) {
+            return Pair.of(false, 100);
+        }
+
+        ItemStack off = ety.getInventory().getItemInOffHand();
+
+        loseChance = judgeItem(off);
+        if (loseChance == 100)
+            pass = false;
+
+        return Pair.of(pass, loseChance);
+    }
+
+    private static boolean chance(int percent) {
+        return INumber.getRandom(0, 100) < percent;
     }
 
     @SuppressWarnings("deprecation") // 去你妈的警告
@@ -159,41 +193,6 @@ public class ArcaneAnvil implements Listener {
                 }
             }
         }
-    }
-
-    private static Pair<Boolean, Integer> judgeCondition(Player ety, ItemStack cur,
-            ItemStack cor) {
-        boolean pass = true;
-        int loseChance;
-
-        if (cur == null || cor == null)
-            return Pair.of(false, 100);
-
-        if (cur.getAmount() != 1 || cor.getAmount() != 1)
-            return Pair.of(false, 100);
-
-        Material type = cur.getType();
-        Material tp = cor.getType();
-        if (type.name().matches(".*AIR.*") || type.getMaxStackSize() != 1 || type.getMaxDurability() < 1
-                || (!tp.equals(Material.BOOK) && !tp.equals(Material.ENCHANTED_BOOK))) {
-            return Pair.of(false, 100);
-        }
-
-        if (ety.getLevel() < 20) {
-            return Pair.of(false, 100);
-        }
-
-        ItemStack off = ety.getInventory().getItemInOffHand();
-
-        loseChance = judgeItem(off);
-        if (loseChance == 100)
-            pass = false;
-
-        return Pair.of(pass, loseChance);
-    }
-
-    private static boolean chance(int percent) {
-        return INumber.getRandom(0, 100) < percent;
     }
 
 }
