@@ -21,13 +21,6 @@
 ---
 
 [![xiaozhangup/MoonCube - GitHub](https://gh-card.dev/repos/xiaozhangup/MoonCube.svg)](https://github.com/xiaozhangup/MoonCube)
-
----
-
-## 其他注意事项
-
-### 使用交易功能需要安装 https://github.com/xiaozhangup/Trading/
-
 ---
 
 ***Thanks***
