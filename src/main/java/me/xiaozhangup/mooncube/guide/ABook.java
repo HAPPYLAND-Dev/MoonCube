@@ -8,6 +8,7 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.util.RGBLike;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -29,12 +30,17 @@ public class ABook {
         Component bookAuthor = Component.text("Guider");
 
         Book book = Book.book(bookTitle, bookAuthor,
-                Component.text(guide_node.get(node - 1) + "\n").color(TextColor.color(160,82,45)).decoration(TextDecoration.BOLD, true)
+                Component.text(guide_node.get(node - 1) + "\n \n").color(TextColor.color(160,82,45)).decoration(TextDecoration.BOLD, true)
                         .append(mm.deserialize("<black>" + content + "</black>\n \n").decoration(TextDecoration.BOLD, false))
                         .append(mm.deserialize("<dark_gray><b><click:run_command:'/treepicker'><hover:show_text:'<gray>回到上级</gray>'>返回主目录</hover></click></b></dark_gray>"))
         );
 
         p.openBook(book);
+        Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
+            List<Integer> lists = ConfigManager.getConfig("playerdate").getIntegerList(p.getUniqueId() + ".Guide");
+            lists.add(node);
+            ConfigManager.writeConfig("playerdate", p.getUniqueId() + ".Guide", lists);
+        });
     }
 
     public static void freshGuide() {

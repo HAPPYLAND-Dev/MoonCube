@@ -4,6 +4,7 @@ import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.ABookHolder;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
+import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.player.ProfileEditor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -34,7 +35,11 @@ public class TreePicker implements Listener {
             }
 
             for (int i = 18; i <= ABook.guide_node.size() + 17; i++) {
-                menu.setItem(i, IBuilder.buildItem(Material.BOOK, "&f" + ABook.guide_node.get(i - 18), "", "&e> 单击开始阅读"));
+                if (ConfigManager.getConfig("playerdate").getIntegerList(p.getUniqueId() + ".Guide").contains(i - 17)) {
+                    menu.setItem(i, IBuilder.buildItem(Material.WRITTEN_BOOK, "&f" + ABook.guide_node.get(i - 18), "", "&e> 单击开始阅读"));
+                } else {
+                    menu.setItem(i, IBuilder.buildItem(Material.BOOK, "&f" + ABook.guide_node.get(i - 18), "", "&e> 单击开始阅读"));
+                }
             }
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
