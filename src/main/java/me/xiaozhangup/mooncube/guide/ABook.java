@@ -38,6 +38,7 @@ public class ABook {
         p.openBook(book);
         Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
             List<Integer> lists = ConfigManager.getConfig("playerdate").getIntegerList(p.getUniqueId() + ".Guide");
+            if (lists.contains(node)) return;
             lists.add(node);
             ConfigManager.writeConfig("playerdate", p.getUniqueId() + ".Guide", lists);
         });
