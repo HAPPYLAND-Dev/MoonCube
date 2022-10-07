@@ -7,7 +7,6 @@ depend:
   - PlaceholderAPI
   - IridiumSkyblock
   - TAB
-  - AureliumSkills
   - ProtocolLib
   - ItemsAdder
   - MinePay

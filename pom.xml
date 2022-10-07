@@ -110,12 +110,6 @@
             <version>3.2.8</version>
         </dependency>
         <dependency>
-            <groupId>com.github.Archy-X</groupId>
-            <artifactId>AureliumSkills</artifactId>
-            <version>Beta1.3.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.github.LoneDev6</groupId>
             <artifactId>api-itemsadder</artifactId>
             <version>3.0.0</version>

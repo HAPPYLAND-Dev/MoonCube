@@ -44,7 +44,7 @@ public class MainMenu implements Listener {
             menu.setItem(37, IBuilder.buildItem(Material.WATER_BUCKET, "&x&6&3&C&C&F&F切换岛屿生物群系", " ", "&7切换岛屿的群系"));
             menu.setItem(38, IBuilder.buildItem(Material.COD, "&x&4&F&B&3&B&F开启或关闭特殊钓鱼", " ", "&7如果你需要回到原版的钓鱼", "&7调整它即可"));
             menu.setItem(39, IBuilder.buildItem(Material.CHEST_MINECART, "&x&F&F&9&D&3&F打开岛屿商店", " ", "&7服务器交易物品的地方"));
-            menu.setItem(40, IBuilder.buildItem(Material.DIAMOND_SWORD, "&x&6&A&B&7&F&F打开技能菜单", " ", "&7你的技能会在这里显示"));
+            menu.setItem(40, IBuilder.buildItem(Material.DIAMOND_SWORD, "&x&6&A&B&7&F&F技能属性点", " ", "&7在你的岛屿放置一个&e书架&7并右键", "&7即可打开你的属性菜单", "&7按下&eL&7键打开概况"));
             menu.setItem(44, IBuilder.buildItem(Material.BARRIER, "&c关闭菜单"));
             menu.setItem(43, IBuilder.buildItem(Material.ENDER_CHEST, "&x&4&8&A&9&9&9赞助我们", " ", "&7服务器的运行与开发需要大笔资金", "&7您的赞助至关重要", "&c所有赞助将全部用于维护服务器"));
 
@@ -71,7 +71,6 @@ public class MainMenu implements Listener {
                 case 37 -> Bukkit.dispatchCommand(p, "is biome");
                 case 38 -> Bukkit.dispatchCommand(p, "emf toggle");
                 case 39 -> Bukkit.dispatchCommand(p, "is shop");
-                case 40 -> Bukkit.dispatchCommand(p, "sk");
 
                 case 11 -> {
                     if (e.getClick() == ClickType.LEFT) {
