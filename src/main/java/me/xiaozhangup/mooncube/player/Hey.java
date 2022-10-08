@@ -155,12 +155,10 @@ public class Hey implements Listener {
             skillsMeta.setDisplayName(IString.addColor("&x&C&D&8&5&3&F个人技能数据"));
             List<String> slore = new ArrayList<>();
             slore.add(" ");
-            slore.add(IString.addColor("&4力量 ➽ &7: " + PlaceholderAPI.setPlaceholders(ed, "%aureliumskills_strength%")));
-            slore.add(IString.addColor("&c生命值 ❤ &7: " + PlaceholderAPI.setPlaceholders(ed, "%aureliumskills_health%")));
-            slore.add(IString.addColor("&6再生 ❥ &7: " + PlaceholderAPI.setPlaceholders(ed, "%aureliumskills_regeneration%")));
-            slore.add(IString.addColor("&2幸运 ☘ &7: " + PlaceholderAPI.setPlaceholders(ed, "%aureliumskills_luck%")));
-            slore.add(IString.addColor("&9智慧 ✿ &7: " + PlaceholderAPI.setPlaceholders(ed, "%aureliumskills_wisdom%")));
-            slore.add(IString.addColor("&5韧性 ✦ &7: " + PlaceholderAPI.setPlaceholders(ed, "%aureliumskills_toughness%")));
+            slore.add(IString.addColor("&x&A&1&8&8&7&F智慧 &7: " + PlaceholderAPI.setPlaceholders(ed, "%adapt_wisdom%")));
+            slore.add(IString.addColor("&x&B&C&A&A&A&4总技能经验值 &7: " + PlaceholderAPI.setPlaceholders(ed, "%adapt_masterxp%")));
+            slore.add(IString.addColor("&x&D&7&C&C&C&8解锁的技能数量 &7: " + PlaceholderAPI.setPlaceholders(ed, "%adapt_seenthings%")));
+            slore.add(IString.addColor("&x&E&3&F&2&F&D总技能增长倍率 &7: " + PlaceholderAPI.setPlaceholders(ed, "%adapt_multiplier%")));
             skillsMeta.setLore(slore);
             skills.setItemMeta(skillsMeta);
             profile.setItem(15, skills);
