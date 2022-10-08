@@ -42,7 +42,6 @@ public class Spawner implements Listener {
 
             double playerDailyCoin = dailyCoin.getOrDefault(uuid, 0.0);
             if (playerDailyCoin <= Config.DAILY_MAX) {
-                player.sendActionBar(IString.addColor(Config.COIN_ACTION.replace("{coin}", coin)));
                 MoonCube.getEconomy().depositPlayer(player, Double.parseDouble(coin));
                 dailyCoin.put(uuid, playerDailyCoin + Double.parseDouble(coin));
             } else {

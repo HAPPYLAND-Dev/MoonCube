@@ -77,7 +77,7 @@ public class MoonCube extends JavaPlugin {
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
                 new ActionBlock(), new PortalBreak(), new PayEvent(),
                 new AutoRemove(), new Respawn(), new NameTag(),
-                new TreePicker()
+                new TreePicker(), new EcoWatch()
         );
         listenerManager.register();
         //event load
@@ -305,6 +305,8 @@ public class MoonCube extends JavaPlugin {
         Board.run();
         ABook.freshGuide();
         nova.registerProtectionIntegration(new NovaHook());
+        EcoWatch.run();
+        new EcoWatch().register();
         //misc
 
         Bukkit.getScheduler().runTaskTimer(this, () -> {
