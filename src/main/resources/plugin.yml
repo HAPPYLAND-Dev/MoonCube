@@ -11,6 +11,7 @@ depend:
   - ItemsAdder
   - MinePay
   - Nova
+  - Essentials
 commands:
   mooncube:
     description: MoonCube Main Command

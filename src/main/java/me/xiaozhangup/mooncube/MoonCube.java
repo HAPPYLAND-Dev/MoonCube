@@ -68,7 +68,6 @@ public class MoonCube extends JavaPlugin {
         RuleManager.setAll();
         //config
 
-
         listenerManager.addListeners(
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
@@ -77,7 +76,7 @@ public class MoonCube extends JavaPlugin {
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
                 new ActionBlock(), new PortalBreak(), new PayEvent(),
                 new AutoRemove(), new Respawn(), new NameTag(),
-                new TreePicker(), new EcoWatch()
+                new TreePicker()
         );
         listenerManager.register();
         //event load
@@ -305,7 +304,6 @@ public class MoonCube extends JavaPlugin {
         Board.run();
         ABook.freshGuide();
         nova.registerProtectionIntegration(new NovaHook());
-        EcoWatch.run();
         new EcoWatch().register();
         //misc
 
