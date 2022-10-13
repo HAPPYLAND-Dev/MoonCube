@@ -304,7 +304,7 @@ public class MoonCube extends JavaPlugin {
         Board.run();
         ABook.freshGuide();
         nova.registerProtectionIntegration(new NovaHook());
-        new EcoWatch().register();
+        new Placeholder().register();
         //misc
 
         Bukkit.getScheduler().runTaskTimer(this, () -> {

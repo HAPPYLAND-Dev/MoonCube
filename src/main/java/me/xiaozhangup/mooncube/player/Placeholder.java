@@ -1,7 +1,7 @@
 package me.xiaozhangup.mooncube.player;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import me.xiaozhangup.mooncube.MoonCube;
+import me.xiaozhangup.mooncube.manager.ConfigManager;
 import net.ess3.api.events.UserBalanceUpdateEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
 
-public class EcoWatch extends PlaceholderExpansion implements Listener {
+public class Placeholder extends PlaceholderExpansion implements Listener {
 
     private static final HashMap<Player, Double> pot = new HashMap<>();
 
@@ -51,6 +51,14 @@ public class EcoWatch extends PlaceholderExpansion implements Listener {
             }
             return "";
         }
+        if ("sign".equals(identifier)) {
+            String name = p.getName();
+            if (ConfigManager.getConfig("emodata").getString(name + ".text") == null) {
+                return "&o他没有设置签名";
+            } else {
+                return ConfigManager.getConfig("emodata").getString(name + ".text");
+            }
+        }
         return "";
     }
 
@@ -64,7 +72,7 @@ public class EcoWatch extends PlaceholderExpansion implements Listener {
         Player p = e.getPlayer();
         pot.put(
                 p, pot.getOrDefault(p, 0.0) +
-                e.getNewBalance().doubleValue() - e.getOldBalance().doubleValue());
+                        e.getNewBalance().doubleValue() - e.getOldBalance().doubleValue());
     }
 
 //老旧的监测方法
