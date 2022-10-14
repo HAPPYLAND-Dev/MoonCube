@@ -43,5 +43,7 @@ commands:
     description: Remove ActionBlock
   treepicker:
     description: Open PickTree GUI
+  spawn:
+  setspawn:
 authors:
   - xiaozhangup

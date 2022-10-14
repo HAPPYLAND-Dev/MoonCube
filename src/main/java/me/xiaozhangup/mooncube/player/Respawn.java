@@ -27,12 +27,22 @@ public class Respawn implements Listener {
         ConfigManager.writeConfig(path, p.getUniqueId() + ".Respawn", null);
     }
 
+    public static void setSpawn(Player p) {
+        ConfigManager.writeConfig(path, "Spawn", p.getLocation());
+    }
+
+    public static Location getSpawn() {
+        return ConfigManager.getConfig(path).getLocation("Spawn");
+    }
+
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
         Location set = getSet(p);
         if (set != null) {
             e.setRespawnLocation(set);
+        } else {
+            e.setRespawnLocation(getSpawn());
         }
     }
 

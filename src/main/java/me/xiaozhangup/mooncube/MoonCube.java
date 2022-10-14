@@ -295,6 +295,19 @@ public class MoonCube extends JavaPlugin {
             return true;
         });
 
+        Command.register("spawn", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            p.teleport(Respawn.getSpawn());
+            return true;
+        });
+
+        Command.register("setspawn", (commandSender, command, s, inside) -> {
+            Player p = (Player) commandSender;
+            if (p.isOp()) {
+                Respawn.setSpawn(p);
+            }
+            return true;
+        });
         //command
 
         Board.load();
