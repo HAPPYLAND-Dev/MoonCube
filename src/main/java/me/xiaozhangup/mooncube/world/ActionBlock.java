@@ -1,6 +1,7 @@
 package me.xiaozhangup.mooncube.world;
 
 import me.xiaozhangup.mooncube.manager.ConfigManager;
+import me.xiaozhangup.mooncube.player.Crate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -56,9 +57,13 @@ public class ActionBlock implements Listener {
             return;
         }
         String date = mem.get(asString(block));
-        if (date != null) {
+        if (date != null && !date.startsWith(":")) {
             e.setCancelled(true);
             Bukkit.dispatchCommand(p, date);
+        } else if (date != null && date.startsWith(":")) {
+            switch (date) {
+                case ":crate" -> Crate.open(p);
+            }
         }
     }
 }

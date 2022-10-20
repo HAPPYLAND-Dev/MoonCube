@@ -13,10 +13,7 @@ import me.xiaozhangup.mooncube.item.BlockSaver;
 import me.xiaozhangup.mooncube.item.ItemSaver;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.manager.ListenerManager;
-import me.xiaozhangup.mooncube.menu.MainMenu;
-import me.xiaozhangup.mooncube.menu.NameTag;
-import me.xiaozhangup.mooncube.menu.UniqueShop;
-import me.xiaozhangup.mooncube.menu.Warps;
+import me.xiaozhangup.mooncube.menu.*;
 import me.xiaozhangup.mooncube.message.Board;
 import me.xiaozhangup.mooncube.message.Death;
 import me.xiaozhangup.mooncube.minepay.PayEvent;
@@ -42,7 +39,7 @@ import java.util.Calendar;
 
 public class MoonCube extends JavaPlugin {
 
-    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push;getallbook");
+    private static final String commandHelper = IString.addColor("&8[DeBug] &7profile;control;main;reload;setkit;testkit;push;getallbook;crate");
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
     public static ProtocolManager protocolManager;
@@ -76,7 +73,7 @@ public class MoonCube extends JavaPlugin {
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
                 new ActionBlock(), new PortalBreak(), new PayEvent(),
                 new AutoRemove(), new Respawn(), new NameTag(),
-                new TreePicker()
+                new TreePicker(), new Crate()
         );
         listenerManager.register();
         //event load
@@ -191,6 +188,11 @@ public class MoonCube extends JavaPlugin {
                 switch (inside[0]) {
                     case "profile" -> {
                         Hey.openProfile(p, p);
+                        return true;
+                    }
+
+                    case "crate" -> {
+                        Crate.open(p);
                         return true;
                     }
 
@@ -317,6 +319,7 @@ public class MoonCube extends JavaPlugin {
         Board.run();
         ABook.freshGuide();
         nova.registerProtectionIntegration(new NovaHook());
+        Crate.setup();
         new Placeholder().register();
         //misc
 
