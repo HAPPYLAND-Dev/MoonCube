@@ -61,13 +61,13 @@ public class Crate implements Listener {
     public static void start(Player p) {
         in.add(p);
         p.openInventory(cratein);
-        time = time + 30;
+        time = 30;
         Bukkit.getScheduler().runTaskLater(MoonCube.plugin, () -> {
             in.remove(p);
             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 
             p.closeInventory();
-            if (INumber.getRandom(1,16) == 2) {
+            if (INumber.getRandom(1,12) == 6) {
                 int reward = INumber.getRandom(120, 600);
                 Bukkit.broadcast(mm.deserialize("<dark_gray>[<color:#cff24e>抽金</color>]</dark_gray> <white>恭喜玩家 " + p.getName() + " 在<yellow>老虎机</yellow>中抽得了 " + reward + " 个<yellow>金币</yellow>!</white>"));
                 MoonCube.getEconomy().depositPlayer(p, reward);

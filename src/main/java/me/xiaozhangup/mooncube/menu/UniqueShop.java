@@ -28,6 +28,7 @@ public class UniqueShop implements Listener {
             "&e更丰富的签到奖励 无限飞行",
             "&6放置更多的精灵,农场",
             "&6存储多达16只宠物",
+            "&6放置无限的超级漏斗",
             "&6肆意修改自己的前缀",
             "&f/ec - 快速打开末影箱",
             "&f/wb - 快速打开工作台",
@@ -47,6 +48,8 @@ public class UniqueShop implements Listener {
     private static final ItemStack closeItem = IBuilder.buildItem(Material.BARRIER, "&c关闭菜单");
     private static final ItemStack backItem = IBuilder.buildItem(Material.COMPASS, "&c返回主页");
     private static final ItemStack tagset = IBuilder.buildItem(Material.NAME_TAG, "&x&f&7&d&7&9&4前缀修改权限", " ", "&7购买一次,终生有效", "&7你可以无限次修改前缀", " ", "&f定价: &e6元/永久", "&e单击购买");
+    private static final ItemStack cry = Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDg2MGJjOWE1NTQ2ZGQxMDliODYwZDc1NWNmYjNjYWNiYWQ4Y2FjZTcxMGYzZDIwNjE0ZDI2MDRlYmVlNmU2MyJ9fX0=", "&x&7&0&9&0&e&7一袋岛屿水晶", " ", "&f购买后您将获得 &x&7&0&9&0&e&7420岛屿水晶", "&c它们将进入你的岛屿银行", " ", "&f定价: &e6元/1个", "&e单击购买");
+    private static final ItemStack money = Skull.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzVjOWNjY2Y2MWE2ZTYyODRmZTliYmU2NDkxNTViZTRkOWNhOTZmNzhmZmNiMjc5Yjg0ZTE2MTc4ZGFjYjUyMiJ9fX0=", "&x&e&7&d&d&6&0一大袋子金币", " ","&f购买后您将获得 &x&e&7&d&d&6&070000金币", "&c它们将进入你的岛屿银行", " ", "&f定价: &e6.8元/1个", "&e单击购买");
 
     private static final ItemStack aoshubook = Skull.getSkull(
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmVmZTY1MDViYzg0MGFiZmQ4NjY2MjYxMDE3ZWMyMGE2ODQ2ODU2MWJjM2NmMmZhZDYzOWE0ZWM5NDc4OWZhMCJ9fX0=",
@@ -83,6 +86,8 @@ public class UniqueShop implements Listener {
             menu.setItem(22, aoshubook);
             menu.setItem(23, baoshi);
             menu.setItem(24, tagset);
+            menu.setItem(31, money);
+            menu.setItem(32, cry);
 
             //TODO
             menu.setItem(36, IBuilder.buildItem(Material.GRAY_BANNER, "&x&7&5&7&5&7&5当前个人信息", " ", "&fUnique到期时间: " + PlaceholderAPI.setPlaceholders(p, "%luckperms_group_expiry_time_unique%")));
@@ -148,6 +153,16 @@ public class UniqueShop implements Listener {
                 case 24 -> {
                     p.closeInventory();
                     Bukkit.dispatchCommand(p, "minepay buy tagset wechat");
+                }
+
+                case 31 -> {
+                    p.closeInventory();
+                    Bukkit.dispatchCommand(p, "minepay buy money wechat");
+                }
+
+                case 32 -> {
+                    p.closeInventory();
+                    Bukkit.dispatchCommand(p, "minepay buy cry wechat");
                 }
 
                 case 43 -> MainMenu.open(p);
