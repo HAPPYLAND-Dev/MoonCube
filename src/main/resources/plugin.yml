@@ -24,6 +24,9 @@ commands:
   tabc:
     description: Tab Settings
   menu:
+    aliases:
+      - cd
+      - mc
     description: Menu
   unique:
     description: Unique shop

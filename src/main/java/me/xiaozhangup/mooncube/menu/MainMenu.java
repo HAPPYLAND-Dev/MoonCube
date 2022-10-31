@@ -6,6 +6,7 @@ import me.xiaozhangup.mooncube.gui.HomeMenu;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.gui.tools.Skull;
+import me.xiaozhangup.mooncube.guide.ABook;
 import me.xiaozhangup.mooncube.guide.TreePicker;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.player.ProfileEditor;
@@ -24,38 +25,69 @@ import org.bukkit.inventory.meta.BookMeta;
 
 public class MainMenu implements Listener {
 
+    public static final ItemStack BG = IBuilder.getBorder(Material.GRAY_STAINED_GLASS_PANE);
+    public static final ItemStack BOARD = IBuilder.getBorder(Material.BLACK_STAINED_GLASS_PANE);
+    public static final ItemStack ITEM = IBuilder.buildItem(Material.BOOK, "&x&7&B&5&E&5&7游戏设置", " ", "&7调整你的界面或者是其他功能");
+    public static final ItemStack ITEM1 = IBuilder.buildItem(Material.WATER_BUCKET, "&x&6&3&C&C&F&F切换岛屿生物群系", " ", "&7切换岛屿的群系");
+    public static final ItemStack ITEM2 = IBuilder.buildItem(Material.COD, "&x&4&F&B&3&B&F开启或关闭特殊钓鱼", " ", "&7如果你需要回到原版的钓鱼", "&7调整它即可");
+    public static final ItemStack ITEM3 = IBuilder.buildItem(Material.CHEST_MINECART, "&x&F&F&9&D&3&F打开岛屿商店", " ", "&7服务器交易物品的地方");
+    public static final ItemStack ITEM4 = IBuilder.buildItem(Material.DIAMOND_SWORD, "&x&6&A&B&7&F&F技能属性点", " ", "&7在你的岛屿放置一个&e书架&7并右键", "&7即可打开你的属性菜单", "&7按下&eL&7键打开概况");
+    public static final ItemStack ITEM5 = IBuilder.buildItem(Material.BARRIER, "&c关闭菜单");
+    public static final ItemStack ITEM6 = IBuilder.buildItem(Material.ENDER_CHEST, "&x&4&8&A&9&9&9赞助我们", " ", "&7服务器的运行与开发需要大笔资金", "&7您的赞助至关重要", "&c所有赞助将全部用于维护服务器");
+    public static final ItemStack ITEM7 = IBuilder.buildItem(Material.COMMAND_BLOCK_MINECART, "&x&F&F&C&0&4&6岛屿操作", " ", "&7小众岛屿设置不太常用", "&7但也有用", " ", "&e左键 &8- &7岛屿控制页", "&e右键 &8- &7小众岛屿设置");
+    public static final ItemStack ITEM8 = IBuilder.buildItem(Material.CAT_SPAWN_EGG, "&x&C&5&6&0&0&0宠物管理", " ", "&7管理你的宠物 (/pet)", " ", "&e如何捕捉宠物?", "&e使用栓绳击杀生物", "&e便有可能将对应生物", "&e变为你的宠物");
+    public static final ItemStack ITEM9 = IBuilder.buildItem(Material.HONEY_BOTTLE, "&x&B&C&5&1&0&0游览其他岛屿", " ", "&e左键 &8- &7查看岛屿转送点", "&e右键 &8- &7浏览全部玩家的岛屿", "", "&c使用命令/pw help查看帮助");
+    public static final ItemStack ITEM10 = IBuilder.buildItem(Material.FISHING_ROD, "&x&F&9&6&8&3&A鱼的收购", " ", "&7收购你钓上来的特殊的鱼");
+    public static final ItemStack ITEM11 = IBuilder.buildItem(Material.OAK_SIGN, "&x&F&F&9&E&4&0服务器传送点", " ", "&7点击打开传送点菜单");
+    public static final ItemStack ITEM12 = IBuilder.buildItem(Material.PURPLE_CANDLE, "&x&7&C&4&3&B&D扩展附魔百科", " ", "&e善用附魔检验台!", " ", "&7点击打开扩展附魔菜单");
+    public static final ItemStack ITEM13 = IBuilder.buildItem(
+            Material.WRITABLE_BOOK,
+            "&x&F&F&D&9&5&A服务器公告",
+            " ",
+            "&e左键 &8- &7服务器的版本记录",
+            "&e右键 &8- &7HAPPYLAND Dev的计划性更改",
+            "",
+            "&e数字键操作:",
+            "&f1 &7- 打开签到",
+            "&f2 &7- 打开&a额外物品 &7合成书",
+            "&f3 &7- 打开&2科技线 &7指导书",
+            "&f4 &7- 打开&f引导之书",
+            "&f5 &7- 前往&x&c&c&9&e&3&3杂鱼市场"
+    );
+    public static final ItemStack ITEM14 = IBuilder.buildItem(Material.KNOWLEDGE_BOOK, "&x&6&0&A&D&5&E获取指导书", " ", "&7获得如下三本指导书:", "&a额外物品 &7合成书", "&2科技线 &7指导书", "&f引导之书");
+
     public static void open(Player p) {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
         Inventory menu = Bukkit.createInventory(new HomeMenu(), 45, IString.addColor("主菜单 | 你好! " + p.getName() + " !"));
         Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
 
-            ItemStack board = IBuilder.getBorder(Material.BLACK_STAINED_GLASS_PANE);
             for (int i = 0; i < 9; i++) {
-                menu.setItem(i, board);
+                menu.setItem(i, BOARD);
             }
-            ItemStack bg = IBuilder.getBorder(Material.GRAY_STAINED_GLASS_PANE);
             for (int i = 9; i < 45; i++) {
-                menu.setItem(i, bg);
+                menu.setItem(i, BG);
             }
 
             //TODO
             menu.setItem(8, Skull.getSkull(p, "&7" + p.getName(), " ", "&e单击修改名片"));
-            menu.setItem(36, IBuilder.buildItem(Material.BOOK, "&x&7&B&5&E&5&7游戏设置", " ", "&7调整你的界面或者是其他功能"));
-            menu.setItem(37, IBuilder.buildItem(Material.WATER_BUCKET, "&x&6&3&C&C&F&F切换岛屿生物群系", " ", "&7切换岛屿的群系"));
-            menu.setItem(38, IBuilder.buildItem(Material.COD, "&x&4&F&B&3&B&F开启或关闭特殊钓鱼", " ", "&7如果你需要回到原版的钓鱼", "&7调整它即可"));
-            menu.setItem(39, IBuilder.buildItem(Material.CHEST_MINECART, "&x&F&F&9&D&3&F打开岛屿商店", " ", "&7服务器交易物品的地方"));
-            menu.setItem(40, IBuilder.buildItem(Material.DIAMOND_SWORD, "&x&6&A&B&7&F&F技能属性点", " ", "&7在你的岛屿放置一个&e书架&7并右键", "&7即可打开你的属性菜单", "&7按下&eL&7键打开概况"));
-            menu.setItem(44, IBuilder.buildItem(Material.BARRIER, "&c关闭菜单"));
-            menu.setItem(43, IBuilder.buildItem(Material.ENDER_CHEST, "&x&4&8&A&9&9&9赞助我们", " ", "&7服务器的运行与开发需要大笔资金", "&7您的赞助至关重要", "&c所有赞助将全部用于维护服务器"));
+            menu.setItem(36, ITEM);
+            menu.setItem(37, ITEM1);
+            menu.setItem(38, ITEM2);
+            menu.setItem(39, ITEM3);
+            menu.setItem(40, ITEM4);
+            menu.setItem(44, ITEM5);
+            menu.setItem(43, ITEM6);
 
-            menu.setItem(11, IBuilder.buildItem(Material.COMMAND_BLOCK_MINECART, "&x&F&F&C&0&4&6岛屿操作", " ", "&7小众岛屿设置不太常用", "&7但也有用", " ", "&e左键 &8- &7岛屿控制页", "&e右键 &8- &7小众岛屿设置"));
-            menu.setItem(12, IBuilder.buildItem(Material.CAT_SPAWN_EGG, "&x&C&5&6&0&0&0宠物管理", " ", "&7管理你的宠物 (/pet)", " ", "&e如何捕捉宠物?", "&e使用栓绳击杀生物", "&e便有可能将对应生物", "&e变为你的宠物"));
-            menu.setItem(13, IBuilder.buildItem(Material.HONEY_BOTTLE, "&x&B&C&5&1&0&0游览其他岛屿", " ", "&e左键 &8- &7查看岛屿转送点", "&e右键 &8- &7浏览全部玩家的岛屿", "", "&c使用命令/pw help查看帮助"));
-            menu.setItem(20, IBuilder.buildItem(Material.FISHING_ROD, "&x&F&9&6&8&3&A鱼的收购", " ", "&7收购你钓上来的特殊的鱼"));
-            menu.setItem(21, IBuilder.buildItem(Material.OAK_SIGN, "&x&F&F&9&E&4&0服务器传送点", " ", "&7点击打开传送点菜单"));
-            menu.setItem(22, IBuilder.buildItem(Material.PURPLE_CANDLE, "&x&7&C&4&3&B&D扩展附魔百科", " ", "&e善用附魔检验台!", " ", "&7点击打开扩展附魔菜单"));
-            menu.setItem(15, IBuilder.buildItem(Material.WRITABLE_BOOK, "&x&F&F&D&9&5&A服务器公告", " ", "&e左键 &8- &7服务器的版本记录", "&e右键 &8- &7HAPPYLAND Dev的计划性更改"));
-            menu.setItem(24, IBuilder.buildItem(Material.KNOWLEDGE_BOOK, "&x&6&0&A&D&5&E获取指导书", " ", "&7获得如下三本指导书:", "&a额外物品 &7合成书", "&2科技线 &7指导书", "&f引导之书"));
+            menu.setItem(11, ITEM7);
+            menu.setItem(12, ITEM8);
+            menu.setItem(13, ITEM9);
+            menu.setItem(20, ITEM10);
+            menu.setItem(21, ITEM11);
+            menu.setItem(22, ITEM12);
+            //
+            menu.setItem(15, ITEM13);
+            //
+            menu.setItem(24, ITEM14);
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
@@ -111,6 +143,14 @@ public class MainMenu implements Listener {
                         bookMeta.addPage(IString.addColor(book));
                         itemStack.setItemMeta(bookMeta);
                         p.openBook(itemStack);
+                    } else if (e.getClick() == ClickType.NUMBER_KEY) {
+                        switch (e.getHotbarButton()) {
+                            case 0 -> Bukkit.dispatchCommand(p, "rewards");
+                            case 1 -> Bukkit.dispatchCommand(p, "ia");
+                            case 2 -> Bukkit.dispatchCommand(p, "nova items");
+                            case 3 -> TreePicker.open(p);
+                            case 4 -> Bukkit.dispatchCommand(p, "warp fishshop");
+                        }
                     }
                 }
                 case 24 -> {
