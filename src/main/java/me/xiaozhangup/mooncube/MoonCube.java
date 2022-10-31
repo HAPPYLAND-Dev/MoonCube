@@ -2,7 +2,6 @@ package me.xiaozhangup.mooncube;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import me.xiaozhangup.mooncube.chunk.AutoRemove;
 import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.guide.ABook;
@@ -72,8 +71,7 @@ public class MoonCube extends JavaPlugin {
                 new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
                 new ActionBlock(), new PortalBreak(), new PayEvent(),
-                new AutoRemove(), new Respawn(), new NameTag(),
-                new TreePicker(), new Crate()
+                new Respawn(), new NameTag(), new TreePicker(), new Crate()
         );
         listenerManager.register();
         //event load

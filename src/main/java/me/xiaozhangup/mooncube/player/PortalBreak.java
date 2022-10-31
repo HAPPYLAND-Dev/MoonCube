@@ -31,9 +31,8 @@ public class PortalBreak implements Listener {
 
     @EventHandler
     public void onPlayerBreak(PlayerInteractEvent e) {
-        if (e.isCancelled()) return;
         Player p = e.getPlayer();
-        Block block = e.getClickedBlock();
+        Block block = p.getTargetBlock(3);
         ItemStack itemStack = e.getItem();
         Action action = e.getAction();
         if (e.getHand() != EquipmentSlot.HAND) return;
@@ -62,6 +61,10 @@ public class PortalBreak implements Listener {
                 p.sendMessage(guide);
             }
         }
+    }
+
+    public static void debug(Player p, String s) {
+        if (p.isOp()) p.sendMessage(s);
     }
 
 }

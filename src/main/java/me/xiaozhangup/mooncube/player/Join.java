@@ -1,5 +1,7 @@
 package me.xiaozhangup.mooncube.player;
 
+import com.destroystokyo.paper.ClientOption;
+import com.destroystokyo.paper.event.player.PlayerClientOptionsChangeEvent;
 import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.tools.BookTip;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
