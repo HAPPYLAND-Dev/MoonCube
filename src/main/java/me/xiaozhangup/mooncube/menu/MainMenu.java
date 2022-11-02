@@ -52,7 +52,8 @@ public class MainMenu implements Listener {
             "&f2 &7- 打开&a额外物品 &7合成书",
             "&f3 &7- 打开&2科技线 &7指导书",
             "&f4 &7- 打开&f引导之书",
-            "&f5 &7- 前往&x&c&c&9&e&3&3杂鱼市场"
+            "&f5 &7- 前往&x&c&c&9&e&3&3杂鱼市场",
+            "&f6 &7- 前往&x&6&b&9&b&f&d反馈任何问题或建议"
     );
     public static final ItemStack ITEM14 = IBuilder.buildItem(Material.KNOWLEDGE_BOOK, "&x&6&0&A&D&5&E获取指导书", " ", "&7获得如下三本指导书:", "&a额外物品 &7合成书", "&2科技线 &7指导书", "&f引导之书");
 
@@ -150,6 +151,22 @@ public class MainMenu implements Listener {
                             case 2 -> Bukkit.dispatchCommand(p, "nova items");
                             case 3 -> TreePicker.open(p);
                             case 4 -> Bukkit.dispatchCommand(p, "warp fishshop");
+                            case 5 -> {
+                                p.closeInventory();
+                                p.sendMessage(
+                                        "§f",
+                                        "§7",
+                                        "§x§6§b§9§b§f§d    §lTencent 兔小巢",
+                                        "§7    https://support.qq.com/products/452661/",
+                                        "§7",
+                                        "§7    提出任何你发现的BUG,或者是任何的诉求",
+                                        "§7    我们会定期查看并对问题经行解决/改进",
+                                        "§f",
+                                        "§7",
+                                        "§7"
+                                );
+                                p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                            }
                         }
                     }
                 }
