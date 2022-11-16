@@ -7,6 +7,7 @@ import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.guide.ABook;
 import me.xiaozhangup.mooncube.guide.TreePicker;
 import me.xiaozhangup.mooncube.island.EntityControl;
+import me.xiaozhangup.mooncube.island.LandEvent;
 import me.xiaozhangup.mooncube.island.NovaHook;
 import me.xiaozhangup.mooncube.item.BlockSaver;
 import me.xiaozhangup.mooncube.item.ItemSaver;
@@ -68,7 +69,7 @@ public class MoonCube extends JavaPlugin {
                 new Spawner(), new Hey(), new Join(),
                 new ProfileEditor(), new TABConfig(), new RuleManager(),
                 new Ketboard(), new MainMenu(), new UniqueShop(),
-                new Warps(), new EntityControl(), new Adder(), new ItemAdders(),
+                new Warps(), new Adder(), new ItemAdders(), new LandEvent(),
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
                 new ActionBlock(), new PortalBreak(), new PayEvent(),
                 new Respawn(), new NameTag(), new TreePicker(), new Crate()

@@ -41,10 +41,6 @@
             <url>https://jitpack.io</url>
         </repository>
         <repository>
-            <id>essentials-releases</id>
-            <url>https://repo.essentialsx.net/releases/</url>
-        </repository>
-        <repository>
             <id>placeholderapi-repo</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
@@ -138,22 +134,22 @@
             <systemPath>${project.basedir}/libs/Crazy-Crates-1.18-1.19-v1.11.6-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>net.essentialsx</groupId>
+            <artifactId>EssentialsX</artifactId>
+            <version>2.19.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/EssentialsX-2.19.7.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>xyz.xenondevs.nova</groupId>
             <artifactId>nova</artifactId>
             <version>0.11.6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.essentialsx</groupId>
-            <artifactId>EssentialsX</artifactId>
-            <version>2.19.0</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.bstats</groupId>
-                    <artifactId>bstats-bukkit</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.github.DeadSilenceIV</groupId>
+            <artifactId>AdvancedChestsAPI</artifactId>
+            <version>2.9-BETA</version>
         </dependency>
     </dependencies>
 
