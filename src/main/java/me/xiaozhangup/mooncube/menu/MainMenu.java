@@ -35,7 +35,7 @@ public class MainMenu implements Listener {
     public static final ItemStack ITEM5 = IBuilder.buildItem(Material.BARRIER, "&c关闭菜单");
     public static final ItemStack ITEM6 = IBuilder.buildItem(Material.ENDER_CHEST, "&x&4&8&A&9&9&9赞助我们", " ", "&7服务器的运行与开发需要大笔资金", "&7您的赞助至关重要", "&c所有赞助将全部用于维护服务器");
     public static final ItemStack ITEM7 = IBuilder.buildItem(Material.COMMAND_BLOCK_MINECART, "&x&F&F&C&0&4&6岛屿操作", " ", "&7小众岛屿设置不太常用", "&7但也有用", " ", "&e左键 &8- &7岛屿控制页", "&e右键 &8- &7小众岛屿设置");
-    public static final ItemStack ITEM8 = IBuilder.buildItem(Material.CAT_SPAWN_EGG, "&x&C&5&6&0&0&0宠物管理", " ", "&7管理你的宠物 (/pet)", " ", "&e如何捕捉宠物?", "&e使用栓绳击杀生物", "&e便有可能将对应生物", "&e变为你的宠物");
+    public static final ItemStack ITEM8 = IBuilder.buildItem(Material.ACACIA_SAPLING, "&x&F&D&D&8&3&5查看所有的机制修改", " ", "&7我们根据需要做了大量的", "&7游戏内容/机制修改", "&7单击此处即可查看全部的更改内容");
     public static final ItemStack ITEM9 = IBuilder.buildItem(Material.HONEY_BOTTLE, "&x&B&C&5&1&0&0游览其他岛屿", " ", "&e左键 &8- &7查看岛屿转送点", "&e右键 &8- &7浏览全部玩家的岛屿", "", "&c使用命令/pw help查看帮助");
     public static final ItemStack ITEM10 = IBuilder.buildItem(Material.FISHING_ROD, "&x&F&9&6&8&3&A鱼的收购", " ", "&7收购你钓上来的特殊的鱼");
     public static final ItemStack ITEM11 = IBuilder.buildItem(Material.OAK_SIGN, "&x&F&F&9&E&4&0服务器传送点", " ", "&7点击打开传送点菜单");
@@ -112,7 +112,7 @@ public class MainMenu implements Listener {
                         Bukkit.dispatchCommand(p, "is settings");
                     }
                 }
-                case 12 -> Bukkit.dispatchCommand(p, "pet");
+                case 12 -> Tweaker.open(p);
                 case 13 -> {
                     if (e.getClick() == ClickType.LEFT) {
                         Bukkit.dispatchCommand(p, "pw");

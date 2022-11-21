@@ -72,7 +72,8 @@ public class MoonCube extends JavaPlugin {
                 new Warps(), new Adder(), new ItemAdders(), new LandEvent(),
                 new ArcaneAnvil(), new ArcaneEnchantBook(), new Death(),
                 new ActionBlock(), new PortalBreak(), new PayEvent(),
-                new Respawn(), new NameTag(), new TreePicker(), new Crate()
+                new Respawn(), new NameTag(), new TreePicker(), new Crate(),
+                new Tweaker()
         );
         listenerManager.register();
         //event load
