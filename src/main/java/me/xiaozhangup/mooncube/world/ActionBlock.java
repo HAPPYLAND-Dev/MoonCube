@@ -1,5 +1,6 @@
 package me.xiaozhangup.mooncube.world;
 
+import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.manager.ConfigManager;
 import me.xiaozhangup.mooncube.player.Crate;
 import org.bukkit.Bukkit;
@@ -13,6 +14,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
 import java.util.HashMap;
+
+import static me.xiaozhangup.mooncube.guide.ABook.mm;
 
 public class ActionBlock implements Listener {
 
@@ -62,7 +65,13 @@ public class ActionBlock implements Listener {
             Bukkit.dispatchCommand(p, date);
         } else if (date != null && date.startsWith(":")) {
             switch (date) {
-                case ":crate" -> Crate.open(p);
+                case ":crate" -> {
+                    if (MoonCube.getEconomy().getBalance(p) <= 420) {
+                        p.sendMessage(mm.deserialize("<dark_gray>[<color:#cff24e>抽金</color>]</dark_gray> <red>为了保护您的资产,需要账号至少拥有420才能抽奖</red>"));
+                        return;
+                    }
+                    Crate.open(p);
+                }
             }
         }
     }

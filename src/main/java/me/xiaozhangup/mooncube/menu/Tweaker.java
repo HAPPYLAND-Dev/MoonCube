@@ -36,7 +36,6 @@ public class Tweaker implements Listener {
     public static ItemStack ITEM15 = IBuilder.buildItem(Material.POLAR_BEAR_SPAWN_EGG, "&f无AI", "&7将生物困在一格内时,生物将失去AI");
     public static ItemStack ITEM16 = IBuilder.buildItem(Material.ENCHANTED_BOOK, "&f附魔大改", "&7所有的附魔都存在了稀有度", "&7并且村民不会出售特殊附魔", "&e主菜单可以查看所有附魔的介绍");
     public static ItemStack ITEM17 = IBuilder.buildItem(Material.PLAYER_HEAD, "&f玩家相互交互", "&7你可以右键,Shift + 右键一个玩家", "&7来和他进行一些交互");
-    public static ItemStack ITEM18 = IBuilder.buildItem(Material.PURPLE_STAINED_GLASS, "&f歪\"门\"邪道", "&7每次前往地狱会生成一个新门", "&7并且可以被挖掘!", "&7", "&7你可以通过在地狱重建一个门并", "&7从中回到主世界来停止", "&7服务器再次创建新门");
     private static final ItemStack backItem = IBuilder.buildItem(Material.COMPASS, "&c返回主页");
 
 
@@ -67,7 +66,6 @@ public class Tweaker implements Listener {
             menu.setItem(23, ITEM15);
             menu.setItem(24, ITEM16);
             menu.setItem(25, ITEM17);
-            menu.setItem(26, ITEM18);
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
