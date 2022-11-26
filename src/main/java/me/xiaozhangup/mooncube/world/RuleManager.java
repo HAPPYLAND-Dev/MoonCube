@@ -6,6 +6,7 @@ import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockDispenseEvent;
 import org.bukkit.event.world.WorldLoadEvent;
 
 public class RuleManager implements Listener {
@@ -21,5 +22,10 @@ public class RuleManager implements Listener {
     public void onWorldload(WorldLoadEvent e) {
         e.getWorld().setGameRule(GameRule.KEEP_INVENTORY, true);
         MoonCube.plugin.getLogger().info("World: " + e.getWorld().getName() + " Done!");
+    }
+
+    @EventHandler
+    public void on(BlockDispenseEvent e) {
+        if (e.getBlock().getChunk().getEntities().length > 16) e.setCancelled(true);
     }
 }
