@@ -13,6 +13,7 @@ depend:
   - Nova
   - Essentials
   - AdvancedChests
+
 commands:
   mooncube:
     description: MoonCube Main Command

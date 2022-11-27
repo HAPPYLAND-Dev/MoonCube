@@ -6,7 +6,6 @@ import me.xiaozhangup.mooncube.command.Command;
 import me.xiaozhangup.mooncube.gui.tools.IString;
 import me.xiaozhangup.mooncube.guide.ABook;
 import me.xiaozhangup.mooncube.guide.TreePicker;
-import me.xiaozhangup.mooncube.island.EntityControl;
 import me.xiaozhangup.mooncube.island.LandEvent;
 import me.xiaozhangup.mooncube.island.NovaHook;
 import me.xiaozhangup.mooncube.item.BlockSaver;
@@ -24,6 +23,8 @@ import me.xiaozhangup.mooncube.player.fastkey.Ketboard;
 import me.xiaozhangup.mooncube.player.tab.TABConfig;
 import me.xiaozhangup.mooncube.world.ActionBlock;
 import me.xiaozhangup.mooncube.world.RuleManager;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
@@ -48,6 +49,9 @@ public class MoonCube extends JavaPlugin {
     public static Economy getEconomy() {
         return econ;
     }
+
+    public static BukkitAudiences adventure;
+    public static MiniMessage miniMessage;
 
     @Override
     public void onEnable() {

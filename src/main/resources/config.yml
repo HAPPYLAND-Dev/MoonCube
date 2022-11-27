@@ -19,3 +19,8 @@ Board:
   prefix: "&8[&x&8&E&8&E&8&E报纸&8] "
   messages:
     - "The One"
+
+text: '<font:nameplates:default>%nameplates_bg_pos%</font>%img_bar_compass%  <font:nameplates:offset_3><color:#BC8F8F>%player_x%, %player_y%, %player_z%</color>   </font><font:nameplates:default>%nameplates_bg_inv%</font>%img_bar_chest_minecart% <font:nameplates:offset_3><color:#DEB887>%player_empty_slots%</color></font>   <font:nameplates:default>%nameplates_bg_time%</font>%img_bar_clock% <font:nameplates:offset_3><color:#FFE4C4>%player_world_time_24%</color></font>'
+color: WHITE
+refresh-rate: 10
+overlay: NOTCHED_20
