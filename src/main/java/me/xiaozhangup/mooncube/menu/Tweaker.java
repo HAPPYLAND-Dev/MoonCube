@@ -36,12 +36,16 @@ public class Tweaker implements Listener {
     public static ItemStack ITEM15 = IBuilder.buildItem(Material.POLAR_BEAR_SPAWN_EGG, "&f无AI", "&7将生物困在一格内时,生物将失去AI");
     public static ItemStack ITEM16 = IBuilder.buildItem(Material.ENCHANTED_BOOK, "&f附魔大改", "&7所有的附魔都存在了稀有度", "&7并且村民不会出售特殊附魔", "&e主菜单可以查看所有附魔的介绍");
     public static ItemStack ITEM17 = IBuilder.buildItem(Material.PLAYER_HEAD, "&f玩家相互交互", "&7你可以右键,Shift + 右键一个玩家", "&7来和他进行一些交互");
+    public static ItemStack ITEM18 = IBuilder.buildItem(Material.TNT, "&fTNT复制", "&7TNT复制被禁用");
+    public static ItemStack ITEM19 = IBuilder.buildItem(Material.WHITE_CARPET, "&f地毯复制", "&7地毯复制被禁用");
+    public static ItemStack ITEM20 = IBuilder.buildItem(Material.POWERED_RAIL, "&f铁轨复制", "&7铁轨复制被禁用");
+    public static ItemStack ITEM21 = IBuilder.buildItem(Material.SHULKER_SHELL, "&f潜影贝", "&7在末影人在末地生成时", "&7有20%的概率同时生成潜影贝");
     private static final ItemStack backItem = IBuilder.buildItem(Material.COMPASS, "&c返回主页");
 
 
     public static void open(Player p) {
         p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
-        Inventory menu = Bukkit.createInventory(new Tweak(), 27, IString.addColor("我们的所有游戏内容修改"));
+        Inventory menu = Bukkit.createInventory(new Tweak(), 36, IString.addColor("我们的所有游戏内容修改"));
         Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
 
             for (int i = 0; i < 9; i++) {
@@ -66,6 +70,10 @@ public class Tweaker implements Listener {
             menu.setItem(23, ITEM15);
             menu.setItem(24, ITEM16);
             menu.setItem(25, ITEM17);
+            menu.setItem(26, ITEM18);
+            menu.setItem(27, ITEM19);
+            menu.setItem(28, ITEM20);
+            menu.setItem(29, ITEM21);
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
