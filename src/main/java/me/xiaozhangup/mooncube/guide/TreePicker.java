@@ -33,11 +33,11 @@ public class TreePicker implements Listener {
                 menu.setItem(i, bg);
             }
 
-            for (int i = 18; i <= ABook.guide_node.size() + 17; i++) {
-                if (ConfigManager.getConfig("playerdate").getIntegerList(p.getUniqueId() + ".Guide").contains(i - 17)) {
-                    menu.setItem(i, IBuilder.buildItem(Material.WRITTEN_BOOK, "&f" + ABook.guide_node.get(i - 18), "", "&e> 单击开始阅读"));
+            for (int i = 9; i <= ABook.guide_node.size() + 8; i++) {
+                if (ConfigManager.getConfig("playerdate").getIntegerList(p.getUniqueId() + ".Guide").contains(i - 8)) {
+                    menu.setItem(i, IBuilder.buildItem(Material.WRITTEN_BOOK, "&f" + ABook.guide_node.get(i - 9), "", "&e> 单击开始阅读"));
                 } else {
-                    menu.setItem(i, IBuilder.buildItem(Material.BOOK, "&f" + ABook.guide_node.get(i - 18), "", "&e> 单击开始阅读"));
+                    menu.setItem(i, IBuilder.buildItem(Material.BOOK, "&f" + ABook.guide_node.get(i - 9), "", "&e> 单击开始阅读"));
                 }
             }
 
@@ -51,8 +51,8 @@ public class TreePicker implements Listener {
         if (e.getWhoClicked() instanceof Player p && e.getInventory().getHolder() instanceof ABookHolder) {
             e.setCancelled(true);
             int slot = e.getRawSlot();
-            if (slot >= 18 && slot <= ABook.guide_node.size() + 17) {
-                ABook.openBook(slot - 17, p);
+            if (slot >= 9 && slot <= ABook.guide_node.size() + 8) {
+                ABook.openBook(slot - 8, p);
             }
         }
     }
