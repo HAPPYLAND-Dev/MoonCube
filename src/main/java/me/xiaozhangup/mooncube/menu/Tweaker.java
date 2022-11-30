@@ -22,7 +22,7 @@ public class Tweaker implements Listener {
     public static ItemStack ITEM1 = IBuilder.buildItem(Material.OAK_LEAVES, "&f树叶快速腐烂", "&7树叶将很快腐烂");
     public static ItemStack ITEM2 = IBuilder.buildItem(Material.IRON_HOE, "&f范围收割", "&7使用锄收割作物将会", "&7一次性收集3x3左右的范围");
     public static ItemStack ITEM3 = IBuilder.buildItem(Material.BONE_MEAL, "&f范围催熟", "&7将会催熟范围内的作物", "&7甚至可以催熟仙人掌,甘蔗等");
-    public static ItemStack ITEM4 = IBuilder.buildItem(Material.BRICK_WALL, "&f灵活放置", "&7输入 /togglereacharound 来开关", "&7你会看到一个黑影,那将是你放置的位置");
+    public static ItemStack ITEM4 = IBuilder.buildItem(Material.TOTEM_OF_UNDYING, "&f死亡重生", "&7你不会掉落任何的物品,经验", "&7可以在\"主菜单->游戏设置\"自定义重生点");
     public static ItemStack ITEM5 = IBuilder.buildItem(Material.LADDER, "&f快速梯子", "&7手持梯子右键梯子将会在右键的梯子下方放置梯子", "&7Shift + 右键整段梯子的一端可快速到达另一端");
     public static ItemStack ITEM6 = IBuilder.buildItem(Material.GRASS, "&f透草攻击", "&7你的攻击将会透过草等等");
     public static ItemStack ITEM7 = IBuilder.buildItem(Material.NAME_TAG, "&f生物静音", "&7将生物命名为silence可让其不再发出声音", "&7再次命名为unsilence可让其再次发出声音");
