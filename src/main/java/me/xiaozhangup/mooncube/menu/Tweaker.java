@@ -32,7 +32,7 @@ public class Tweaker implements Listener {
     public static ItemStack ITEM11 = IBuilder.buildItem(Material.WATER_BUCKET, "&f无限水桶", "&7将水桶使用铁砧附魔为无限", "&7使其可无限放置水源");
     public static ItemStack ITEM12 = IBuilder.buildItem(Material.OBSIDIAN, "&f异形地狱门", "&7地狱门可以为任何形状,并点燃", "&7可使用黑曜石和哭泣的黑曜石");
     public static ItemStack ITEM13 = IBuilder.buildItem(Material.VILLAGER_SPAWN_EGG, "&f贪财的村民", "&7如果你手持绿宝石块", "&7那么村民会被你吸引过来");
-    public static ItemStack ITEM14 = IBuilder.buildItem(Material.WARDEN_SPAWN_EGG, "&f更快的流浪商人生成", "&7浏览商人会每7分钟生成一次");
+    public static ItemStack ITEM14 = IBuilder.buildItem(Material.WARDEN_SPAWN_EGG, "&f更快的流浪商人生成", "&7流浪商人会每7分钟生成一次");
     public static ItemStack ITEM15 = IBuilder.buildItem(Material.POLAR_BEAR_SPAWN_EGG, "&f无AI", "&7将生物困在一格内时,生物将失去AI");
     public static ItemStack ITEM16 = IBuilder.buildItem(Material.ENCHANTED_BOOK, "&f附魔大改", "&7所有的附魔都存在了稀有度", "&7并且村民不会出售特殊附魔", "&e主菜单可以查看所有附魔的介绍");
     public static ItemStack ITEM17 = IBuilder.buildItem(Material.PLAYER_HEAD, "&f玩家相互交互", "&7你可以右键,Shift + 右键一个玩家", "&7来和他进行一些交互");

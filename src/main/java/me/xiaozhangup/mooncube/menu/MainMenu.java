@@ -29,7 +29,7 @@ public class MainMenu implements Listener {
     public static final ItemStack BOARD = IBuilder.getBorder(Material.BLACK_STAINED_GLASS_PANE);
     public static final ItemStack ITEM = IBuilder.buildItem(Material.BOOK, "&x&7&B&5&E&5&7游戏设置", " ", "&7调整你的界面或者是其他功能");
     public static final ItemStack ITEM1 = IBuilder.buildItem(Material.WATER_BUCKET, "&x&6&3&C&C&F&F切换岛屿生物群系", " ", "&7切换岛屿的群系");
-    public static final ItemStack ITEM2 = IBuilder.buildItem(Material.COD, "&x&4&F&B&3&B&F开启或关闭特殊钓鱼", " ", "&7如果你需要回到原版的钓鱼", "&7调整它即可");
+    public static final ItemStack ITEM2 = IBuilder.buildItem(Material.HEART_OF_THE_SEA, "&x&4&F&B&3&B&F修改岛屿边界", " ", "&7如果你觉得默认的岛屿边界十分压抑", "&7你可以直接关闭,这不会有任何影响");
     public static final ItemStack ITEM3 = IBuilder.buildItem(Material.CHEST_MINECART, "&x&F&F&9&D&3&F打开岛屿商店", " ", "&7服务器交易物品的地方");
     public static final ItemStack ITEM4 = IBuilder.buildItem(Material.DIAMOND_SWORD, "&x&6&A&B&7&F&F技能属性点", " ", "&7在你的岛屿放置一个&e书架&7并右键", "&7即可打开你的属性菜单", "&7按下&eL&7键打开概况");
     public static final ItemStack ITEM5 = IBuilder.buildItem(Material.BARRIER, "&c关闭菜单");
@@ -37,7 +37,7 @@ public class MainMenu implements Listener {
     public static final ItemStack ITEM7 = IBuilder.buildItem(Material.COMMAND_BLOCK_MINECART, "&x&F&F&C&0&4&6岛屿操作", " ", "&7小众岛屿设置不太常用", "&7但也有用", " ", "&e左键 &8- &7岛屿控制页", "&e右键 &8- &7小众岛屿设置");
     public static final ItemStack ITEM8 = IBuilder.buildItem(Material.ACACIA_SAPLING, "&x&F&D&D&8&3&5查看所有的机制修改", " ", "&7我们根据需要做了大量的", "&7游戏内容/机制修改", "&7单击此处即可查看全部的更改内容");
     public static final ItemStack ITEM9 = IBuilder.buildItem(Material.HONEY_BOTTLE, "&x&B&C&5&1&0&0游览其他岛屿", " ", "&e左键 &8- &7查看岛屿转送点", "&e右键 &8- &7浏览全部玩家的岛屿", "", "&c使用命令/pw help查看帮助");
-    public static final ItemStack ITEM10 = IBuilder.buildItem(Material.FISHING_ROD, "&x&F&9&6&8&3&A鱼的收购", " ", "&7收购你钓上来的特殊的鱼");
+    public static final ItemStack ITEM10 = IBuilder.buildItem(Material.FISHING_ROD, "&x&F&9&6&8&3&A鱼的收购", " ", "&e需要使用特殊的鱼竿钓鱼", "&e你可以查看 &7\"&a额外物品 &7合成书\" &e合成", "", "&7收购你钓上来的特殊的鱼");
     public static final ItemStack ITEM11 = IBuilder.buildItem(Material.OAK_SIGN, "&x&F&F&9&E&4&0服务器传送点", " ", "&7点击打开传送点菜单");
     public static final ItemStack ITEM12 = IBuilder.buildItem(Material.PURPLE_CANDLE, "&x&7&C&4&3&B&D扩展附魔百科", " ", "&e善用附魔检验台!", " ", "&7点击打开扩展附魔菜单");
     public static final ItemStack ITEM13 = IBuilder.buildItem(
@@ -102,7 +102,7 @@ public class MainMenu implements Listener {
                 case 8 -> ProfileEditor.openProfile(p);
                 case 36 -> TABConfig.openTAB(p);
                 case 37 -> Bukkit.dispatchCommand(p, "is biome");
-                case 38 -> Bukkit.dispatchCommand(p, "emf toggle");
+                case 38 -> Bukkit.dispatchCommand(p, "is border");
                 case 39 -> Bukkit.dispatchCommand(p, "is shop");
 
                 case 11 -> {
@@ -120,7 +120,7 @@ public class MainMenu implements Listener {
                         Bukkit.dispatchCommand(p, "is visit");
                     }
                 }
-                case 20 -> Bukkit.dispatchCommand(p, "emf shop");
+                case 20 -> Bukkit.dispatchCommand(p, "sellfish");
                 case 21 -> Warps.open(p);
                 case 22 -> Bukkit.dispatchCommand(p, "nereusopus menu");
                 case 15 -> {
