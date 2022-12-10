@@ -2,7 +2,7 @@ name: MoonCube
 version: ${project.version}
 api-version: 1.18
 main: me.xiaozhangup.mooncube.MoonCube
-depend:
+softdepend:
   - Vault
   - PlaceholderAPI
   - IridiumSkyblock
@@ -13,6 +13,7 @@ depend:
   - Nova
   - Essentials
   - AdvancedChests
+  - LuckPerms
 
 commands:
   mooncube:

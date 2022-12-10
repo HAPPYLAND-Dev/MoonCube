@@ -4,6 +4,7 @@ import me.neznamy.tab.api.TabAPI;
 import me.neznamy.tab.api.TabPlayer;
 import me.neznamy.tab.api.bossbar.BossBarManager;
 import me.neznamy.tab.api.scoreboard.ScoreboardManager;
+import me.xiaozhangup.mooncube.MoonCube;
 import me.xiaozhangup.mooncube.gui.TabC;
 import me.xiaozhangup.mooncube.gui.tools.IBuilder;
 import me.xiaozhangup.mooncube.gui.tools.IString;
@@ -30,6 +31,10 @@ public class TABConfig implements Listener {
     public static List<Integer> boardSlot = new ArrayList<>();
 
     public static ItemStack respawn = IBuilder.buildItem(Material.RED_BED, "&x&9&5&a&5&a&6重生点设置", " ", "&e左键 &8- &7设置重生点到脚下位置", "&e右键 &8- &7恢复重生点到默认设置");
+    public static ItemStack bar_on = IBuilder.buildItem(Material.LEATHER_BOOTS, "&x&9&8&7&6&6&5顶部信息显示器 &a开启", " ", "&7单击来关闭这个控件");
+    public static ItemStack bar_off = IBuilder.buildItem(Material.LEATHER_BOOTS, "&x&9&8&7&6&6&5顶部信息显示器 &c关闭", " ", "&7单击来打开这个控件");
+    public static ItemStack loc_on = IBuilder.buildItem(Material.LEATHER_CHESTPLATE, "&x&9&8&7&6&6&5岛屿信息显示器 &a开启", " ", "&7单击来关闭这个控件");
+    public static ItemStack loc_off = IBuilder.buildItem(Material.LEATHER_CHESTPLATE, "&x&9&8&7&6&6&5岛屿信息显示器 &c关闭", " ", "&7单击来打开这个控件");
 
     public static void openTAB(Player p) {
         Inventory tab = Bukkit.createInventory(new TabC(), 45, IString.addColor("游戏页面控件置"));
@@ -39,67 +44,81 @@ public class TABConfig implements Listener {
 
         TabPlayer tabPlayer = TabAPI.getInstance().getPlayer(p.getUniqueId());
 
-        ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
-        ItemMeta boardMeta = board.getItemMeta();
-        boardMeta.setDisplayName(" ");
-        board.setItemMeta(boardMeta);
+        Bukkit.getScheduler().runTaskAsynchronously(MoonCube.plugin, () -> {
+            ItemStack board = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+            ItemMeta boardMeta = board.getItemMeta();
+            boardMeta.setDisplayName(" ");
+            board.setItemMeta(boardMeta);
 
-        for (int i = 0; i < 45; i++) {
-            tab.setItem(i, board);
-        }
-
-        if (bossBarManager != null && bossBarManager.hasBossBarVisible(tabPlayer)) {
-            ItemStack bosson = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-            ItemMeta bossonMeta = bosson.getItemMeta();
-            bossonMeta.setDisplayName(IString.addColor("&fBossBar控件: &a开启"));
-            List<String> onlore = new ArrayList<>();
-            onlore.add(" ");
-            onlore.add(IString.addColor("&7单击来关闭这个控件"));
-            bossonMeta.setLore(onlore);
-            bosson.setItemMeta(bossonMeta);
-            for (int i = 1; i < 8; i++) {
-                tab.setItem(i, bosson);
+            for (int i = 0; i < 45; i++) {
+                tab.setItem(i, board);
             }
-        } else if (bossBarManager != null) {
-            ItemStack bossoff = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-            ItemMeta bossoffMeta = bossoff.getItemMeta();
-            bossoffMeta.setDisplayName(IString.addColor("&fBossBar控件: &c关闭"));
-            List<String> offlore = new ArrayList<>();
-            offlore.add(" ");
-            offlore.add(IString.addColor("&7单击来打开这个控件"));
-            bossoffMeta.setLore(offlore);
-            bossoff.setItemMeta(bossoffMeta);
-            for (int i = 1; i < 8; i++) {
-                tab.setItem(i, bossoff);
+
+            if (bossBarManager != null && bossBarManager.hasBossBarVisible(tabPlayer)) {
+                ItemStack bosson = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+                ItemMeta bossonMeta = bosson.getItemMeta();
+                bossonMeta.setDisplayName(IString.addColor("&fBossBar控件 &a开启"));
+                List<String> onlore = new ArrayList<>();
+                onlore.add(" ");
+                onlore.add(IString.addColor("&7单击来关闭这个控件"));
+                bossonMeta.setLore(onlore);
+                bosson.setItemMeta(bossonMeta);
+                for (int i = 1; i < 8; i++) {
+                    tab.setItem(i, bosson);
+                }
+            } else if (bossBarManager != null) {
+                ItemStack bossoff = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+                ItemMeta bossoffMeta = bossoff.getItemMeta();
+                bossoffMeta.setDisplayName(IString.addColor("&fBossBar控件 &c关闭"));
+                List<String> offlore = new ArrayList<>();
+                offlore.add(" ");
+                offlore.add(IString.addColor("&7单击来打开这个控件"));
+                bossoffMeta.setLore(offlore);
+                bossoff.setItemMeta(bossoffMeta);
+                for (int i = 1; i < 8; i++) {
+                    tab.setItem(i, bossoff);
+                }
             }
-        }
 
-        if (scoreboardManager != null && scoreboardManager.hasScoreboardVisible(tabPlayer)) {
-            ItemStack boardon = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-            ItemMeta boardonMeta = boardon.getItemMeta();
-            boardonMeta.setDisplayName(IString.addColor("&f计分板控件: &a开启"));
-            List<String> bloreon = new ArrayList<>();
-            bloreon.add(" ");
-            bloreon.add(IString.addColor("&7单击来关闭这个控件"));
-            boardonMeta.setLore(bloreon);
-            boardon.setItemMeta(boardonMeta);
-            fastSet(boardon, tab, 25, 26, 34, 35, 43, 44);
-        } else if (scoreboardManager != null) {
-            ItemStack boardoff = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-            ItemMeta boardoffMeta = boardoff.getItemMeta();
-            boardoffMeta.setDisplayName(IString.addColor("&f计分板控件: &c关闭"));
-            List<String> bloreoff = new ArrayList<>();
-            bloreoff.add(" ");
-            bloreoff.add(IString.addColor("&7单击来打开这个控件"));
-            boardoffMeta.setLore(bloreoff);
-            boardoff.setItemMeta(boardoffMeta);
-            fastSet(boardoff, tab, 25, 26, 34, 35, 43, 44);
-        }
+            if (scoreboardManager != null && scoreboardManager.hasScoreboardVisible(tabPlayer)) {
+                ItemStack boardon = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+                ItemMeta boardonMeta = boardon.getItemMeta();
+                boardonMeta.setDisplayName(IString.addColor("&f计分板控件 &a开启"));
+                List<String> bloreon = new ArrayList<>();
+                bloreon.add(" ");
+                bloreon.add(IString.addColor("&7单击来关闭这个控件"));
+                boardonMeta.setLore(bloreon);
+                boardon.setItemMeta(boardonMeta);
+                fastSet(boardon, tab, 25, 26, 34, 35, 43, 44);
+            } else if (scoreboardManager != null) {
+                ItemStack boardoff = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+                ItemMeta boardoffMeta = boardoff.getItemMeta();
+                boardoffMeta.setDisplayName(IString.addColor("&f计分板控件 &c关闭"));
+                List<String> bloreoff = new ArrayList<>();
+                bloreoff.add(" ");
+                bloreoff.add(IString.addColor("&7单击来打开这个控件"));
+                boardoffMeta.setLore(bloreoff);
+                boardoff.setItemMeta(boardoffMeta);
+                fastSet(boardoff, tab, 25, 26, 34, 35, 43, 44);
+            }
 
-        tab.setItem(36, IBuilder.buildItem(Material.COMPASS, "&c返回主页"));
-        tab.setItem(37, respawn);
+            if (p.hasPermission("bar.land")) {
+                tab.setItem(3, loc_on);
+            } else {
+                tab.setItem(3, loc_off);
+            }
 
-        p.openInventory(tab);
+            if(p.hasPermission("bar.info")) {
+                tab.setItem(5, bar_on);
+            } else {
+                tab.setItem(5, bar_off);
+            }
+
+            tab.setItem(36, IBuilder.buildItem(Material.COMPASS, "&c返回主页"));
+            tab.setItem(37, respawn);
+
+            Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(tab));
+        });
     }
 
     public static void fastSet(ItemStack itemStack, Inventory inventory, Integer... list) {
@@ -146,6 +165,12 @@ public class TABConfig implements Listener {
                     bossBarManager.setBossBarVisible(tabPlayer, true, false);
                     openTAB(p);
                 }
+            } else if (e.getRawSlot() == 3) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " permission set bar.land " + !p.hasPermission("bar.land"));
+                openTAB(p);
+            } else if (e.getRawSlot() == 5) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " permission set bar.info " + !p.hasPermission("bar.info"));
+                openTAB(p);
             } else if (e.getRawSlot() == 36) {
                 MainMenu.open(p);
             } else if (e.getRawSlot() == 37) {

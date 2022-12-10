@@ -25,6 +25,7 @@ import me.xiaozhangup.mooncube.world.ActionBlock;
 import me.xiaozhangup.mooncube.world.RuleManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.luckperms.api.LuckPerms;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
@@ -52,6 +53,8 @@ public class MoonCube extends JavaPlugin {
 
     public static BukkitAudiences adventure;
     public static MiniMessage miniMessage;
+    RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+    LuckPerms lp;
 
     @Override
     public void onEnable() {
@@ -93,6 +96,10 @@ public class MoonCube extends JavaPlugin {
         ConfigManager.createFile("guide");
         //file
 
+        if (provider != null) {
+            lp = provider.getProvider();
+        }
+        //lp
 
         Command.register("profile", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;

@@ -24,7 +24,6 @@ import java.util.Optional;
 public class NovaHook implements ProtectionIntegration {
 
     public static final IridiumSkyblock INSTANCE = IridiumSkyblock.getInstance();
-    TileEntityManager tileEntityManager = Nova.getNova().getTileEntityManager();
 
     @Override
     public boolean canBreak(@NotNull OfflinePlayer offlinePlayer, @Nullable ItemStack itemStack, @NotNull Location location) {
