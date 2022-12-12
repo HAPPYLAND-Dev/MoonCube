@@ -2,28 +2,31 @@ package me.xiaozhangup.mooncube.island;
 
 import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.PermissionType;
+import com.iridium.iridiumskyblock.api.IridiumSkyblockAPI;
 import com.iridium.iridiumskyblock.database.Island;
 import com.iridium.iridiumskyblock.database.User;
-import me.xiaozhangup.mooncube.MoonCube;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import us.lynuxcraft.deadsilenceiv.advancedchests.AdvancedChestsAPI;
-import xyz.xenondevs.nova.api.Nova;
 import xyz.xenondevs.nova.api.protection.ProtectionIntegration;
 import xyz.xenondevs.nova.api.tileentity.TileEntity;
-import xyz.xenondevs.nova.api.tileentity.TileEntityManager;
-import xyz.xenondevs.nova.tileentity.network.NetworkEndPoint;
 
 import java.util.Optional;
+
+import static me.xiaozhangup.mooncube.guide.ABook.mm;
 
 public class NovaHook implements ProtectionIntegration {
 
     public static final IridiumSkyblock INSTANCE = IridiumSkyblock.getInstance();
+    private static final Component level6 = mm.deserialize("<red>使用机器需要你的岛屿等级至少为6!</red> <gray>(/istodo 和 /is level)</gray>");
+    private static final Component level7 = mm.deserialize("<red>使用缆线需要你的岛屿等级至少为7!</red> <gray>(紧挨发电器和机器获得电力)</gray>");
 
     @Override
     public boolean canBreak(@NotNull OfflinePlayer offlinePlayer, @Nullable ItemStack itemStack, @NotNull Location location) {
@@ -42,6 +45,17 @@ public class NovaHook implements ProtectionIntegration {
 
     @Override
     public boolean canPlace(@NotNull OfflinePlayer offlinePlayer, @NotNull ItemStack itemStack, @NotNull Location location) {
+        var opland = IridiumSkyblockAPI.getInstance().getIslandViaLocation(location);
+        if (opland.isPresent()) {
+            var land = opland.get();
+            if (land.getLevel() < 6) {
+                if (offlinePlayer.isOnline()) {
+                    Player player = offlinePlayer.getPlayer();
+                    player.sendActionBar(level6);
+                }
+                return false;
+            }
+        }
         return checkIridiumSkyblockPlayer(offlinePlayer, location, PermissionType.BLOCK_PLACE);
     }
 
@@ -78,7 +92,19 @@ public class NovaHook implements ProtectionIntegration {
 
     @Override
     public boolean canPlace(@NotNull TileEntity tileEntity, @NotNull ItemStack itemStack, @NotNull Location location) {
-        return canPlace(tileEntity.getOwner(), itemStack, location);
+        var opland = IridiumSkyblockAPI.getInstance().getIslandViaLocation(location);
+        OfflinePlayer entityOwner = tileEntity.getOwner();
+        if (opland.isPresent()) {
+            var land = opland.get();
+            if (land.getLevel() < 7 && tileEntity.getMaterial().toString().endsWith("_cable")) {
+                if (entityOwner.isOnline()) {
+                    Player player = entityOwner.getPlayer();
+                    player.sendActionBar(level7);
+                }
+                return false;
+            }
+        }
+        return canPlace(entityOwner, itemStack, location);
     }
 
     @Override
@@ -87,9 +113,10 @@ public class NovaHook implements ProtectionIntegration {
         if (!canUseBlock(tileEntity.getOwner(), itemStack, location)) {
             return false;
         } else {
-            if (tileEntity.getMaterial().toString().endsWith("_cable")) {
+            if (tileEntity.getMaterial().toString().endsWith("_cable") && location.getBlock().getType() == Material.CHEST) {
                 var chests = AdvancedChestsAPI.getChestManager().getAdvancedChest(location);
                 return (chests == null);
+
             } else {
                 return true;
             }
