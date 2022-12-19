@@ -26,7 +26,6 @@ public class NovaHook implements ProtectionIntegration {
 
     public static final IridiumSkyblock INSTANCE = IridiumSkyblock.getInstance();
     private static final Component level6 = mm.deserialize("<red>使用机器需要你的岛屿等级至少为6!</red> <gray>(/istodo 和 /is level)</gray>");
-    private static final Component level7 = mm.deserialize("<red>使用缆线需要你的岛屿等级至少为7!</red> <gray>(紧挨发电器和机器获得电力)</gray>");
 
     @Override
     public boolean canBreak(@NotNull OfflinePlayer offlinePlayer, @Nullable ItemStack itemStack, @NotNull Location location) {
@@ -92,19 +91,7 @@ public class NovaHook implements ProtectionIntegration {
 
     @Override
     public boolean canPlace(@NotNull TileEntity tileEntity, @NotNull ItemStack itemStack, @NotNull Location location) {
-        var opland = IridiumSkyblockAPI.getInstance().getIslandViaLocation(location);
-        OfflinePlayer entityOwner = tileEntity.getOwner();
-        if (opland.isPresent()) {
-            var land = opland.get();
-            if (land.getLevel() < 7 && tileEntity.getMaterial().toString().endsWith("_cable")) {
-                if (entityOwner.isOnline()) {
-                    Player player = entityOwner.getPlayer();
-                    player.sendActionBar(level7);
-                }
-                return false;
-            }
-        }
-        return canPlace(entityOwner, itemStack, location);
+        return canPlace(tileEntity.getOwner(), itemStack, location);
     }
 
     @Override
@@ -113,10 +100,9 @@ public class NovaHook implements ProtectionIntegration {
         if (!canUseBlock(tileEntity.getOwner(), itemStack, location)) {
             return false;
         } else {
-            if (tileEntity.getMaterial().toString().endsWith("_cable") && location.getBlock().getType() == Material.CHEST) {
+            if (tileEntity.getMaterial().toString().endsWith("_cable")) {
                 var chests = AdvancedChestsAPI.getChestManager().getAdvancedChest(location);
                 return (chests == null);
-
             } else {
                 return true;
             }
