@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import us.lynuxcraft.deadsilenceiv.advancedchests.AdvancedChestsAPI;
+import xyz.xenondevs.nova.api.material.NovaMaterial;
 import xyz.xenondevs.nova.api.protection.ProtectionIntegration;
 import xyz.xenondevs.nova.api.tileentity.TileEntity;
 

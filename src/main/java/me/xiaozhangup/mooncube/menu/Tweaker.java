@@ -40,6 +40,8 @@ public class Tweaker implements Listener {
     public static ItemStack ITEM19 = IBuilder.buildItem(Material.WHITE_CARPET, "&f地毯复制", "&7地毯复制被禁用");
     public static ItemStack ITEM20 = IBuilder.buildItem(Material.POWERED_RAIL, "&f铁轨复制", "&7铁轨复制被禁用");
     public static ItemStack ITEM21 = IBuilder.buildItem(Material.SHULKER_SHELL, "&f潜影贝", "&7在末影人在末地生成时", "&7有20%的概率同时生成潜影贝");
+    public static ItemStack ITEM22 = IBuilder.buildItem(Material.DISPENSER, "&f发射器/投掷器", "&7当所在区块实体数量大于24时", "&7将不会照常工作");
+    public static ItemStack ITEM23 = IBuilder.buildItem(Material.NOTE_BLOCK, "&f音符盒", "&7不再能够传导红石信号");
     private static final ItemStack backItem = IBuilder.buildItem(Material.COMPASS, "&c返回主页");
 
 
@@ -74,6 +76,8 @@ public class Tweaker implements Listener {
             menu.setItem(27, ITEM19);
             menu.setItem(28, ITEM20);
             menu.setItem(29, ITEM21);
+            menu.setItem(30, ITEM22);
+            menu.setItem(31, ITEM23);
 
             Bukkit.getScheduler().runTask(MoonCube.plugin, () -> p.openInventory(menu));
         });
